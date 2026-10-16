@@ -1,0 +1,60 @@
+{
+  "version": "1.0.0",
+  "updatedAt": "2026-10-16T23:00:00.000Z",
+  "presets": {
+    "brooklyn-warehouse": {
+      "presetId": "brooklyn-warehouse",
+      "resolvedSeedIds": [
+        "urn:entity:artist:fred_again_4f2a",
+        "urn:entity:artist:four_tet_9b1c",
+        "urn:entity:artist:peggy_gou_7c8d",
+        "urn:entity:artist:overmono_3e4f"
+      ],
+      "topBrandEntities": [
+        "urn:entity:brand:aiaiai_audio_88",
+        "urn:entity:brand:teenage_eng_91",
+        "urn:entity:brand:carhartt_wip_04",
+        "urn:entity:brand:liquid_death_77",
+        "urn:entity:brand:nothing_tech_52",
+        "urn:entity:brand:minor_figures_33",
+        "urn:entity:brand:nts_merch_19",
+        "urn:entity:brand:casio_gshock_61"
+      ]
+    },
+    "silver-lake-indie": {
+      "presetId": "silver-lake-indie",
+      "resolvedSeedIds": [
+        "urn:entity:artist:khruangbin_8d2a",
+        "urn:entity:artist:steve_lacy_5a7c",
+        "urn:entity:artist:clairo_2d9e",
+        "urn:entity:artist:men_i_trust_6f4b"
+      ],
+      "topBrandEntities": [
+        "urn:entity:brand:aesop_skincare_44",
+        "urn:entity:brand:sonos_sound_88",
+        "urn:entity:brand:patagonia_outdoor_11",
+        "urn:entity:brand:le_labo_09",
+        "urn:entity:brand:shinola_detroit_23",
+        "urn:entity:brand:kin_euphorics_55",
+        "urn:entity:brand:muji_japan_76"
+      ]
+    },
+    "hackney-jazz": {
+      "presetId": "hackney-jazz",
+      "resolvedSeedIds": [
+        "urn:entity:artist:ezra_collective_1a3b",
+        "urn:entity:artist:little_simz_8c7d",
+        "urn:entity:artist:yussef_dayes_4e9a"
+      ],
+      "topBrandEntities": [
+        "urn:entity:brand:marshall_audio_72",
+        "urn:entity:brand:fred_perry_33",
+        "urn:entity:brand:kanto_audio_18",
+        "urn:entity:brand:clarks_originals_07",
+        "urn:entity:brand:cubitts_eyewear_29",
+        "urn:entity:brand:bravado_merch_64",
+        "urn:entity:brand:rough_trade_82"
+      ]
+    }
+  }
+}
