@@ -17,7 +17,14 @@ import {
   ShieldCheck,
   Tag,
   Search,
+  Terminal,
+  Code2,
+  Copy,
+  Check,
+  Cpu,
 } from 'lucide-react';
+import { CountUp } from '@/components/ui/CountUp';
+import { DecryptedText } from '@/components/ui/DecryptedText';
 
 interface AgentTracePaneProps {
   brief: EventBrief;
@@ -39,257 +46,320 @@ export function AgentTracePane({
   executionDurationMs,
 }: AgentTracePaneProps) {
   const [expandedTraceId, setExpandedTraceId] = useState<string | null>(null);
+  const [copiedPayloadId, setCopiedPayloadId] = useState<string | null>(null);
+  const [activeStep, setActiveStep] = useState<number>(3); // 0-indexed scrubber step
 
   const toggleTrace = (id: string) => {
     setExpandedTraceId(expandedTraceId === id ? null : id);
   };
 
+  const copyPayload = (id: string, payload: unknown) => {
+    navigator.clipboard.writeText(JSON.stringify(payload, null, 2));
+    setCopiedPayloadId(id);
+    setTimeout(() => setCopiedPayloadId(null), 1800);
+  };
+
   const totalEntitiesRetrieved = traces.reduce((acc, t) => acc + (t.entitiesReturned || 0), 0);
 
+  const steps = [
+    { label: 'Entity Resolve', desc: 'Qloo URN lookup' },
+    { label: 'Taste Correlate', desc: '250M+ vectors' },
+    { label: 'Rule Enforce', desc: 'Commercial filter' },
+    { label: 'Synthesis', desc: 'Pitches & activations' },
+  ];
+
   return (
-    <aside className="space-y-4">
-      {/* Active Brief Summary Card */}
-      <div className="panel-surface rounded-xl p-4 border border-white/[0.08]">
-        <div className="flex items-center justify-between mb-2">
-          <span className="text-[11px] font-mono font-semibold tracking-wider uppercase text-slate-400 flex items-center gap-1.5">
-            <Layers className="w-3.5 h-3.5 text-[#10B981]" />
-            Active Brief Spec
-          </span>
-          <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/[0.05] text-slate-300">
-            {brief.city}
-          </span>
-        </div>
-        <h2 className="text-base font-bold text-white line-clamp-1">{brief.name}</h2>
-        {brief.venueName && (
-          <p className="text-xs text-slate-400 mt-0.5 line-clamp-1">📍 {brief.venueName}</p>
-        )}
+    <aside className="rounded-2xl border border-zinc-800 bg-zinc-950/90 shadow-2xl overflow-hidden backdrop-blur-md flex flex-col">
+      {/* Manus.im macOS Window Header */}
+      <div className="px-4 py-3 bg-zinc-900/80 border-b border-zinc-800 flex items-center justify-between select-none">
+        <div className="flex items-center gap-2">
+          {/* macOS Traffic Lights */}
+          <div className="flex items-center gap-1.5 mr-2">
+            <span className="w-2.5 h-2.5 rounded-full bg-zinc-700/80 hover:bg-red-500/80 transition-colors" />
+            <span className="w-2.5 h-2.5 rounded-full bg-zinc-700/80 hover:bg-amber-500/80 transition-colors" />
+            <span className="w-2.5 h-2.5 rounded-full bg-zinc-700/80 hover:bg-emerald-500/80 transition-colors" />
+          </div>
 
-        {/* Commercial Constraints Pills */}
-        <div className="flex flex-wrap gap-1.5 mt-3 pt-3 border-t border-white/[0.06]">
-          <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-amber-500/10 text-amber-300 border border-amber-500/20">
-            ${(brief.constraints.minBudgetTier! / 1000).toFixed(0)}k Floor
-          </span>
-          {brief.constraints.blockedCategories.map((c) => (
-            <span
-              key={c}
-              className="text-[11px] font-mono px-2 py-0.5 rounded bg-red-500/10 text-red-300 border border-red-500/20"
-            >
-              Blocked: {c}
+          <div className="flex items-center gap-1.5 text-xs font-mono font-medium text-zinc-300">
+            <Terminal className="w-3.5 h-3.5 text-emerald-400" />
+            <span className="truncate max-w-[190px] sm:max-w-xs font-semibold">
+              Agent Computer — Qloo Session
             </span>
-          ))}
-          {brief.constraints.lockedCompetitors.map((comp) => (
-            <span
-              key={comp}
-              className="text-[11px] font-mono px-2 py-0.5 rounded bg-purple-500/10 text-purple-300 border border-purple-500/20"
-            >
-              Locked: {comp}
-            </span>
-          ))}
-          {brief.constraints.ecoConsciousOnly && (
-            <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-300 border border-emerald-500/20">
-              Eco-Conscious Only
-            </span>
-          )}
+          </div>
+        </div>
+
+        {/* Live Execution Status */}
+        <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-zinc-800 border border-zinc-700/60 text-[10px] font-mono text-zinc-300">
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+          <span className="font-semibold">ACTIVE</span>
         </div>
       </div>
 
-      {/* Telemetry Bento Grid */}
-      <div className="grid grid-cols-2 gap-2">
-        <div className="panel-surface rounded-xl p-3 border border-white/[0.08]">
-          <div className="text-[10px] font-mono uppercase tracking-wider text-slate-400 flex items-center gap-1">
-            <Search className="w-3 h-3 text-[#10B981]" />
-            Entities Ingested
-          </div>
-          <div className="text-xl font-bold font-mono text-white mt-1">
-            {totalEntitiesRetrieved}
-          </div>
-          <div className="text-[10px] text-slate-500 font-mono">Qloo Taste Graph</div>
+      {/* Live Step Scrubber */}
+      <div className="px-4 py-2.5 bg-zinc-900/40 border-b border-zinc-800/80">
+        <div className="text-[10px] font-mono uppercase tracking-wider text-zinc-500 mb-2 flex items-center justify-between">
+          <span>Execution Pipeline</span>
+          <span className="text-zinc-400">Step 4/4 Complete</span>
         </div>
-
-        <div className="panel-surface rounded-xl p-3 border border-white/[0.08]">
-          <div className="text-[10px] font-mono uppercase tracking-wider text-slate-400 flex items-center gap-1">
-            <ShieldCheck className="w-3 h-3 text-red-400" />
-            Rules Enforced
-          </div>
-          <div className="text-xl font-bold font-mono text-red-400 mt-1">
-            {totalRejectedCount}
-          </div>
-          <div className="text-[10px] text-slate-500 font-mono">Commercial Blocks</div>
-        </div>
-
-        <div className="panel-surface rounded-xl p-3 border border-white/[0.08]">
-          <div className="text-[10px] font-mono uppercase tracking-wider text-slate-400 flex items-center gap-1">
-            <Sparkles className="w-3 h-3 text-amber-400" />
-            LLM Divergence
-          </div>
-          <div className="text-xl font-bold font-mono text-amber-400 mt-1">
-            {jaccardDivergenceScore}%
-          </div>
-          <div className="text-[10px] text-slate-500 font-mono">Jaccard Cultural Diff</div>
-        </div>
-
-        <div className="panel-surface rounded-xl p-3 border border-white/[0.08]">
-          <div className="text-[10px] font-mono uppercase tracking-wider text-slate-400 flex items-center gap-1">
-            <Clock className="w-3 h-3 text-emerald-400" />
-            Total Latency
-          </div>
-          <div className="text-xl font-bold font-mono text-slate-200 mt-1">
-            {executionDurationMs}ms
-          </div>
-          <div className="text-[10px] text-slate-500 font-mono">Pipeline Execution</div>
-        </div>
-      </div>
-
-      {/* Resolved Lineup Artists */}
-      <div className="panel-surface rounded-xl p-4 border border-white/[0.08]">
-        <div className="flex items-center justify-between mb-3">
-          <span className="text-[11px] font-mono font-semibold tracking-wider uppercase text-slate-400 flex items-center gap-1.5">
-            <CheckCircle2 className="w-3.5 h-3.5 text-[#10B981]" />
-            Resolved Lineup Entities ({resolvedArtists.length})
-          </span>
-          <span className="text-[10px] font-mono text-emerald-400">100% Grounded</span>
-        </div>
-
-        <div className="space-y-2">
-          {resolvedArtists.map((artist) => (
-            <div
-              key={artist.entityId}
-              className="p-2.5 rounded-lg bg-[#090A0F] border border-white/[0.06] hover:border-white/10 transition-colors"
+        <div className="grid grid-cols-4 gap-1.5">
+          {steps.map((st, i) => (
+            <button
+              key={st.label}
+              onClick={() => setActiveStep(i)}
+              className={`p-1.5 rounded-lg border text-left transition-all cursor-pointer ${
+                activeStep === i
+                  ? 'bg-zinc-800 border-zinc-600 text-white shadow-xs'
+                  : 'bg-zinc-900/60 border-zinc-800/80 text-zinc-400 hover:text-zinc-300'
+              }`}
             >
-              <div className="flex items-start justify-between gap-1">
-                <div>
-                  <div className="text-xs font-semibold text-white flex items-center gap-1.5">
-                    {artist.resolvedName}
-                    <span className="text-[9px] px-1 py-0.2 rounded bg-emerald-500/10 text-emerald-400 font-mono border border-emerald-500/20">
-                      ✓ Verified
-                    </span>
-                  </div>
-                  <div className="text-[10px] font-mono text-slate-400 mt-0.5 truncate max-w-[240px]">
-                    {artist.entityId}
-                  </div>
-                </div>
-                {artist.disambiguationScore && (
-                  <span className="text-[10px] font-mono text-slate-400 shrink-0">
-                    {(artist.disambiguationScore * 100).toFixed(0)}% Match
-                  </span>
-                )}
+              <div className="text-[10px] font-mono font-semibold truncate leading-tight">
+                {st.label}
               </div>
-              {artist.genres && artist.genres.length > 0 && (
-                <div className="flex flex-wrap gap-1 mt-1.5">
-                  {artist.genres.slice(0, 3).map((g) => (
-                    <span
-                      key={g}
-                      className="text-[9px] px-1.5 py-0.2 rounded bg-white/[0.04] text-slate-400 font-mono"
-                    >
-                      {g}
-                    </span>
-                  ))}
-                </div>
-              )}
-            </div>
+              <div className="text-[9px] font-mono text-zinc-400 truncate mt-0.5">
+                {st.desc}
+              </div>
+            </button>
           ))}
         </div>
       </div>
 
-      {/* Live Agent Execution Step Log (Manus Pattern) */}
-      <div className="panel-surface rounded-xl p-4 border border-white/[0.08]">
-        <div className="flex items-center justify-between mb-3">
-          <span className="text-[11px] font-mono font-semibold tracking-wider uppercase text-slate-400 flex items-center gap-1.5">
-            <Activity className="w-3.5 h-3.5 text-[#10B981]" />
-            Qloo API Execution Log
-          </span>
-          <span className="text-[10px] font-mono text-slate-500">{traces.length} Telemetry Events</span>
-        </div>
-
-        <div className="space-y-2 max-h-[360px] overflow-y-auto pr-1">
-          {traces.map((trace) => {
-            const isExpanded = expandedTraceId === trace.stepId;
-            return (
-              <div
-                key={trace.stepId}
-                className="rounded-lg bg-[#090A0F] border border-white/[0.06] overflow-hidden text-xs"
-              >
-                <button
-                  type="button"
-                  onClick={() => toggleTrace(trace.stepId)}
-                  className="w-full text-left p-2.5 flex items-center justify-between gap-2 hover:bg-white/[0.02] transition-colors"
-                >
-                  <div className="flex items-center gap-2 min-w-0">
-                    <span
-                      className={`w-1.5 h-1.5 rounded-full shrink-0 ${
-                        trace.status === 200 ? 'bg-emerald-400' : 'bg-red-400'
-                      }`}
-                    />
-                    <span className="font-mono font-semibold text-slate-200 truncate">
-                      {trace.endpoint}
-                    </span>
-                    <span className="text-[10px] font-mono text-slate-500 shrink-0">
-                      {trace.entitiesReturned} items
-                    </span>
-                  </div>
-
-                  <div className="flex items-center gap-2 shrink-0">
-                    <span className="text-[10px] font-mono text-slate-400 bg-white/[0.05] px-1.5 py-0.5 rounded">
-                      {trace.latencyMs}ms
-                    </span>
-                    <span
-                      className={`text-[9px] font-mono px-1.5 py-0.5 rounded uppercase font-semibold ${
-                        trace.mode === 'LIVE_QLOO'
-                          ? 'bg-[#10B981]/15 text-[#10B981]'
-                          : trace.mode === 'CACHED_QLOO'
-                          ? 'bg-emerald-950 text-emerald-400'
-                          : 'bg-amber-500/15 text-amber-400'
-                      }`}
-                    >
-                      {trace.mode === 'MOCK_FIXTURE' ? 'Mock' : trace.mode === 'CACHED_QLOO' ? 'Cache' : 'Live'}
-                    </span>
-                    {isExpanded ? (
-                      <ChevronUp className="w-3.5 h-3.5 text-slate-400" />
-                    ) : (
-                      <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
-                    )}
-                  </div>
-                </button>
-
-                {isExpanded && (
-                  <div className="p-2.5 pt-0 border-t border-white/[0.04] bg-[#0c0d14] font-mono text-[11px] text-slate-400">
-                    <div className="text-[10px] text-slate-500 mb-1">Sanitized Parameters:</div>
-                    <pre className="bg-[#050608] p-2 rounded border border-white/5 overflow-x-auto text-slate-300">
-                      {JSON.stringify(trace.params, null, 2)}
-                    </pre>
-                  </div>
-                )}
-              </div>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* Audience Taste Intersection Tags */}
-      {tasteTags && tasteTags.length > 0 && (
-        <div className="panel-surface rounded-xl p-4 border border-white/[0.08]">
+      <div className="p-4 space-y-4">
+        {/* Active Brief Spec Block */}
+        <div className="p-3.5 rounded-xl bg-zinc-900/50 border border-zinc-800/80">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-[11px] font-mono font-semibold tracking-wider uppercase text-slate-400 flex items-center gap-1.5">
-              <Tag className="w-3.5 h-3.5 text-[#10B981]" />
-              Audience Taste Signals ({tasteTags.length})
+            <span className="text-[10px] font-mono font-semibold tracking-wider uppercase text-zinc-400 flex items-center gap-1.5">
+              <Layers className="w-3 h-3 text-emerald-400" />
+              Target Brief
+            </span>
+            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-zinc-800 text-zinc-300 border border-zinc-700/60">
+              {brief.city}
             </span>
           </div>
-          <p className="text-[11px] text-slate-400 mb-2.5">
-            Cross-domain affinities retrieved from Qloo Taste AI Graph:
-          </p>
-          <div className="flex flex-wrap gap-1.5">
-            {tasteTags.map((tag) => (
+          <h2 className="text-sm font-bold text-zinc-100 truncate">{brief.name}</h2>
+          {brief.venueName && (
+            <p className="text-xs text-zinc-400 mt-0.5 truncate">📍 {brief.venueName}</p>
+          )}
+
+          {/* Commercial Constraints Pills */}
+          <div className="flex flex-wrap gap-1 mt-2.5 pt-2.5 border-t border-zinc-800/60">
+            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-zinc-900 text-amber-300 border border-amber-900/40">
+              ${(brief.constraints.minBudgetTier! / 1000).toFixed(0)}k Floor
+            </span>
+            {brief.constraints.blockedCategories.map((c) => (
               <span
-                key={tag}
-                className="text-[11px] px-2 py-0.5 rounded-full badge-qloo font-mono flex items-center gap-1"
+                key={c}
+                className="text-[10px] font-mono px-2 py-0.5 rounded bg-zinc-900 text-red-400 border border-red-900/40"
               >
-                <span>•</span>
-                {tag}
+                No {c}
               </span>
+            ))}
+            {brief.constraints.lockedCompetitors.map((comp) => (
+              <span
+                key={comp}
+                className="text-[10px] font-mono px-2 py-0.5 rounded bg-zinc-900 text-purple-300 border border-purple-900/40"
+              >
+                Lock: {comp}
+              </span>
+            ))}
+            {brief.constraints.ecoConsciousOnly && (
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-zinc-900 text-emerald-300 border border-emerald-900/40">
+                Eco Only
+              </span>
+            )}
+          </div>
+        </div>
+
+        {/* Telemetry Bento Grid with React Bits CountUp */}
+        <div className="grid grid-cols-2 gap-2">
+          <div className="p-3 rounded-xl bg-zinc-900/40 border border-zinc-800/80">
+            <div className="text-[10px] font-mono uppercase tracking-wider text-zinc-400 flex items-center gap-1">
+              <Search className="w-3 h-3 text-emerald-400" />
+              Entities Ingested
+            </div>
+            <div className="text-lg font-bold font-mono text-zinc-100 mt-1">
+              <CountUp to={totalEntitiesRetrieved} duration={1} />
+            </div>
+            <div className="text-[10px] text-zinc-400 font-mono">Qloo Graph</div>
+          </div>
+
+          <div className="p-3 rounded-xl bg-zinc-900/40 border border-zinc-800/80">
+            <div className="text-[10px] font-mono uppercase tracking-wider text-zinc-400 flex items-center gap-1">
+              <ShieldCheck className="w-3 h-3 text-red-400" />
+              Rules Enforced
+            </div>
+            <div className="text-lg font-bold font-mono text-red-400 mt-1">
+              <CountUp to={totalRejectedCount} duration={1} />
+            </div>
+            <div className="text-[10px] text-zinc-400 font-mono">Blocked Deals</div>
+          </div>
+
+          <div className="p-3 rounded-xl bg-zinc-900/40 border border-zinc-800/80">
+            <div className="text-[10px] font-mono uppercase tracking-wider text-zinc-400 flex items-center gap-1">
+              <Sparkles className="w-3 h-3 text-amber-400" />
+              LLM Divergence
+            </div>
+            <div className="text-lg font-bold font-mono text-amber-400 mt-1">
+              <CountUp to={jaccardDivergenceScore} suffix="%" duration={1.2} />
+            </div>
+            <div className="text-[10px] text-zinc-400 font-mono">Jaccard Cultural Diff</div>
+          </div>
+
+          <div className="p-3 rounded-xl bg-zinc-900/40 border border-zinc-800/80">
+            <div className="text-[10px] font-mono uppercase tracking-wider text-zinc-400 flex items-center gap-1">
+              <Clock className="w-3 h-3 text-emerald-400" />
+              Execution
+            </div>
+            <div className="text-lg font-bold font-mono text-zinc-200 mt-1">
+              <CountUp to={executionDurationMs} suffix="ms" duration={1} />
+            </div>
+            <div className="text-[10px] text-zinc-400 font-mono">Pipeline Latency</div>
+          </div>
+        </div>
+
+        {/* Resolved Lineup Entities with DecryptedText URN */}
+        <div className="p-3.5 rounded-xl bg-zinc-900/40 border border-zinc-800/80">
+          <div className="flex items-center justify-between mb-2.5">
+            <span className="text-[10px] font-mono font-semibold tracking-wider uppercase text-zinc-400 flex items-center gap-1.5">
+              <CheckCircle2 className="w-3 h-3 text-emerald-400" />
+              Resolved Entities ({resolvedArtists.length})
+            </span>
+            <span className="text-[10px] font-mono text-emerald-400">100% Grounded</span>
+          </div>
+
+          <div className="space-y-2">
+            {resolvedArtists.map((artist) => (
+              <div
+                key={artist.entityId}
+                className="p-2.5 rounded-lg bg-zinc-950 border border-zinc-800/80 hover:border-zinc-700 transition-colors"
+              >
+                <div className="flex items-start justify-between gap-1">
+                  <div className="min-w-0">
+                    <div className="text-xs font-semibold text-zinc-100 flex items-center gap-1.5 truncate">
+                      {artist.resolvedName}
+                      <span className="text-[9px] px-1 py-0.2 rounded bg-zinc-900 text-emerald-400 font-mono border border-zinc-800">
+                        ✓ Verified
+                      </span>
+                    </div>
+                    {/* DecryptedText for URN */}
+                    <div className="mt-0.5 truncate max-w-[230px]">
+                      <DecryptedText
+                        text={artist.entityId}
+                        speed={35}
+                        maxIterations={10}
+                        className="font-mono text-[10px] text-zinc-400"
+                        encryptedClassName="font-mono text-[10px] text-emerald-500/70"
+                      />
+                    </div>
+                  </div>
+                  {artist.disambiguationScore && (
+                    <span className="text-[10px] font-mono text-zinc-400 shrink-0">
+                      {(artist.disambiguationScore * 100).toFixed(0)}%
+                    </span>
+                  )}
+                </div>
+              </div>
             ))}
           </div>
         </div>
-      )}
+
+        {/* Collapsible HTTP Payload Inspection & Trace Log */}
+        <div className="p-3.5 rounded-xl bg-zinc-900/40 border border-zinc-800/80">
+          <div className="flex items-center justify-between mb-2.5">
+            <span className="text-[10px] font-mono font-semibold tracking-wider uppercase text-zinc-400 flex items-center gap-1.5">
+              <Activity className="w-3 h-3 text-emerald-400" />
+              Qloo HTTP Payloads
+            </span>
+            <span className="text-[10px] font-mono text-zinc-400">
+              {traces.length} Events
+            </span>
+          </div>
+
+          <div className="space-y-1.5 max-h-[340px] overflow-y-auto pr-1">
+            {traces.map((trace) => {
+              const isExpanded = expandedTraceId === trace.stepId;
+              const isCopied = copiedPayloadId === trace.stepId;
+              return (
+                <div
+                  key={trace.stepId}
+                  className="rounded-lg bg-zinc-950 border border-zinc-800/80 overflow-hidden text-xs"
+                >
+                  <button
+                    type="button"
+                    onClick={() => toggleTrace(trace.stepId)}
+                    className="w-full text-left p-2.5 flex items-center justify-between gap-2 hover:bg-zinc-900/50 transition-colors cursor-pointer"
+                  >
+                    <div className="flex items-center gap-2 min-w-0">
+                      <span
+                        className={`w-1.5 h-1.5 rounded-full shrink-0 ${
+                          trace.status === 200 ? 'bg-emerald-400' : 'bg-red-400'
+                        }`}
+                      />
+                      <span className="font-mono font-bold text-[10px] px-1 py-0.2 rounded bg-zinc-900 border border-zinc-800 text-zinc-300 shrink-0">
+                        GET
+                      </span>
+                      <span className="font-mono text-zinc-300 truncate text-[11px]">
+                        {trace.endpoint}
+                      </span>
+                    </div>
+
+                    <div className="flex items-center gap-2 shrink-0">
+                      <span className="font-mono text-[10px] text-zinc-400">
+                        {trace.latencyMs}ms
+                      </span>
+                      {isExpanded ? (
+                        <ChevronUp className="w-3.5 h-3.5 text-zinc-400" />
+                      ) : (
+                        <ChevronDown className="w-3.5 h-3.5 text-zinc-400" />
+                      )}
+                    </div>
+                  </button>
+
+                  {/* Expanded HTTP Payload Inspector */}
+                  {isExpanded && (
+                    <div className="p-3 border-t border-zinc-800 bg-zinc-900/70 space-y-2 animate-in fade-in duration-150">
+                      <div className="flex items-center justify-between text-[10px] font-mono text-zinc-400">
+                        <span>Payload & Parameters</span>
+                        <button
+                          onClick={() => copyPayload(trace.stepId, trace.params)}
+                          className="flex items-center gap-1 px-1.5 py-0.5 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-300 transition-colors cursor-pointer"
+                        >
+                          {isCopied ? (
+                            <>
+                              <Check className="w-2.5 h-2.5 text-emerald-400" />
+                              <span>Copied</span>
+                            </>
+                          ) : (
+                            <>
+                              <Copy className="w-2.5 h-2.5" />
+                              <span>Copy JSON</span>
+                            </>
+                          )}
+                        </button>
+                      </div>
+
+                      {trace.params && (
+                        <div>
+                          <div className="text-[10px] font-mono text-zinc-400 mb-0.5">Parameters:</div>
+                          <pre className="p-2 rounded bg-zinc-950 border border-zinc-800 text-[10px] font-mono text-zinc-300 overflow-x-auto">
+                            {JSON.stringify(trace.params, null, 2)}
+                          </pre>
+                        </div>
+                      )}
+
+                      <div className="flex items-center justify-between text-[10px] font-mono text-zinc-400 pt-1 border-t border-zinc-800/60">
+                        <span>Status: <span className="text-emerald-400">{trace.status} OK</span></span>
+                        <span>Mode: <span className="text-zinc-300">{trace.mode}</span></span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
     </aside>
   );
 }
+
+export default AgentTracePane;

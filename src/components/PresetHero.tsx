@@ -14,6 +14,8 @@ import {
   X,
   CheckCircle2,
 } from 'lucide-react';
+import SpotlightCard from '@/components/ui/SpotlightCard';
+import { CssLink } from '@/components/ui/CssLink';
 
 interface PresetHeroProps {
   activePresetId?: string;
@@ -86,7 +88,7 @@ export function PresetHero({
   return (
     <header className="border-b border-white/[0.08] bg-[#090A0F]/95 backdrop-blur-md sticky top-0 z-40 transition-all">
       {/* Top Navbar */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-wrap items-center justify-between gap-3">
+      <div className="max-w-[1400px] mx-auto px-6 py-3.5 flex flex-wrap items-center justify-between gap-3">
         {/* Logo & Brand Identity */}
         <div className="flex items-center gap-3">
           <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-[#10B981] via-[#059669] to-[#047857] flex items-center justify-center shadow-lg shadow-[#10B981]/20">
@@ -170,59 +172,62 @@ export function PresetHero({
         </div>
       </div>
 
-      {/* Preset Selector Bar (Zero-Typing Judge Entry) */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+        {/* Preset Selector Bar (Zero-Typing Judge Entry) */}
+      <div className="max-w-[1400px] mx-auto px-6 py-3">
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-2">
-            <Sparkles className="w-3.5 h-3.5 text-[#10B981]" />
-            <span className="text-xs uppercase font-mono font-bold tracking-wider text-slate-400">
+            <Sparkles className="w-3.5 h-3.5 text-zinc-400" />
+            <span className="text-xs uppercase font-mono font-bold tracking-wider text-zinc-400">
               One-Click Judge Presets (Zero Typing Required)
             </span>
           </div>
-          <span className="text-[11px] font-mono text-slate-500 hidden sm:inline">
+          <span className="text-[11px] font-mono text-zinc-500 hidden sm:inline">
             Empirical audience taste grounding
           </span>
         </div>
 
-        {/* 3 Preset Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+        {/* 3 Preset Cards Grid - Strict 3 Columns, min-w-0, zero overflow */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 w-full">
           {JUDGE_PRESETS.map((preset) => {
             const isActive = activePresetId === preset.presetId;
             return (
-              <button
+              <SpotlightCard
                 key={preset.presetId}
                 onClick={() => onSelectPreset(preset)}
-                className={`text-left p-3.5 rounded-xl border transition-all relative overflow-hidden group cursor-pointer ${
+                theme="dark"
+                spotlightColor="rgba(255, 255, 255, 0.08)"
+                intensity={0.25}
+                className={`text-left p-3.5 rounded-xl border transition-all relative overflow-hidden group cursor-pointer min-w-0 ${
                   isActive
-                    ? 'bg-[#181B26] border-[#10B981] ring-1 ring-[#10B981]/40 shadow-lg shadow-[#10B981]/10'
-                    : 'bg-[#11131C] hover:bg-[#181B26]/80 border-white/[0.08] hover:border-white/20'
+                    ? '!bg-zinc-900/90 !border-zinc-700 shadow-md ring-1 ring-zinc-700/60'
+                    : '!bg-zinc-950/70 hover:!bg-zinc-900/60 !border-zinc-800/80 hover:!border-zinc-700/60'
                 }`}
               >
-                {/* Active Indicator Top Stripe */}
+                {/* Active Understated Top Lip */}
                 {isActive && (
-                  <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#10B981] via-emerald-400 to-[#10B981]" />
+                  <div className="absolute top-0 left-0 right-0 h-[2px] bg-zinc-400/80" />
                 )}
 
-                <div className="flex items-start justify-between gap-2 mb-1.5">
-                  <div className="font-semibold text-sm text-slate-100 group-hover:text-white line-clamp-1">
+                <div className="flex items-start justify-between gap-2 mb-1.5 min-w-0">
+                  <div className="font-semibold text-sm text-zinc-100 group-hover:text-white truncate min-w-0">
                     {preset.name}
                   </div>
                   {isActive ? (
-                    <span className="flex items-center gap-1 text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-[#10B981]/20 text-[#10B981] border border-[#10B981]/40 shrink-0">
-                      <CheckCircle2 className="w-3 h-3" />
+                    <span className="flex items-center gap-1 text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-zinc-800 text-zinc-200 border border-zinc-600/60 shrink-0">
+                      <CheckCircle2 className="w-3 h-3 text-emerald-400" />
                       ACTIVE
                     </span>
                   ) : (
-                    <span className="text-[10px] font-mono text-slate-500 shrink-0">1-Click</span>
+                    <span className="text-[10px] font-mono text-zinc-500 shrink-0">1-Click</span>
                   )}
                 </div>
 
                 {/* Lineup Pills */}
-                <div className="flex flex-wrap gap-1 mb-2">
+                <div className="flex flex-wrap gap-1 mb-2 overflow-hidden max-h-12">
                   {preset.lineup.map((artist) => (
                     <span
                       key={artist}
-                      className="text-[11px] px-1.5 py-0.5 rounded bg-white/[0.05] text-slate-300 font-mono"
+                      className="text-[11px] px-1.5 py-0.5 rounded bg-zinc-900 border border-zinc-800/80 text-zinc-300 font-mono truncate max-w-[140px]"
                     >
                       {artist}
                     </span>
@@ -230,29 +235,29 @@ export function PresetHero({
                 </div>
 
                 {/* Location & Commercial Constraint Tags */}
-                <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-slate-400 font-mono">
-                  <span className="flex items-center gap-1 text-slate-300">
-                    <MapPin className="w-3 h-3 text-emerald-400" />
+                <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-zinc-400 font-mono min-w-0">
+                  <span className="flex items-center gap-1 text-zinc-300 truncate">
+                    <MapPin className="w-3 h-3 text-zinc-400" />
                     {preset.city.split(',')[0]}
                   </span>
-                  <span className="flex items-center gap-1 text-slate-300">
-                    <DollarSign className="w-3 h-3 text-amber-400" />
+                  <span className="flex items-center gap-1 text-zinc-300 truncate">
+                    <DollarSign className="w-3 h-3 text-zinc-400" />
                     ${(preset.constraints.minBudgetTier! / 1000).toFixed(0)}k+ Floor
                   </span>
                   {preset.constraints.blockedCategories.length > 0 && (
-                    <span className="flex items-center gap-1 text-red-400">
+                    <span className="flex items-center gap-1 text-red-400/90 truncate">
                       <ShieldAlert className="w-3 h-3" />
                       No {preset.constraints.blockedCategories[0]}
                     </span>
                   )}
                   {preset.constraints.lockedCompetitors.length > 0 && (
-                    <span className="flex items-center gap-1 text-red-400">
+                    <span className="flex items-center gap-1 text-purple-400/90 truncate">
                       <ShieldAlert className="w-3 h-3" />
                       Lock: {preset.constraints.lockedCompetitors[0]}
                     </span>
                   )}
                 </div>
-              </button>
+              </SpotlightCard>
             );
           })}
         </div>

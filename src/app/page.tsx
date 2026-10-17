@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useTransition } from 'react';
+import { motion } from 'motion/react';
 import { JudgePreset, DEFAULT_PRESET } from '@/data/presets';
 import {
   AnalyzeResponse,
@@ -14,6 +15,7 @@ import { SponsorCard } from '@/components/SponsorCard';
 import { LlmDiffView } from '@/components/LlmDiffView';
 import { RejectedRulesLog } from '@/components/RejectedRulesLog';
 import { EvidenceDrawer } from '@/components/EvidenceDrawer';
+import { BklitAffinityChart } from '@/components/BklitAffinityChart';
 import {
   Sparkles,
   TrendingUp,
@@ -97,8 +99,8 @@ export default function Home() {
   const plainLlmBaseline = analysisData?.plainLlmBaseline;
 
   return (
-    <div className="min-h-screen bg-[#090A0F] text-[#F3F4F6] flex flex-col font-sans selection:bg-[#10B981]/20 selection:text-[#10B981]">
-      {/* Top Header & 3-Preset Zero-Typing Bar */}
+    <div className="min-h-screen bg-[#090A0F] text-[#F3F4F6] flex flex-col font-sans selection:bg-zinc-800 selection:text-white">
+      {/* Top Header & 3-Preset Zero-Typing Bar (Strict max-w-[1400px]) */}
       <PresetHero
         activePresetId={activePresetId}
         onSelectPreset={handleSelectPreset}
@@ -108,10 +110,10 @@ export default function Home() {
         activeMode={activeMode}
       />
 
-      {/* Main Split-Screen Workspace (Manus.im Pattern) */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      {/* Main Split-Screen Workspace (Strict max-w-[1400px], Zero Horizontal Overflow) */}
+      <main className="flex-1 max-w-[1400px] w-full mx-auto px-6 py-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-          {/* Left Column (4 cols) — Brief Spec & Live Execution Trace */}
+          {/* Left Column (4 cols) — Manus.im Agent Computer Sandbox */}
           <div className="lg:col-span-4 sticky top-48">
             <AgentTracePane
               brief={currentBrief}
@@ -124,69 +126,106 @@ export default function Home() {
             />
           </div>
 
-          {/* Right Column (8 cols) — Segmented Intelligence Workspace */}
-          <div className="lg:col-span-8 space-y-6">
-            {/* Segmented Control Tab Bar */}
-            <div className="p-1.5 rounded-xl bg-[#11131C] border border-white/[0.08] flex items-center justify-between gap-1">
-              <div className="flex items-center gap-1 w-full sm:w-auto">
+          {/* Right Column (8 cols) — High-Craft Artifact & Data Canvas */}
+          <div className="lg:col-span-8 space-y-6 min-w-0">
+            {/* Real Bklit Composable Affinity Chart at Top of Workspace */}
+            {selectedTab === 'sponsors' && approvedSponsors.length > 0 && (
+              <BklitAffinityChart
+                sponsors={approvedSponsors}
+                comparison={plainLlmBaseline}
+                title="Qloo Taste Graph Affinity Distribution"
+                subtitle="Empirical brand correlation ranking vs. un-grounded plain LLM baseline with crosshair inspection"
+              />
+            )}
+
+            {/* Segmented Control Tab Bar - Clean Single-Line whitespace-nowrap with motion layoutId */}
+            <div className="p-1.5 rounded-xl bg-zinc-950/80 border border-zinc-800/80 flex items-center justify-between gap-2 overflow-x-auto no-scrollbar whitespace-nowrap shadow-sm">
+              <div className="flex items-center gap-1 shrink-0">
                 {/* Tab 1: Ranked Sponsors */}
                 <button
+                  type="button"
                   onClick={() => setSelectedTab('sponsors')}
-                  className={`flex-1 sm:flex-initial px-3.5 py-2 rounded-lg text-xs font-mono font-semibold transition-all flex items-center justify-center gap-2 cursor-pointer ${
+                  className={`relative px-4 py-2 rounded-lg text-xs font-mono font-medium transition-colors whitespace-nowrap flex items-center gap-2 cursor-pointer ${
                     selectedTab === 'sponsors'
-                      ? 'bg-[#181B26] text-white border border-[#10B981]/40 shadow-sm shadow-[#10B981]/10'
-                      : 'text-slate-400 hover:text-slate-200'
+                      ? 'text-white font-semibold'
+                      : 'text-zinc-400 hover:text-zinc-200'
                   }`}
                 >
-                  <Sparkles className="w-3.5 h-3.5 text-[#10B981]" />
+                  {selectedTab === 'sponsors' && (
+                    <motion.div
+                      layoutId="activeWorkspaceTabPill"
+                      className="absolute inset-0 bg-zinc-900 border border-zinc-700/80 rounded-lg shadow-sm -z-10"
+                      transition={{ type: 'spring', bounce: 0.18, duration: 0.4 }}
+                    />
+                  )}
+                  <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
                   <span>Ranked Sponsors</span>
-                  <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-white/10 text-slate-300">
+                  <span className="text-[10px] px-1.5 py-0.2 rounded font-mono bg-zinc-800 text-zinc-300 border border-zinc-700/60">
                     {approvedSponsors.length}
                   </span>
                 </button>
 
                 {/* Tab 2: Side-by-Side Qloo vs Plain LLM */}
                 <button
+                  type="button"
                   onClick={() => setSelectedTab('diff')}
-                  className={`flex-1 sm:flex-initial px-3.5 py-2 rounded-lg text-xs font-mono font-semibold transition-all flex items-center justify-center gap-2 cursor-pointer ${
+                  className={`relative px-4 py-2 rounded-lg text-xs font-mono font-medium transition-colors whitespace-nowrap flex items-center gap-2 cursor-pointer ${
                     selectedTab === 'diff'
-                      ? 'bg-[#181B26] text-white border border-amber-500/40 shadow-sm shadow-amber-500/10'
-                      : 'text-slate-400 hover:text-slate-200'
+                      ? 'text-white font-semibold'
+                      : 'text-zinc-400 hover:text-zinc-200'
                   }`}
                 >
-                  <TrendingUp className="w-3.5 h-3.5 text-[#F59E0B]" />
+                  {selectedTab === 'diff' && (
+                    <motion.div
+                      layoutId="activeWorkspaceTabPill"
+                      className="absolute inset-0 bg-zinc-900 border border-zinc-700/80 rounded-lg shadow-sm -z-10"
+                      transition={{ type: 'spring', bounce: 0.18, duration: 0.4 }}
+                    />
+                  )}
+                  <TrendingUp className="w-3.5 h-3.5 text-amber-400" />
                   <span>Qloo vs. Plain LLM</span>
-                  <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-amber-500/15 text-amber-400">
+                  <span className="text-[10px] px-1.5 py-0.2 rounded font-mono bg-zinc-800 text-amber-400 border border-zinc-700/60">
                     {plainLlmBaseline?.jaccardDivergenceScore ?? 100}% Diff
                   </span>
                 </button>
 
                 {/* Tab 3: Commercial Rule Rejections */}
                 <button
+                  type="button"
                   onClick={() => setSelectedTab('rejected')}
-                  className={`flex-1 sm:flex-initial px-3.5 py-2 rounded-lg text-xs font-mono font-semibold transition-all flex items-center justify-center gap-2 cursor-pointer ${
+                  className={`relative px-4 py-2 rounded-lg text-xs font-mono font-medium transition-colors whitespace-nowrap flex items-center gap-2 cursor-pointer ${
                     selectedTab === 'rejected'
-                      ? 'bg-[#181B26] text-white border border-red-500/40 shadow-sm shadow-red-500/10'
-                      : 'text-slate-400 hover:text-slate-200'
+                      ? 'text-white font-semibold'
+                      : 'text-zinc-400 hover:text-zinc-200'
                   }`}
                 >
-                  <Scale className="w-3.5 h-3.5 text-[#EF4444]" />
+                  {selectedTab === 'rejected' && (
+                    <motion.div
+                      layoutId="activeWorkspaceTabPill"
+                      className="absolute inset-0 bg-zinc-900 border border-zinc-700/80 rounded-lg shadow-sm -z-10"
+                      transition={{ type: 'spring', bounce: 0.18, duration: 0.4 }}
+                    />
+                  )}
+                  <Scale className="w-3.5 h-3.5 text-red-400" />
                   <span>Rule Rejections</span>
-                  <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-red-500/15 text-red-400">
+                  <span className="text-[10px] px-1.5 py-0.2 rounded font-mono bg-zinc-800 text-red-400 border border-zinc-700/60">
                     {rejectedSponsors.length} Blocked
                   </span>
                 </button>
               </div>
 
               {/* Status Indicator */}
-              <div className="hidden sm:flex items-center gap-2 pr-2 text-xs font-mono text-slate-500">
+              <div className="hidden sm:flex items-center gap-2 pr-2 text-xs font-mono text-zinc-500 shrink-0">
                 {isLoading ? (
                   <span className="flex items-center gap-1.5 text-emerald-400">
                     <RefreshCw className="w-3 h-3 animate-spin" />
                     Synthesizing...
                   </span>
                 ) : (
-                  <span>Verified Qloo Signals</span>
+                  <span className="flex items-center gap-1 text-zinc-400">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                    Verified Qloo Grounding
+                  </span>
                 )}
               </div>
             </div>
@@ -195,17 +234,17 @@ export default function Home() {
             {selectedTab === 'sponsors' && (
               <div className="space-y-4">
                 {isLoading && approvedSponsors.length === 0 ? (
-                  <div className="p-12 text-center panel-surface rounded-2xl border border-white/[0.08]">
-                    <RefreshCw className="w-6 h-6 animate-spin text-[#10B981] mx-auto mb-3" />
-                    <p className="text-sm font-mono text-slate-300">
-                      Querying Qloo Taste Graph for correlated brands...
+                  <div className="p-12 text-center rounded-2xl bg-zinc-950/70 border border-zinc-800">
+                    <RefreshCw className="w-6 h-6 animate-spin text-emerald-400 mx-auto mb-3" />
+                    <p className="text-sm font-mono text-zinc-300">
+                      Querying Qloo Taste Graph for correlated brand entities...
                     </p>
                   </div>
                 ) : approvedSponsors.length === 0 ? (
-                  <div className="p-12 text-center panel-surface rounded-2xl border border-white/[0.08]">
+                  <div className="p-12 text-center rounded-2xl bg-zinc-950/70 border border-zinc-800">
                     <ShieldAlert className="w-8 h-8 text-amber-400 mx-auto mb-2" />
                     <h3 className="text-base font-bold text-white">No Sponsors Approved</h3>
-                    <p className="text-xs text-slate-400 mt-1 max-w-sm mx-auto">
+                    <p className="text-xs text-zinc-400 mt-1 max-w-sm mx-auto">
                       All retrieved candidates were filtered by commercial rules. Check the Rule Rejections tab.
                     </p>
                   </div>
