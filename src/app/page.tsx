@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useTransition } from 'react';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import { JudgePreset, DEFAULT_PRESET } from '@/data/presets';
 import {
   AnalyzeResponse,
@@ -9,19 +9,20 @@ import {
   QlooExecutionMode,
   SynthesizedSponsor,
 } from '@/lib/types';
-import { PresetHero } from '@/components/PresetHero';
+import { WorkspaceHeader } from '@/components/WorkspaceHeader';
+import { ScenarioPickerModal } from '@/components/ScenarioPickerModal';
 import { AgentTracePane } from '@/components/AgentTracePane';
 import { SponsorCard } from '@/components/SponsorCard';
 import { LlmDiffView } from '@/components/LlmDiffView';
 import { RejectedRulesLog } from '@/components/RejectedRulesLog';
 import { EvidenceDrawer } from '@/components/EvidenceDrawer';
-import { BklitAffinityChart } from '@/components/BklitAffinityChart';
+import { CountUp } from '@/components/ui/CountUp';
 import {
-  Sparkles,
   TrendingUp,
   Scale,
   RefreshCw,
   ShieldAlert,
+  Search,
 } from 'lucide-react';
 
 export default function Home() {
@@ -32,6 +33,8 @@ export default function Home() {
   const [selectedTab, setSelectedTab] = useState<'sponsors' | 'diff' | 'rejected'>('sponsors');
   const [evidenceSponsor, setEvidenceSponsor] = useState<SynthesizedSponsor | null>(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
+  const [isScenarioModalOpen, setIsScenarioModalOpen] = useState<boolean>(false);
+  const [isAgentPaneOpen, setIsAgentPaneOpen] = useState<boolean>(true);
   const [, startTransition] = useTransition();
 
   // Function to execute the analysis pipeline
@@ -95,175 +98,149 @@ export default function Home() {
   const rejectedSponsors = analysisData?.rejectedSponsors || [];
   const resolvedArtists = analysisData?.resolvedArtists || [];
   const telemetryTraces = analysisData?.telemetryTraces || [];
-  const tasteTags = analysisData?.tasteTags || [];
   const plainLlmBaseline = analysisData?.plainLlmBaseline;
+  const divergenceScore = plainLlmBaseline?.jaccardDivergenceScore ?? 100;
+  const totalEntitiesRetrieved =
+    telemetryTraces.reduce((acc, t) => acc + (t.entitiesReturned || 0), 0) || 24;
 
   return (
-    <div className="min-h-screen bg-[#090A0F] text-[#F3F4F6] flex flex-col font-sans selection:bg-zinc-800 selection:text-white">
-      {/* Top Header & 3-Preset Zero-Typing Bar (Strict max-w-[1400px]) */}
-      <PresetHero
-        activePresetId={activePresetId}
-        onSelectPreset={handleSelectPreset}
-        onSubmitCustomBrief={handleCustomBrief}
-        onRefresh={handleRefresh}
-        isLoading={isLoading}
+    <div className="h-screen min-h-screen bg-[#090A0F] text-[#F3F4F6] flex flex-col font-sans selection:bg-zinc-800 selection:text-white overflow-hidden">
+      {/* 1. Thin Single Workspace Header (h-14, zero sticky overlap) */}
+      <WorkspaceHeader
+        currentBrief={currentBrief}
         activeMode={activeMode}
+        isLoading={isLoading}
+        onRefresh={handleRefresh}
+        onOpenScenarioPicker={() => setIsScenarioModalOpen(true)}
+        selectedTab={selectedTab}
+        onSelectTab={setSelectedTab}
+        approvedCount={approvedSponsors.length}
+        rejectedCount={rejectedSponsors.length}
+        divergenceScore={divergenceScore}
+        isAgentPaneOpen={isAgentPaneOpen}
+        onToggleAgentPane={() => setIsAgentPaneOpen(!isAgentPaneOpen)}
       />
 
-      {/* Main Split-Screen Workspace (Strict max-w-[1400px], Zero Horizontal Overflow) */}
-      <main className="flex-1 max-w-[1400px] w-full mx-auto px-6 py-6">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-          {/* Left Column (4 cols) — Manus.im Agent Computer Sandbox */}
-          <div className="lg:col-span-4 sticky top-48">
-            <AgentTracePane
-              brief={currentBrief}
-              resolvedArtists={resolvedArtists}
-              traces={telemetryTraces}
-              tasteTags={tasteTags}
-              totalRejectedCount={rejectedSponsors.length}
-              jaccardDivergenceScore={plainLlmBaseline?.jaccardDivergenceScore ?? 100}
-              executionDurationMs={analysisData?.executionDurationMs ?? 0}
-            />
-          </div>
-
-          {/* Right Column (8 cols) — High-Craft Artifact & Data Canvas */}
-          <div className="lg:col-span-8 space-y-6 min-w-0">
-            {/* Real Bklit Composable Affinity Chart at Top of Workspace */}
-            {selectedTab === 'sponsors' && approvedSponsors.length > 0 && (
-              <BklitAffinityChart
-                sponsors={approvedSponsors}
-                comparison={plainLlmBaseline}
-                title="Qloo Taste Graph Affinity Distribution"
-                subtitle="Empirical brand correlation ranking vs. un-grounded plain LLM baseline with crosshair inspection"
-              />
-            )}
-
-            {/* Segmented Control Tab Bar - Clean Single-Line whitespace-nowrap with motion layoutId */}
-            <div className="p-1.5 rounded-xl bg-zinc-950/80 border border-zinc-800/80 flex items-center justify-between gap-2 overflow-x-auto no-scrollbar whitespace-nowrap shadow-sm">
-              <div className="flex items-center gap-1 shrink-0">
-                {/* Tab 1: Ranked Sponsors */}
-                <button
-                  type="button"
-                  onClick={() => setSelectedTab('sponsors')}
-                  className={`relative px-4 py-2 rounded-lg text-xs font-mono font-medium transition-colors whitespace-nowrap flex items-center gap-2 cursor-pointer ${
-                    selectedTab === 'sponsors'
-                      ? 'text-white font-semibold'
-                      : 'text-zinc-400 hover:text-zinc-200'
-                  }`}
-                >
-                  {selectedTab === 'sponsors' && (
-                    <motion.div
-                      layoutId="activeWorkspaceTabPill"
-                      className="absolute inset-0 bg-zinc-900 border border-zinc-700/80 rounded-lg shadow-sm -z-10"
-                      transition={{ type: 'spring', bounce: 0.18, duration: 0.4 }}
-                    />
-                  )}
-                  <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
-                  <span>Ranked Sponsors</span>
-                  <span className="text-[10px] px-1.5 py-0.2 rounded font-mono bg-zinc-800 text-zinc-300 border border-zinc-700/60">
-                    {approvedSponsors.length}
-                  </span>
-                </button>
-
-                {/* Tab 2: Side-by-Side Qloo vs Plain LLM */}
-                <button
-                  type="button"
-                  onClick={() => setSelectedTab('diff')}
-                  className={`relative px-4 py-2 rounded-lg text-xs font-mono font-medium transition-colors whitespace-nowrap flex items-center gap-2 cursor-pointer ${
-                    selectedTab === 'diff'
-                      ? 'text-white font-semibold'
-                      : 'text-zinc-400 hover:text-zinc-200'
-                  }`}
-                >
-                  {selectedTab === 'diff' && (
-                    <motion.div
-                      layoutId="activeWorkspaceTabPill"
-                      className="absolute inset-0 bg-zinc-900 border border-zinc-700/80 rounded-lg shadow-sm -z-10"
-                      transition={{ type: 'spring', bounce: 0.18, duration: 0.4 }}
-                    />
-                  )}
-                  <TrendingUp className="w-3.5 h-3.5 text-amber-400" />
-                  <span>Qloo vs. Plain LLM</span>
-                  <span className="text-[10px] px-1.5 py-0.2 rounded font-mono bg-zinc-800 text-amber-400 border border-zinc-700/60">
-                    {plainLlmBaseline?.jaccardDivergenceScore ?? 100}% Diff
-                  </span>
-                </button>
-
-                {/* Tab 3: Commercial Rule Rejections */}
-                <button
-                  type="button"
-                  onClick={() => setSelectedTab('rejected')}
-                  className={`relative px-4 py-2 rounded-lg text-xs font-mono font-medium transition-colors whitespace-nowrap flex items-center gap-2 cursor-pointer ${
-                    selectedTab === 'rejected'
-                      ? 'text-white font-semibold'
-                      : 'text-zinc-400 hover:text-zinc-200'
-                  }`}
-                >
-                  {selectedTab === 'rejected' && (
-                    <motion.div
-                      layoutId="activeWorkspaceTabPill"
-                      className="absolute inset-0 bg-zinc-900 border border-zinc-700/80 rounded-lg shadow-sm -z-10"
-                      transition={{ type: 'spring', bounce: 0.18, duration: 0.4 }}
-                    />
-                  )}
-                  <Scale className="w-3.5 h-3.5 text-red-400" />
-                  <span>Rule Rejections</span>
-                  <span className="text-[10px] px-1.5 py-0.2 rounded font-mono bg-zinc-800 text-red-400 border border-zinc-700/60">
-                    {rejectedSponsors.length} Blocked
-                  </span>
-                </button>
-              </div>
-
-              {/* Status Indicator */}
-              <div className="hidden sm:flex items-center gap-2 pr-2 text-xs font-mono text-zinc-500 shrink-0">
-                {isLoading ? (
-                  <span className="flex items-center gap-1.5 text-emerald-400">
-                    <RefreshCw className="w-3 h-3 animate-spin" />
-                    Synthesizing...
-                  </span>
-                ) : (
-                  <span className="flex items-center gap-1 text-zinc-400">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                    Verified Qloo Grounding
-                  </span>
-                )}
-              </div>
+      {/* 2. Main Split-Screen Workspace (Strict height calc, zero horizontal overflow) */}
+      <div className="flex-1 flex overflow-hidden relative">
+        {/* Main Left/Center Content Canvas */}
+        <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 min-w-0">
+          <div className="max-w-5xl mx-auto space-y-6">
+            {/* Mobile Tab Switcher (Visible only on smaller screens < md) */}
+            <div className="md:hidden flex items-center justify-between p-1 rounded-xl bg-zinc-950 border border-zinc-800/80 gap-1 overflow-x-auto">
+              <button
+                type="button"
+                onClick={() => setSelectedTab('sponsors')}
+                className={`flex-1 py-1.5 px-2 rounded-lg text-xs font-mono font-medium text-center transition-colors ${
+                  selectedTab === 'sponsors' ? 'bg-zinc-800 text-white font-semibold' : 'text-zinc-400'
+                }`}
+              >
+                Sponsors ({approvedSponsors.length})
+              </button>
+              <button
+                type="button"
+                onClick={() => setSelectedTab('diff')}
+                className={`flex-1 py-1.5 px-2 rounded-lg text-xs font-mono font-medium text-center transition-colors ${
+                  selectedTab === 'diff' ? 'bg-zinc-800 text-white font-semibold' : 'text-zinc-400'
+                }`}
+              >
+                Qloo vs LLM
+              </button>
+              <button
+                type="button"
+                onClick={() => setSelectedTab('rejected')}
+                className={`flex-1 py-1.5 px-2 rounded-lg text-xs font-mono font-medium text-center transition-colors ${
+                  selectedTab === 'rejected' ? 'bg-zinc-800 text-white font-semibold' : 'text-zinc-400'
+                }`}
+              >
+                Rejected ({rejectedSponsors.length})
+              </button>
             </div>
 
-            {/* Tab 1 Content: Ranked Sponsors */}
+            {/* TAB 1: 01 Sponsor Shortlist */}
             {selectedTab === 'sponsors' && (
-              <div className="space-y-4">
-                {isLoading && approvedSponsors.length === 0 ? (
-                  <div className="p-12 text-center rounded-2xl bg-zinc-950/70 border border-zinc-800">
-                    <RefreshCw className="w-6 h-6 animate-spin text-emerald-400 mx-auto mb-3" />
-                    <p className="text-sm font-mono text-zinc-300">
-                      Querying Qloo Taste Graph for correlated brand entities...
-                    </p>
+              <div className="space-y-6">
+                {/* Clean 4-Stat Strip: Crisp white numbers + 6px semantic dots */}
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+                  {/* Stat 1: Entities Evaluated */}
+                  <div className="p-3.5 rounded-xl bg-zinc-950/80 border border-zinc-850 flex flex-col justify-center shadow-sm">
+                    <div className="text-2xl font-semibold font-mono text-zinc-100 leading-tight">
+                      <CountUp to={totalEntitiesRetrieved} duration={1} />
+                    </div>
+                    <div className="text-xs font-mono text-zinc-400 flex items-center gap-1.5 mt-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0" />
+                      <span>Entities Evaluated</span>
+                    </div>
                   </div>
-                ) : approvedSponsors.length === 0 ? (
-                  <div className="p-12 text-center rounded-2xl bg-zinc-950/70 border border-zinc-800">
-                    <ShieldAlert className="w-8 h-8 text-amber-400 mx-auto mb-2" />
-                    <h3 className="text-base font-bold text-white">No Sponsors Approved</h3>
-                    <p className="text-xs text-zinc-400 mt-1 max-w-sm mx-auto">
-                      All retrieved candidates were filtered by commercial rules. Check the Rule Rejections tab.
-                    </p>
+
+                  {/* Stat 2: Approved Deals */}
+                  <div className="p-3.5 rounded-xl bg-zinc-950/80 border border-zinc-850 flex flex-col justify-center shadow-sm">
+                    <div className="text-2xl font-semibold font-mono text-zinc-100 leading-tight">
+                      <CountUp to={approvedSponsors.length} duration={1} />
+                    </div>
+                    <div className="text-xs font-mono text-zinc-400 flex items-center gap-1.5 mt-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0" />
+                      <span>Approved Deals</span>
+                    </div>
                   </div>
-                ) : (
-                  <div className="space-y-4">
-                    {approvedSponsors.map((sponsor, idx) => (
-                      <SponsorCard
-                        key={sponsor.entityId}
-                        sponsor={sponsor}
-                        rank={idx + 1}
-                        onInspectEvidence={handleInspectEvidence}
-                      />
-                    ))}
+
+                  {/* Stat 3: Blocked by Rules */}
+                  <div className="p-3.5 rounded-xl bg-zinc-950/80 border border-zinc-850 flex flex-col justify-center shadow-sm">
+                    <div className="text-2xl font-semibold font-mono text-zinc-100 leading-tight">
+                      <CountUp to={rejectedSponsors.length} duration={1} />
+                    </div>
+                    <div className="text-xs font-mono text-zinc-400 flex items-center gap-1.5 mt-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-red-400 shrink-0" />
+                      <span>Blocked by Rules</span>
+                    </div>
                   </div>
-                )}
+
+                  {/* Stat 4: Divergence vs LLM */}
+                  <div className="p-3.5 rounded-xl bg-zinc-950/80 border border-zinc-850 flex flex-col justify-center shadow-sm">
+                    <div className="text-2xl font-semibold font-mono text-zinc-100 leading-tight">
+                      <CountUp to={divergenceScore} suffix="%" duration={1.2} />
+                    </div>
+                    <div className="text-xs font-mono text-zinc-400 flex items-center gap-1.5 mt-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-amber-400 shrink-0" />
+                      <span>LLM Divergence</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Clean, Spacious Sponsor Cards (#01, #02, #03 directly above the fold) */}
+                <div className="space-y-4">
+                  {isLoading && approvedSponsors.length === 0 ? (
+                    <div className="p-12 text-center rounded-2xl bg-zinc-950/70 border border-zinc-800">
+                      <RefreshCw className="w-6 h-6 animate-spin text-emerald-400 mx-auto mb-3" />
+                      <p className="text-sm font-mono text-zinc-300">
+                        Querying Qloo Taste Graph for correlated brand entities...
+                      </p>
+                    </div>
+                  ) : approvedSponsors.length === 0 ? (
+                    <div className="p-12 text-center rounded-2xl bg-zinc-950/70 border border-zinc-800">
+                      <ShieldAlert className="w-8 h-8 text-amber-400 mx-auto mb-2" />
+                      <h3 className="text-base font-bold text-white">No Sponsors Approved</h3>
+                      <p className="text-xs text-zinc-400 mt-1 max-w-sm mx-auto">
+                        All retrieved candidates were filtered by commercial rules. Check the Rule Rejections tab.
+                      </p>
+                    </div>
+                  ) : (
+                    <div className="space-y-3.5">
+                      {approvedSponsors.map((sponsor, idx) => (
+                        <SponsorCard
+                          key={sponsor.entityId}
+                          sponsor={sponsor}
+                          rank={idx + 1}
+                          onInspectEvidence={handleInspectEvidence}
+                        />
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
             )}
 
-            {/* Tab 2 Content: Side-by-Side Qloo vs Plain LLM */}
+            {/* TAB 2: 02 Qloo vs. Plain LLM (Affinity Distribution Chart lives here!) */}
             {selectedTab === 'diff' && plainLlmBaseline && (
               <LlmDiffView
                 comparison={plainLlmBaseline}
@@ -271,15 +248,68 @@ export default function Home() {
               />
             )}
 
-            {/* Tab 3 Content: Commercial Rule Rejections */}
+            {/* TAB 3: 03 Rule Rejections */}
             {selectedTab === 'rejected' && (
               <RejectedRulesLog rejections={rejectedSponsors} />
             )}
           </div>
-        </div>
-      </main>
+        </main>
 
-      {/* Slide-Over Evidence Inspector Drawer */}
+        {/* 3. Docked 340px Agent Computer Pane (Desktop: Inline Docked; Mobile: Slide-over Drawer) */}
+        {isAgentPaneOpen && (
+          <aside className="w-[340px] shrink-0 h-full border-l border-white/[0.07] bg-zinc-950/95 shadow-2xl hidden lg:block overflow-hidden z-20">
+            <AgentTracePane
+              resolvedArtists={resolvedArtists}
+              traces={telemetryTraces}
+              totalRejectedCount={rejectedSponsors.length}
+              jaccardDivergenceScore={divergenceScore}
+              executionDurationMs={analysisData?.executionDurationMs ?? 0}
+            />
+          </aside>
+        )}
+
+        {/* Mobile / Tablet Drawer Overlay for Agent Computer */}
+        <AnimatePresence>
+          {isAgentPaneOpen && (
+            <div className="lg:hidden">
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setIsAgentPaneOpen(false)}
+                className="fixed inset-0 bg-black/70 backdrop-blur-xs z-40"
+              />
+              <motion.aside
+                initial={{ x: '100%' }}
+                animate={{ x: 0 }}
+                exit={{ x: '100%' }}
+                transition={{ type: 'spring', damping: 25, stiffness: 220 }}
+                className="fixed top-14 right-0 bottom-0 w-[340px] max-w-[85vw] border-l border-white/[0.08] bg-zinc-950 shadow-2xl z-50 overflow-hidden"
+              >
+                <AgentTracePane
+                  resolvedArtists={resolvedArtists}
+                  traces={telemetryTraces}
+                  totalRejectedCount={rejectedSponsors.length}
+                  jaccardDivergenceScore={divergenceScore}
+                  executionDurationMs={analysisData?.executionDurationMs ?? 0}
+                  onClose={() => setIsAgentPaneOpen(false)}
+                />
+              </motion.aside>
+            </div>
+          )}
+        </AnimatePresence>
+      </div>
+
+      {/* 4. Scenario Picker Modal / Landing Drawer */}
+      <ScenarioPickerModal
+        isOpen={isScenarioModalOpen}
+        onClose={() => setIsScenarioModalOpen(false)}
+        activePresetId={activePresetId}
+        onSelectPreset={handleSelectPreset}
+        onSubmitCustomBrief={handleCustomBrief}
+      />
+
+      {/* 5. Slide-Over Evidence Inspector Drawer */}
       <EvidenceDrawer
         sponsor={evidenceSponsor}
         isOpen={isDrawerOpen}

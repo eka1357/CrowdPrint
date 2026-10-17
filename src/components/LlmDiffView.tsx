@@ -3,7 +3,6 @@
 import React from 'react';
 import { LlmDiffComparison, SynthesizedSponsor } from '@/lib/types';
 import {
-  Sparkles,
   AlertTriangle,
   CheckCircle2,
   TrendingUp,
@@ -61,31 +60,31 @@ export function LlmDiffView({ comparison, approvedSponsors }: LlmDiffViewProps) 
 
         {/* Dynamic Divergence Summary */}
         <div className="mt-4 pt-4 border-t border-zinc-800/80 text-xs font-mono text-zinc-300 flex items-start gap-2">
-          <Sparkles className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+          <TrendingUp className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
           <span>{comparison.divergenceSummary}</span>
         </div>
       </div>
 
-      {/* Real Bklit Composable Bar/Area Comparison Chart */}
+      {/* Sleek Affinity Distribution Chart */}
       <BklitAffinityChart
         sponsors={approvedSponsors}
         comparison={comparison}
         title="Qloo vs. Plain LLM Divergence Distribution"
-        subtitle="Live Bklit visualization contrasting empirical Qloo affinity distribution against plain LLM baseline with crosshair tooltips"
+        subtitle="Empirical taste correlation ranking contrasting Qloo affinity distribution against plain LLM baseline"
       />
 
       {/* Side-by-Side Comparison Columns */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Left Column: Plain LLM Baseline */}
         <div className="space-y-3">
-          <div className="flex items-center justify-between pb-2 border-b border-amber-800/40">
+          <div className="flex items-center justify-between pb-2 border-b border-zinc-800">
             <div className="flex items-center gap-2">
-              <div className="w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse" />
-              <h3 className="text-sm font-bold text-amber-300 font-mono uppercase tracking-wide">
-                Plain LLM Baseline (Zero-Qloo Guess)
+              <div className="w-2.5 h-2.5 rounded-full bg-zinc-500" />
+              <h3 className="text-sm font-bold text-zinc-300 font-mono uppercase tracking-wide">
+                Plain LLM Baseline (Generic Guess)
               </h3>
             </div>
-            <span className="text-xs font-mono text-zinc-400">
+            <span className="text-xs font-mono text-zinc-500">
               {comparison.plainLlmSponsors.length} Predicted
             </span>
           </div>
@@ -94,32 +93,32 @@ export function LlmDiffView({ comparison, approvedSponsors }: LlmDiffViewProps) 
             {comparison.plainLlmSponsors.map((sponsor, idx) => (
               <div
                 key={sponsor.name + idx}
-                className="p-4 rounded-xl bg-zinc-950/70 border border-zinc-800/90 hover:border-amber-700/50 transition-colors"
+                className="p-4 rounded-xl bg-zinc-950/70 border border-zinc-850 hover:border-zinc-700 transition-colors"
               >
                 <div className="flex items-start justify-between gap-2 mb-1.5">
-                  <div className="font-bold text-sm text-zinc-100 flex items-center gap-2">
+                  <div className="font-bold text-sm text-zinc-200 flex items-center gap-2">
                     <span>{sponsor.name}</span>
                     {sponsor.isGenericFortune500 && (
-                      <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-amber-950/40 text-amber-400 border border-amber-800/40">
+                      <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-zinc-900 text-zinc-400 border border-zinc-800">
                         Generic Megabrand
                       </span>
                     )}
                   </div>
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-zinc-900 text-amber-300 border border-amber-900/50">
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-zinc-900 text-zinc-400 border border-zinc-800">
                     [Creative Guess]
                   </span>
                 </div>
 
-                <div className="text-[11px] font-mono text-zinc-400 mb-2">
+                <div className="text-[11px] font-mono text-zinc-500 mb-2">
                   Category: {sponsor.category}
                 </div>
 
-                <p className="text-xs text-zinc-300 italic bg-zinc-900/60 p-2.5 rounded-lg border border-zinc-800/80">
+                <p className="text-xs text-zinc-400 italic bg-zinc-900/40 p-2.5 rounded-lg border border-zinc-800/60">
                   &ldquo;{sponsor.predictedReason}&rdquo;
                 </p>
 
-                <div className="flex items-center gap-1.5 mt-2 text-[10px] font-mono text-amber-400/80">
-                  <AlertTriangle className="w-3 h-3" />
+                <div className="flex items-center gap-1.5 mt-2 text-[10px] font-mono text-zinc-500">
+                  <AlertTriangle className="w-3 h-3 text-amber-500/80" />
                   <span>0 empirical audience overlap metrics. Pure parametric hallucination.</span>
                 </div>
               </div>
@@ -160,7 +159,7 @@ export function LlmDiffView({ comparison, approvedSponsors }: LlmDiffViewProps) 
                   </div>
                 </div>
 
-                <div className="text-[10px] font-mono text-zinc-400 truncate mb-2">
+                <div className="text-[10px] font-mono text-zinc-500 truncate mb-2">
                   {sponsor.entityId}
                 </div>
 

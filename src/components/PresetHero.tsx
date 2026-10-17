@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import { JUDGE_PRESETS, JudgePreset } from '@/data/presets';
 import { EventBrief, QlooExecutionMode } from '@/lib/types';
 import {
-  Sparkles,
   RefreshCw,
   SlidersHorizontal,
   MapPin,
@@ -176,7 +175,7 @@ export function PresetHero({
       <div className="max-w-[1400px] mx-auto px-6 py-3">
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-2">
-            <Sparkles className="w-3.5 h-3.5 text-zinc-400" />
+            <Radio className="w-3.5 h-3.5 text-zinc-400" />
             <span className="text-xs uppercase font-mono font-bold tracking-wider text-zinc-400">
               One-Click Judge Presets (Zero Typing Required)
             </span>

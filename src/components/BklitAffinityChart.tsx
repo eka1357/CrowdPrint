@@ -7,7 +7,7 @@ import { Bar } from '@/components/charts/bar';
 import { Grid } from '@/components/charts/grid';
 import { BarXAxis } from '@/components/charts/bar-x-axis';
 import { ChartTooltip } from '@/components/charts/tooltip/chart-tooltip';
-import { Sparkles, TrendingUp, BarChart3, Info } from 'lucide-react';
+import { TrendingUp, BarChart3, Info } from 'lucide-react';
 import { CountUp } from '@/components/ui/CountUp';
 
 interface BklitAffinityChartProps {
@@ -27,7 +27,7 @@ export function BklitAffinityChart({
 }: BklitAffinityChartProps) {
   const [activeMetric, setActiveMetric] = useState<'both' | 'qloo' | 'llm'>('both');
 
-  // Prepare top 8 data points for composable Bklit chart
+  // Prepare top 8 data points for chart
   const chartData = useMemo(() => {
     if (!sponsors || sponsors.length === 0) return [];
     
@@ -68,20 +68,19 @@ export function BklitAffinityChart({
 
   return (
     <div className={`p-5 rounded-2xl bg-zinc-950/80 border border-zinc-800/80 shadow-xl backdrop-blur-sm relative overflow-hidden ${className}`}>
-      {/* Ambient background glow */}
+      {/* Subtle ambient background glow */}
       <div className="absolute top-0 right-1/4 w-80 h-36 bg-emerald-500/5 blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-1/4 w-80 h-36 bg-amber-500/5 blur-3xl pointer-events-none" />
 
       {/* Header bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-5 pb-4 border-b border-zinc-800/60 relative z-10">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4 pb-3.5 border-b border-zinc-800/60 relative z-10">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <span className="text-[10px] font-mono uppercase tracking-wider font-bold px-2 py-0.5 rounded-full bg-zinc-900 border border-zinc-700/60 text-zinc-300 flex items-center gap-1.5">
-              <BarChart3 className="w-3 h-3 text-emerald-400" />
-              Bklit Composable Chart
+            <span className="text-[10px] font-mono uppercase tracking-wider font-bold px-2 py-0.5 rounded-full bg-emerald-950/40 border border-emerald-800/40 text-emerald-400 flex items-center gap-1.5">
+              <BarChart3 className="w-3 h-3" />
+              Affinity Distribution
             </span>
             <span className="text-[11px] font-mono text-zinc-400">
-              --chart-1 / --chart-2 Crosshair
+              Qloo Taste Graph vs. Plain LLM Baseline
             </span>
           </div>
           <h3 className="text-base font-bold text-zinc-100 tracking-tight flex items-center gap-2">
@@ -92,7 +91,7 @@ export function BklitAffinityChart({
           </p>
         </div>
 
-        {/* Aggregate Stats Dial */}
+        {/* Aggregate Stats Dial & Filter Tabs */}
         <div className="flex items-center gap-3 shrink-0">
           <div className="px-3 py-1.5 rounded-xl bg-zinc-900/90 border border-zinc-800 text-right">
             <div className="text-[10px] font-mono uppercase text-zinc-400 tracking-wider">
@@ -107,6 +106,7 @@ export function BklitAffinityChart({
           {/* Metric Selector Tabs */}
           <div className="p-1 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center gap-1">
             <button
+              type="button"
               onClick={() => setActiveMetric('both')}
               className={`px-2.5 py-1 rounded text-[11px] font-mono font-medium transition-all cursor-pointer ${
                 activeMetric === 'both'
@@ -117,6 +117,7 @@ export function BklitAffinityChart({
               Both
             </button>
             <button
+              type="button"
               onClick={() => setActiveMetric('qloo')}
               className={`px-2.5 py-1 rounded text-[11px] font-mono font-medium transition-all cursor-pointer ${
                 activeMetric === 'qloo'
@@ -127,11 +128,12 @@ export function BklitAffinityChart({
               Qloo
             </button>
             <button
+              type="button"
               onClick={() => setActiveMetric('llm')}
               className={`px-2.5 py-1 rounded text-[11px] font-mono font-medium transition-all cursor-pointer ${
                 activeMetric === 'llm'
-                  ? 'bg-amber-950/60 text-amber-300 border border-amber-800/50'
-                  : 'text-zinc-400 hover:text-amber-400'
+                  ? 'bg-zinc-800 text-zinc-200 border border-zinc-700/60'
+                  : 'text-zinc-400 hover:text-zinc-300'
               }`}
             >
               Plain LLM
@@ -141,33 +143,34 @@ export function BklitAffinityChart({
       </div>
 
       {/* Legend Indicator Pills */}
-      <div className="flex items-center gap-4 text-xs font-mono mb-4 px-1 text-zinc-400">
+      <div className="flex items-center gap-4 text-xs font-mono mb-3 px-1 text-zinc-400">
         <div className="flex items-center gap-1.5">
-          <span className="w-3 h-3 rounded-sm bg-[#10B981] inline-block shadow-xs shadow-emerald-500/30" />
-          <span className="text-zinc-200 font-semibold">Qloo Affinity Index (Grounded)</span>
-          <span className="text-[10px] text-zinc-400 font-normal">avg {avgQloo}%</span>
+          <span className="w-2.5 h-2.5 rounded-sm bg-[#10B981] inline-block shadow-xs shadow-emerald-500/30" />
+          <span className="text-zinc-200 font-medium">Qloo Taste Graph (Grounded)</span>
+          <span className="text-[10px] text-zinc-500 font-normal">avg {avgQloo}%</span>
         </div>
         <div className="flex items-center gap-1.5">
-          <span className="w-3 h-3 rounded-sm bg-[#F59E0B] inline-block shadow-xs shadow-amber-500/30" />
-          <span className="text-zinc-200 font-semibold">Plain LLM Baseline (Un-grounded)</span>
-          <span className="text-[10px] text-zinc-400 font-normal">avg {avgLlm}%</span>
+          <span className="w-2.5 h-2.5 rounded-sm bg-[#52525B] inline-block" />
+          <span className="text-zinc-400 font-medium">Plain LLM Baseline (Un-grounded)</span>
+          <span className="text-[10px] text-zinc-500 font-normal">avg {avgLlm}%</span>
         </div>
       </div>
 
-      {/* Real Bklit Composable BarChart */}
-      <div className="w-full relative min-h-[220px]">
+      {/* Sleek BarChart with 12px bars and subtle muted colors */}
+      <div className="w-full relative h-56 min-h-[220px]">
         <BarChart
           data={chartData}
           xDataKey="name"
-          aspectRatio="2.5 / 1"
-          className="w-full"
-          barGap={0.2}
-          margin={{ top: 16, right: 20, bottom: 36, left: 20 }}
+          barWidth={12}
+          barGap={0.25}
+          aspectRatio="3.2 / 1"
+          className="w-full h-full"
+          margin={{ top: 12, right: 16, bottom: 32, left: 16 }}
         >
           <Grid
             horizontal
             vertical={false}
-            stroke="rgba(255, 255, 255, 0.08)"
+            stroke="rgba(255, 255, 255, 0.06)"
             strokeDasharray="2 2"
           />
           <BarXAxis showAllLabels maxLabels={8} />
@@ -180,7 +183,7 @@ export function BklitAffinityChart({
           {(activeMetric === 'both' || activeMetric === 'llm') && (
             <Bar
               dataKey="llm"
-              fill="#F59E0B"
+              fill="#52525B"
             />
           )}
           <ChartTooltip
@@ -192,12 +195,12 @@ export function BklitAffinityChart({
       </div>
 
       {/* Footer Insight Note */}
-      <div className="mt-3 pt-3 border-t border-zinc-800/40 flex items-center justify-between text-[11px] font-mono text-zinc-400">
+      <div className="mt-2.5 pt-2.5 border-t border-zinc-800/40 flex items-center justify-between text-[11px] font-mono text-zinc-400">
         <span className="flex items-center gap-1.5">
-          <Info className="w-3.5 h-3.5 text-zinc-400" />
-          Interactive Crosshair: Hover over columns to inspect brand affinity metrics & divergence delta.
+          <Info className="w-3.5 h-3.5 text-zinc-500" />
+          Hover over columns to inspect brand affinity metrics & divergence delta.
         </span>
-        <span className="text-zinc-400">
+        <span className="text-zinc-500">
           Source: Qloo 250M+ Entity Taste Graph
         </span>
       </div>
