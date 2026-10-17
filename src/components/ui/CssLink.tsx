@@ -4,7 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
-interface CssLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+export interface CssLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   href: string;
   children: React.ReactNode;
   className?: string;
