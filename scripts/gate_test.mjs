@@ -11,6 +11,15 @@
 
 import { readFileSync, existsSync } from 'fs';
 import { resolve } from 'path';
+import {
+  buildBrandInsightsPath,
+  buildPlaceInsightsPath,
+  buildSearchPath,
+  extractInsightEntities,
+  extractSearchResults,
+  normalizeName,
+  pickArtistMatch,
+} from '../src/lib/qloo_parse.ts';
 
 // Attempt to load .env.local manually if node was invoked without --env-file
 if (existsSync(resolve(process.cwd(), '.env.local'))) {
@@ -78,51 +87,36 @@ console.log('------------------------------------------------------------\n');
 
 async function callQloo(path) {
   if (isDryMock) {
-    // Simulated realistic response for dry gate testing
+    // Simulated response for dry gate testing — mirrors the real live Qloo payload shapes
     await new Promise((r) => setTimeout(r, 45));
-    if (path.includes('/search')) {
+    const mockId = (s) => `MOCK-${s.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 12)}`;
+    if (path.startsWith('/search')) {
       const q = new URLSearchParams(path.split('?')[1]).get('query') || 'artist';
       return {
         status: 200,
         data: {
-          results: [
-            {
-              id: `urn:entity:artist:${q.toLowerCase().replace(/[^a-z0-9]/g, '_')}`,
-              name: q,
-              score: 0.98,
-            },
-          ],
+          results: [{ name: q, entity_id: mockId(q), types: ['urn:entity:artist'], popularity: 0.98, tags: [] }],
         },
       };
     }
     if (path.includes('/v2/insights') && path.includes('urn:entity:brand')) {
+      const names = ['AIAIAI Audio', 'Teenage Engineering', 'Carhartt WIP', 'Liquid Death', 'Nothing Tech', 'Aesop', 'Sonos', 'Minor Figures', 'Marshall Amplification', 'NTS Radio Store'];
       return {
         status: 200,
         data: {
-          results: [
-            { id: 'urn:entity:brand:aiaiai_audio', name: 'AIAIAI Audio', affinity: 0.96, categories: ['Audio Hardware'] },
-            { id: 'urn:entity:brand:teenage_eng', name: 'Teenage Engineering', affinity: 0.94, categories: ['Music Tech'] },
-            { id: 'urn:entity:brand:carhartt_wip', name: 'Carhartt WIP', affinity: 0.92, categories: ['Streetwear'] },
-            { id: 'urn:entity:brand:liquid_death', name: 'Liquid Death', affinity: 0.89, categories: ['Beverage'] },
-            { id: 'urn:entity:brand:nothing_tech', name: 'Nothing Tech', affinity: 0.88, categories: ['Electronics'] },
-            { id: 'urn:entity:brand:aesop', name: 'Aesop', affinity: 0.86, categories: ['Personal Care'] },
-            { id: 'urn:entity:brand:sonos', name: 'Sonos', affinity: 0.85, categories: ['Audio'] },
-            { id: 'urn:entity:brand:minor_figures', name: 'Minor Figures', affinity: 0.84, categories: ['Coffee'] },
-            { id: 'urn:entity:brand:marshall', name: 'Marshall Amplification', affinity: 0.83, categories: ['Audio'] },
-            { id: 'urn:entity:brand:nts_radio', name: 'NTS Radio Store', affinity: 0.82, categories: ['Media'] },
-          ],
+          success: true,
+          results: {
+            entities: names.map((name, i) => ({ name, entity_id: mockId(name), subtype: 'urn:entity:brand', query: { affinity: 0.96 - i * 0.015 } })),
+          },
         },
       };
     }
     if (path.includes('/v2/insights') && path.includes('urn:entity:place')) {
       const isWilliamsburg = path.includes('Williamsburg');
+      const names = isWilliamsburg ? ['Public Records', 'Elsewhere', 'Nowadays'] : ['KGB Bar', 'Dime', 'Bowery Ballroom'];
       return {
         status: 200,
-        data: {
-          results: isWilliamsburg
-            ? [{ name: 'Public Records' }, { name: 'Elsewhere' }, { name: 'Nowadays' }]
-            : [{ name: 'KGB Bar' }, { name: 'Dime' }, { name: 'Bowery Ballroom' }],
-        },
+        data: { success: true, results: { entities: names.map((name) => ({ name, entity_id: mockId(name) })) } },
       };
     }
   }
@@ -161,18 +155,21 @@ async function runGate() {
 
     for (const artist of item.artists) {
       totalQueried++;
-      const { status, data } = await callQloo(`/search?query=${encodeURIComponent(artist)}&types=urn:entity:artist&limit=1`);
-      const results = data?.results || data?.data || [];
-      const first = results[0];
-      const entityId = first?.id || first?.entity_id || '';
+      const { status, data } = await callQloo(buildSearchPath(artist, 'urn:entity:artist', 3));
+      const results = extractSearchResults(data);
+      const match = pickArtistMatch(results, artist);
+      const entityId = match?.entity_id || '';
+      const nameMatches = !!match && normalizeName(match.name || '') === normalizeName(artist);
 
-      if (status === 200 && entityId.startsWith('urn:entity:artist')) {
+      if (status === 200 && entityId && nameMatches) {
         lineupResolvedCount++;
         totalResolved++;
         resolvedURNsByLineup[key].push(entityId);
-        console.log(`  ✓ [${key}] "${artist}" -> ${entityId}`);
+        console.log(`  ✓ [${key}] "${artist}" -> "${match.name}" ${entityId} (popularity ${match.popularity?.toFixed?.(3) ?? 'n/a'})`);
+      } else if (status === 200 && entityId) {
+        console.log(`  ✗ [${key}] "${artist}" ambiguous: top artist match was "${match.name}" (${entityId})`);
       } else {
-        console.log(`  ✗ [${key}] "${artist}" failed resolution (status: ${status})`);
+        console.log(`  ✗ [${key}] "${artist}" failed resolution (status: ${status}, results: ${results.length})`);
       }
     }
 
@@ -191,14 +188,20 @@ async function runGate() {
   const retrievedBrandsByLineup = {};
 
   for (const [key, seeds] of Object.entries(resolvedURNsByLineup)) {
-    const seedParam = seeds.slice(0, 3).join(',');
-    const { status, data } = await callQloo(
-      `/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=${encodeURIComponent(seedParam)}&limit=20`
-    );
-    const brands = data?.results || data?.data || [];
+    if (seeds.length === 0) {
+      retrievedBrandsByLineup[key] = [];
+      console.log(`  • [${key}] Skipped — no resolved seed entities`);
+      continue;
+    }
+    const { status, data } = await callQloo(buildBrandInsightsPath(seeds, { city: LINEUPS[key].city, take: 20 }));
+    const brands = extractInsightEntities(data);
     retrievedBrandsByLineup[key] = brands;
 
-    console.log(`  • [${key}] Retrieved ${brands.length} brand candidates (status: ${status})`);
+    const preview = brands
+      .slice(0, 5)
+      .map((b) => `${b.name} (${Math.round((b.query?.affinity ?? 0) * 100)})`)
+      .join(', ');
+    console.log(`  • [${key}] Retrieved ${brands.length} brand candidates (status: ${status}) — ${preview}`);
     if (brands.length >= 8) {
       check2PassCount++;
     }
@@ -222,7 +225,8 @@ async function runGate() {
   }
 
   const overlapPct = nycBrands.length > 0 ? Math.round((overlapCount / nycBrands.length) * 100) : 0;
-  gateResults.check3.pass = overlapPct < 40;
+  // An empty brand list must not count as "differentiated"
+  gateResults.check3.pass = nycBrands.length >= 8 && overlapPct < 40;
   console.log(`  • NYC Top 10 Qloo Brands: ${nycBrands.slice(0, 5).join(', ')}...`);
   console.log(`  • Overlap with generic LLM brands: ${overlapCount}/${nycBrands.length} (${overlapPct}%)`);
   console.log(`-> Check 3 Result: ${gateResults.check3.pass ? 'PASS' : 'FAIL'} (Overlap ${overlapPct}% is ${overlapPct < 40 ? '< 40%' : '>= 40%'})\n`);
@@ -232,11 +236,11 @@ async function runGate() {
   // Test if place/brand rankings differ at the neighborhood level
   // ============================================================
   console.log('[CHECK 4] Testing Geographic Granularity (Williamsburg vs. Lower East Side)...');
-  const wburgRes = await callQloo('/v2/insights?filter.type=urn:entity:place&location=Williamsburg,Brooklyn&limit=5');
-  const lesRes = await callQloo('/v2/insights?filter.type=urn:entity:place&location=Lower+East+Side,Manhattan&limit=5');
+  const wburgRes = await callQloo(buildPlaceInsightsPath('Williamsburg, Brooklyn', 5));
+  const lesRes = await callQloo(buildPlaceInsightsPath('Lower East Side, Manhattan', 5));
 
-  const wburgPlaces = (wburgRes.data?.results || []).map((p) => p.name || p.id).join('|');
-  const lesPlaces = (lesRes.data?.results || []).map((p) => p.name || p.id).join('|');
+  const wburgPlaces = extractInsightEntities(wburgRes.data).map((p) => p.name || p.entity_id).join('|');
+  const lesPlaces = extractInsightEntities(lesRes.data).map((p) => p.name || p.entity_id).join('|');
 
   const geoDiverges = wburgPlaces !== lesPlaces && wburgPlaces.length > 0;
   gateResults.check4.pass = geoDiverges;

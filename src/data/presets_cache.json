@@ -1,59 +1,1713 @@
 {
-  "version": "1.0.0",
-  "updatedAt": "2026-10-16T23:00:00.000Z",
+  "version": "2.0.0",
+  "source": "LIVE_QLOO",
+  "apiUrl": "https://hackathon.api.qloo.com",
+  "updatedAt": "2026-10-20T04:51:07.689Z",
   "presets": {
     "brooklyn-warehouse": {
       "presetId": "brooklyn-warehouse",
+      "city": "New York City, NY",
+      "neighborhood": "Williamsburg, Brooklyn",
+      "lineup": [
+        "Fred again..",
+        "Four Tet",
+        "Peggy Gou",
+        "Overmono"
+      ],
       "resolvedSeedIds": [
-        "urn:entity:artist:fred_again_4f2a",
-        "urn:entity:artist:four_tet_9b1c",
-        "urn:entity:artist:peggy_gou_7c8d",
-        "urn:entity:artist:overmono_3e4f"
+        "D723CAE9-2A15-4F4B-A8CE-E49F1706D7ED",
+        "1FCE26EB-24C4-4AD9-85E0-6F6BC8D262B8",
+        "CCCDAEFE-96FC-414B-9FBD-F07D3D929FB6",
+        "EE649BE0-BA8B-4F1E-BDCE-1F5D7AD28186"
       ],
       "topBrandEntities": [
-        "urn:entity:brand:aiaiai_audio_88",
-        "urn:entity:brand:teenage_eng_91",
-        "urn:entity:brand:carhartt_wip_04",
-        "urn:entity:brand:liquid_death_77",
-        "urn:entity:brand:nothing_tech_52",
-        "urn:entity:brand:minor_figures_33",
-        "urn:entity:brand:nts_merch_19",
-        "urn:entity:brand:casio_gshock_61"
+        "9082F37F-5FFC-44A5-84C3-5C1CFD68F47A",
+        "11EA72EF-3C12-44E7-AAD6-699560C23507",
+        "A5707876-D5A1-49F0-ABF9-A793EA7736D2",
+        "404901FF-6E66-4EF7-BAC0-1D324828AEFB",
+        "CFE4B666-1F05-4AB2-864C-8E1D2679651D",
+        "14ED8849-CFBD-4E68-9160-F2D85EAC9CD8",
+        "827D80C7-BD20-4C76-B8F4-BDC131223FD0",
+        "B55163AE-468B-4873-B114-C9DC65CE4E27",
+        "DB045A2F-5476-47A0-98FF-B05E3723AF56",
+        "488CEB9E-FC80-45B4-9F5B-857EBDB9984E"
+      ],
+      "resolvedArtists": [
+        {
+          "inputName": "Fred again..",
+          "resolvedName": "Fred again..",
+          "entityId": "D723CAE9-2A15-4F4B-A8CE-E49F1706D7ED",
+          "verified": true,
+          "disambiguationScore": 0.981,
+          "genres": [
+            "House",
+            "Uk Garage",
+            "Electronic",
+            "Dance"
+          ]
+        },
+        {
+          "inputName": "Four Tet",
+          "resolvedName": "Four Tet",
+          "entityId": "1FCE26EB-24C4-4AD9-85E0-6F6BC8D262B8",
+          "verified": true,
+          "disambiguationScore": 0.998,
+          "genres": [
+            "Idm",
+            "Electronica",
+            "Electronic",
+            "Experimental",
+            "Instrumental",
+            "Ambient"
+          ]
+        },
+        {
+          "inputName": "Peggy Gou",
+          "resolvedName": "PEGGY GOU",
+          "entityId": "CCCDAEFE-96FC-414B-9FBD-F07D3D929FB6",
+          "verified": true,
+          "disambiguationScore": 0.958,
+          "genres": [
+            "House",
+            "Electronic",
+            "Techno",
+            "Korean"
+          ]
+        },
+        {
+          "inputName": "Overmono",
+          "resolvedName": "Overmono",
+          "entityId": "EE649BE0-BA8B-4F1E-BDCE-1F5D7AD28186",
+          "verified": true,
+          "disambiguationScore": 0.953,
+          "genres": [
+            "Idm",
+            "Electronic",
+            "Uk Bass",
+            "Techno",
+            "Breakbeat",
+            "UK Garage"
+          ]
+        }
+      ],
+      "brandCandidates": [
+        {
+          "entityId": "9082F37F-5FFC-44A5-84C3-5C1CFD68F47A",
+          "name": "Rains",
+          "affinityScore": 95.4,
+          "categories": [
+            "Fashion & Apparel",
+            "Retail",
+            "Formalwear",
+            "Accessories",
+            "Bags & Leather",
+            "Fashion"
+          ],
+          "sharedTags": [
+            "Matte Finishes",
+            "Clean Lines",
+            "Monochromatic Palettes"
+          ],
+          "rawQueryUrl": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=D723CAE9-2A15-4F4B-A8CE-E49F1706D7ED,1FCE26EB-24C4-4AD9-85E0-6F6BC8D262B8,CCCDAEFE-96FC-414B-9FBD-F07D3D929FB6,EE649BE0-BA8B-4F1E-BDCE-1F5D7AD28186&take=20&signal.location.query=New%20York%20City%2C%20NY",
+          "description": "Rains is a brand specializing in waterproof outerwear and bags, offering stylish and functional rainwear products with a 2-year warranty."
+        },
+        {
+          "entityId": "11EA72EF-3C12-44E7-AAD6-699560C23507",
+          "name": "Urbanears",
+          "affinityScore": 95.4,
+          "categories": [
+            "Consumer Electronics",
+            "Audio Equipment",
+            "Headphones",
+            "Electronics"
+          ],
+          "sharedTags": [
+            "Minimalist",
+            "Matte Finishes",
+            "Monochromatic Palettes"
+          ],
+          "rawQueryUrl": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=D723CAE9-2A15-4F4B-A8CE-E49F1706D7ED,1FCE26EB-24C4-4AD9-85E0-6F6BC8D262B8,CCCDAEFE-96FC-414B-9FBD-F07D3D929FB6,EE649BE0-BA8B-4F1E-BDCE-1F5D7AD28186&take=20&signal.location.query=New%20York%20City%2C%20NY",
+          "description": "Urbanears is a brand specializing in headphones and earbuds, known for wireless and wired audio products with a focus on sound quality and sustainability."
+        },
+        {
+          "entityId": "A5707876-D5A1-49F0-ABF9-A793EA7736D2",
+          "name": "Vice",
+          "affinityScore": 95.2,
+          "categories": [
+            "Media & Entertainment",
+            "Digital Publishing",
+            "News",
+            "Documentary",
+            "Mass media",
+            "Media & entertainment industry"
+          ],
+          "sharedTags": [
+            "Low-Fidelity Photography",
+            "Raw Video Editing",
+            "Bold Typography"
+          ],
+          "rawQueryUrl": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=D723CAE9-2A15-4F4B-A8CE-E49F1706D7ED,1FCE26EB-24C4-4AD9-85E0-6F6BC8D262B8,CCCDAEFE-96FC-414B-9FBD-F07D3D929FB6,EE649BE0-BA8B-4F1E-BDCE-1F5D7AD28186&take=20&signal.location.query=New%20York%20City%2C%20NY",
+          "description": "VICE is a global media brand known for original journalism and content covering diverse cultural, social, and political topics, including its Spanish-language platform VICE en Español."
+        },
+        {
+          "entityId": "404901FF-6E66-4EF7-BAC0-1D324828AEFB",
+          "name": "ColorsxStudios",
+          "affinityScore": 95.1,
+          "categories": [
+            "Media & Entertainment",
+            "Music Discovery",
+            "Digital Content",
+            "Music industry",
+            "Cultural Arts"
+          ],
+          "sharedTags": [
+            "Monochromatic",
+            "Minimalist",
+            "High-Contrast"
+          ],
+          "rawQueryUrl": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=D723CAE9-2A15-4F4B-A8CE-E49F1706D7ED,1FCE26EB-24C4-4AD9-85E0-6F6BC8D262B8,CCCDAEFE-96FC-414B-9FBD-F07D3D929FB6,EE649BE0-BA8B-4F1E-BDCE-1F5D7AD28186&take=20&signal.location.query=New%20York%20City%2C%20NY",
+          "description": "COLORSxSTUDIOS is a German music performance platform showcasing emerging and distinctive new artists globally through minimalist aesthetic videos and live performances."
+        },
+        {
+          "entityId": "CFE4B666-1F05-4AB2-864C-8E1D2679651D",
+          "name": "Norse Projects",
+          "affinityScore": 95.1,
+          "categories": [
+            "Fashion & Apparel",
+            "Design",
+            "Fashion",
+            "Casual"
+          ],
+          "sharedTags": [
+            "Minimalist",
+            "Neutral Color Palette",
+            "Functional Details"
+          ],
+          "rawQueryUrl": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=D723CAE9-2A15-4F4B-A8CE-E49F1706D7ED,1FCE26EB-24C4-4AD9-85E0-6F6BC8D262B8,CCCDAEFE-96FC-414B-9FBD-F07D3D929FB6,EE649BE0-BA8B-4F1E-BDCE-1F5D7AD28186&take=20&signal.location.query=New%20York%20City%2C%20NY",
+          "description": "Norse Projects is a Danish fashion brand founded in 2004, known for timeless, functional clothing blending luxury natural fibers and technical fabrics."
+        },
+        {
+          "entityId": "14ED8849-CFBD-4E68-9160-F2D85EAC9CD8",
+          "name": "Profound",
+          "affinityScore": 95,
+          "categories": [
+            "Fashion & Apparel",
+            "Luxury Goods",
+            "Casual",
+            "Fashion"
+          ],
+          "sharedTags": [
+            "Hand-Distressed Detailing",
+            "Global Motifs",
+            "Intricate Embroidery"
+          ],
+          "rawQueryUrl": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=D723CAE9-2A15-4F4B-A8CE-E49F1706D7ED,1FCE26EB-24C4-4AD9-85E0-6F6BC8D262B8,CCCDAEFE-96FC-414B-9FBD-F07D3D929FB6,EE649BE0-BA8B-4F1E-BDCE-1F5D7AD28186&take=20&signal.location.query=New%20York%20City%2C%20NY",
+          "description": "Profound is a multidisciplinary luxury fashion brand known for crafting collections that blend historical and cultural influences into bold, modern silhouettes."
+        },
+        {
+          "entityId": "827D80C7-BD20-4C76-B8F4-BDC131223FD0",
+          "name": "Ssense",
+          "affinityScore": 94.8,
+          "categories": [
+            "Retail",
+            "Fashion & Apparel",
+            "E-commerce",
+            "Media & Editorial"
+          ],
+          "sharedTags": [
+            "Minimalist Web Design",
+            "Editorial Photography",
+            "High-Contrast Layouts"
+          ],
+          "rawQueryUrl": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=D723CAE9-2A15-4F4B-A8CE-E49F1706D7ED,1FCE26EB-24C4-4AD9-85E0-6F6BC8D262B8,CCCDAEFE-96FC-414B-9FBD-F07D3D929FB6,EE649BE0-BA8B-4F1E-BDCE-1F5D7AD28186&take=20&signal.location.query=New%20York%20City%2C%20NY",
+          "description": "SSENSE is a Canadian luxury fashion retailer offering designer clothing, shoes, and accessories for men and women."
+        },
+        {
+          "entityId": "B55163AE-468B-4873-B114-C9DC65CE4E27",
+          "name": "Carne Bollente",
+          "affinityScore": 94.8,
+          "categories": [
+            "Fashion & Apparel",
+            "Graphic Design",
+            "Fashion",
+            "Casual"
+          ],
+          "sharedTags": [
+            "Graphic-Heavy",
+            "Illustrative",
+            "Playful Minimalism"
+          ],
+          "rawQueryUrl": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=D723CAE9-2A15-4F4B-A8CE-E49F1706D7ED,1FCE26EB-24C4-4AD9-85E0-6F6BC8D262B8,CCCDAEFE-96FC-414B-9FBD-F07D3D929FB6,EE649BE0-BA8B-4F1E-BDCE-1F5D7AD28186&take=20&signal.location.query=New%20York%20City%2C%20NY",
+          "description": "Carne Bollente is a Paris-based sex-positive fashion brand known for its provocative clothing and accessories."
+        },
+        {
+          "entityId": "DB045A2F-5476-47A0-98FF-B05E3723AF56",
+          "name": "Komono",
+          "affinityScore": 94.7,
+          "categories": [
+            "Fashion & Apparel",
+            "Accessories",
+            "Eyewear",
+            "Watch",
+            "Fashion"
+          ],
+          "sharedTags": [
+            "Minimalist",
+            "Sleek",
+            "Neutral Color Palette"
+          ],
+          "rawQueryUrl": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=D723CAE9-2A15-4F4B-A8CE-E49F1706D7ED,1FCE26EB-24C4-4AD9-85E0-6F6BC8D262B8,CCCDAEFE-96FC-414B-9FBD-F07D3D929FB6,EE649BE0-BA8B-4F1E-BDCE-1F5D7AD28186&take=20&signal.location.query=New%20York%20City%2C%20NY",
+          "description": "Komono is a Belgian brand known for its sleek, minimalist watches, sunglasses, and optical eyewear with full UV400 protection."
+        },
+        {
+          "entityId": "488CEB9E-FC80-45B4-9F5B-857EBDB9984E",
+          "name": "Only NY",
+          "affinityScore": 94.7,
+          "categories": [
+            "Fashion & Apparel",
+            "Lifestyle",
+            "Fashion"
+          ],
+          "sharedTags": [
+            "Minimalist Branding",
+            "Graphic Prints",
+            "Utility-Inspired Details"
+          ],
+          "rawQueryUrl": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=D723CAE9-2A15-4F4B-A8CE-E49F1706D7ED,1FCE26EB-24C4-4AD9-85E0-6F6BC8D262B8,CCCDAEFE-96FC-414B-9FBD-F07D3D929FB6,EE649BE0-BA8B-4F1E-BDCE-1F5D7AD28186&take=20&signal.location.query=New%20York%20City%2C%20NY",
+          "description": "Only NY is an independent clothing and lifestyle brand inspired by New York City, offering apparel and accessories celebrating the city."
+        },
+        {
+          "entityId": "3637BC2E-B2D1-4496-9BD7-938E4FAE81AD",
+          "name": "Comme des Garcons",
+          "affinityScore": 94.7,
+          "categories": [
+            "Fashion & Apparel",
+            "Retail",
+            "Fragrance",
+            "Design",
+            "Lifestyle / Casual",
+            "Casual"
+          ],
+          "sharedTags": [
+            "Deconstructed Silhouettes",
+            "Asymmetry",
+            "Dark Palette"
+          ],
+          "rawQueryUrl": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=D723CAE9-2A15-4F4B-A8CE-E49F1706D7ED,1FCE26EB-24C4-4AD9-85E0-6F6BC8D262B8,CCCDAEFE-96FC-414B-9FBD-F07D3D929FB6,EE649BE0-BA8B-4F1E-BDCE-1F5D7AD28186&take=20&signal.location.query=New%20York%20City%2C%20NY",
+          "description": "Comme des Garçons is a Japanese fashion label founded by Rei Kawakubo, known for avant-garde clothing, accessories, and collaborations."
+        },
+        {
+          "entityId": "C90E3920-BF05-4537-903F-085BFE2E41AC",
+          "name": "Acne Studios",
+          "affinityScore": 94.6,
+          "categories": [
+            "Fashion & Apparel",
+            "Retail",
+            "Art",
+            "Publishing",
+            "Textile industry",
+            "Accessories"
+          ],
+          "sharedTags": [
+            "Minimalist",
+            "Structured Silhouettes",
+            "Oversized Proportions"
+          ],
+          "rawQueryUrl": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=D723CAE9-2A15-4F4B-A8CE-E49F1706D7ED,1FCE26EB-24C4-4AD9-85E0-6F6BC8D262B8,CCCDAEFE-96FC-414B-9FBD-F07D3D929FB6,EE649BE0-BA8B-4F1E-BDCE-1F5D7AD28186&take=20&signal.location.query=New%20York%20City%2C%20NY",
+          "description": "Acne Studios is a Stockholm-based fashion brand known for its ready-to-wear clothing, accessories, shoes, and denim collections."
+        },
+        {
+          "entityId": "DE26217C-75AC-4619-A181-CE38D3050DE7",
+          "name": "Maison Kitsuné",
+          "affinityScore": 94.5,
+          "categories": [
+            "Fashion & Apparel",
+            "Retail",
+            "Hospitality & Travel",
+            "Media & Entertainment",
+            "Coffee",
+            "Music"
+          ],
+          "sharedTags": [
+            "Minimalist",
+            "Graphic-Driven",
+            "Tailored Silhouettes"
+          ],
+          "rawQueryUrl": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=D723CAE9-2A15-4F4B-A8CE-E49F1706D7ED,1FCE26EB-24C4-4AD9-85E0-6F6BC8D262B8,CCCDAEFE-96FC-414B-9FBD-F07D3D929FB6,EE649BE0-BA8B-4F1E-BDCE-1F5D7AD28186&take=20&signal.location.query=New%20York%20City%2C%20NY",
+          "description": "Maison Kitsuné is a fashion and lifestyle brand known for its clothing and accessories, blending Parisian and Japanese influences."
+        },
+        {
+          "entityId": "6EBC0BED-129B-493C-8F4D-A36ABAF4C84D",
+          "name": "Côte&ciel",
+          "affinityScore": 94.5,
+          "categories": [
+            "Fashion & Apparel",
+            "Accessories",
+            "Fashion",
+            "Bags & Leather"
+          ],
+          "sharedTags": [
+            "Sculptural",
+            "Asymmetrical",
+            "Minimalist"
+          ],
+          "rawQueryUrl": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=D723CAE9-2A15-4F4B-A8CE-E49F1706D7ED,1FCE26EB-24C4-4AD9-85E0-6F6BC8D262B8,CCCDAEFE-96FC-414B-9FBD-F07D3D929FB6,EE649BE0-BA8B-4F1E-BDCE-1F5D7AD28186&take=20&signal.location.query=New%20York%20City%2C%20NY",
+          "description": "côte&ciel is a Paris-designed brand specializing in innovative, stylish backpacks and bags that blend functionality with unique aesthetics."
+        },
+        {
+          "entityId": "BFE400C1-19BF-4491-9730-2DD7054CE2B7",
+          "name": "Stones Throw Records",
+          "affinityScore": 94.5,
+          "categories": [
+            "Media & Entertainment",
+            "Music Industry",
+            "Entertainment",
+            "Website"
+          ],
+          "sharedTags": [
+            "Lo-Fi Visuals",
+            "Retro Graphics",
+            "Textured Paper Stocks"
+          ],
+          "rawQueryUrl": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=D723CAE9-2A15-4F4B-A8CE-E49F1706D7ED,1FCE26EB-24C4-4AD9-85E0-6F6BC8D262B8,CCCDAEFE-96FC-414B-9FBD-F07D3D929FB6,EE649BE0-BA8B-4F1E-BDCE-1F5D7AD28186&take=20&signal.location.query=New%20York%20City%2C%20NY",
+          "description": "Stones Throw Records is an independent record label known for releasing music on vinyl, CD, cassette, and digital formats, featuring hip-hop and experimental artists."
+        },
+        {
+          "entityId": "DE3FA929-BDA9-44B8-8187-EDD76AA53F05",
+          "name": "i-D",
+          "affinityScore": 94.5,
+          "categories": [
+            "Media & Entertainment",
+            "Fashion & Apparel",
+            "Publishing",
+            "Fashion",
+            "Entertainment",
+            "Website"
+          ],
+          "sharedTags": [
+            "Edgy",
+            "Lo-Fi Photography",
+            "Experimental Typography"
+          ],
+          "rawQueryUrl": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=D723CAE9-2A15-4F4B-A8CE-E49F1706D7ED,1FCE26EB-24C4-4AD9-85E0-6F6BC8D262B8,CCCDAEFE-96FC-414B-9FBD-F07D3D929FB6,EE649BE0-BA8B-4F1E-BDCE-1F5D7AD28186&take=20&signal.location.query=New%20York%20City%2C%20NY",
+          "description": "i-D is a global platform and trendy fashion magazine celebrating fashion, culture, individuality, and youth, known for showcasing emerging talent."
+        },
+        {
+          "entityId": "B89E4CA2-D7F7-405B-93D4-89ABBA31502E",
+          "name": "Weekday",
+          "affinityScore": 94.5,
+          "categories": [
+            "Fashion & Apparel",
+            "Retail",
+            "Youth Culture",
+            "Fashion",
+            "Casual"
+          ],
+          "sharedTags": [
+            "Minimalist",
+            "Raw Denim",
+            "Oversized Silhouettes"
+          ],
+          "rawQueryUrl": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=D723CAE9-2A15-4F4B-A8CE-E49F1706D7ED,1FCE26EB-24C4-4AD9-85E0-6F6BC8D262B8,CCCDAEFE-96FC-414B-9FBD-F07D3D929FB6,EE649BE0-BA8B-4F1E-BDCE-1F5D7AD28186&take=20&signal.location.query=New%20York%20City%2C%20NY",
+          "description": "Weekday is a fashion brand known for its iconic jeans, effortless tailoring, and seasonal wardrobe pieces including swim and beachwear."
+        },
+        {
+          "entityId": "BEAF7205-E828-4F2A-979D-E48D96AA90E6",
+          "name": "Colorful Standard",
+          "affinityScore": 94.5,
+          "categories": [
+            "Fashion & Apparel",
+            "Fashion"
+          ],
+          "sharedTags": [
+            "Minimalist",
+            "Monochromatic",
+            "Vibrant Palette"
+          ],
+          "rawQueryUrl": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=D723CAE9-2A15-4F4B-A8CE-E49F1706D7ED,1FCE26EB-24C4-4AD9-85E0-6F6BC8D262B8,CCCDAEFE-96FC-414B-9FBD-F07D3D929FB6,EE649BE0-BA8B-4F1E-BDCE-1F5D7AD28186&take=20&signal.location.query=New%20York%20City%2C%20NY",
+          "description": "Colorful Standard is a sustainable fashion brand offering organic and recycled wardrobe essentials in vibrant colors, made in Portugal."
+        },
+        {
+          "entityId": "4734F205-F021-4903-8BAA-65D62E5E353F",
+          "name": "The Arrivals",
+          "affinityScore": 94.5,
+          "categories": [
+            "Fashion & Apparel",
+            "Retail",
+            "Outdoor Gear",
+            "Fashion",
+            "Casual"
+          ],
+          "sharedTags": [
+            "Minimalist",
+            "Monochromatic",
+            "Technical"
+          ],
+          "rawQueryUrl": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=D723CAE9-2A15-4F4B-A8CE-E49F1706D7ED,1FCE26EB-24C4-4AD9-85E0-6F6BC8D262B8,CCCDAEFE-96FC-414B-9FBD-F07D3D929FB6,EE649BE0-BA8B-4F1E-BDCE-1F5D7AD28186&take=20&signal.location.query=New%20York%20City%2C%20NY",
+          "description": "The Arrivals is an independent outerwear brand specializing in genderless, seasonless, high-function essentials and outerwear engineered for everyday life."
+        },
+        {
+          "entityId": "7F197629-994D-4A85-9F72-49A54A6FB2AD",
+          "name": "Crap Eyewear",
+          "affinityScore": 94.4,
+          "categories": [
+            "Fashion & Apparel",
+            "Retail",
+            "Eyewear",
+            "Accessories",
+            "Fashion"
+          ],
+          "sharedTags": [
+            "Bold Frames",
+            "Playful Colorways",
+            "Retro-Inspired Silhouettes"
+          ],
+          "rawQueryUrl": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=D723CAE9-2A15-4F4B-A8CE-E49F1706D7ED,1FCE26EB-24C4-4AD9-85E0-6F6BC8D262B8,CCCDAEFE-96FC-414B-9FBD-F07D3D929FB6,EE649BE0-BA8B-4F1E-BDCE-1F5D7AD28186&take=20&signal.location.query=New%20York%20City%2C%20NY",
+          "description": "Independent sunglass brand offering funky, bioacetate sunglasses designed and tested beachside in Los Angeles, known for premium quality and affordable prices."
+        }
+      ],
+      "tags": [
+        "Horror Enthusiasts",
+        "Emotive",
+        "Mystery Lovers",
+        "Textured",
+        "Youthful Rebellion",
+        "Teen-Oriented",
+        "Mature",
+        "Young Adults",
+        "Diverse",
+        "Aspirational"
+      ],
+      "anchorVenues": [
+        {
+          "entityId": "02DAB1BD-8691-4836-B7D0-ADF459AE59F1",
+          "name": "Domino Park",
+          "address": "15 River St Brooklyn, NY 11249",
+          "category": "Park",
+          "popularity": 1,
+          "neighborhood": "Williamsburg, Brooklyn"
+        },
+        {
+          "entityId": "F120AC41-430D-42A9-A2D4-9D73096391B8",
+          "name": "Music Hall of Williamsburg",
+          "address": "66 N 6th St Brooklyn, NY 11211",
+          "category": "Event venue",
+          "popularity": 0.999,
+          "neighborhood": "Williamsburg, Brooklyn"
+        },
+        {
+          "entityId": "CF8503DF-2014-42D7-9437-0082A70CC58E",
+          "name": "Baby's All Right",
+          "address": "146 Broadway Brooklyn, NY 11211",
+          "category": "Live music venue",
+          "popularity": 0.999,
+          "neighborhood": "Williamsburg, Brooklyn"
+        },
+        {
+          "entityId": "ECB43FCB-D534-4F4A-A6C8-2AF4C5780B58",
+          "name": "Wythe Hotel",
+          "address": "80 Wythe Ave Brooklyn, NY 11249",
+          "category": "Hotel",
+          "popularity": 0.999,
+          "neighborhood": "Williamsburg, Brooklyn"
+        },
+        {
+          "entityId": "12802308-1EB2-48E5-9546-40F70D0A5744",
+          "name": "Isola Brooklyn",
+          "address": "361 Metropolitan Ave Brooklyn, NY 11211",
+          "category": "Live music venue",
+          "popularity": 0.999,
+          "neighborhood": "Williamsburg, Brooklyn"
+        }
+      ],
+      "queries": {
+        "brands": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=D723CAE9-2A15-4F4B-A8CE-E49F1706D7ED,1FCE26EB-24C4-4AD9-85E0-6F6BC8D262B8,CCCDAEFE-96FC-414B-9FBD-F07D3D929FB6,EE649BE0-BA8B-4F1E-BDCE-1F5D7AD28186&take=20&signal.location.query=New%20York%20City%2C%20NY",
+        "tags": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:tag&filter.tag.types=urn:tag:lifestyle:qloo,urn:tag:audience:qloo,urn:tag:music:qloo&signal.interests.entities=D723CAE9-2A15-4F4B-A8CE-E49F1706D7ED,1FCE26EB-24C4-4AD9-85E0-6F6BC8D262B8,CCCDAEFE-96FC-414B-9FBD-F07D3D929FB6,EE649BE0-BA8B-4F1E-BDCE-1F5D7AD28186&take=10",
+        "places": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:place&filter.location.query=Williamsburg%2C%20Brooklyn&take=5"
+      },
+      "calls": [
+        {
+          "endpoint": "/search",
+          "query": "Fred again..",
+          "status": 200,
+          "latencyMs": 967,
+          "entitiesReturned": 3
+        },
+        {
+          "endpoint": "/search",
+          "query": "Four Tet",
+          "status": 200,
+          "latencyMs": 285,
+          "entitiesReturned": 3
+        },
+        {
+          "endpoint": "/search",
+          "query": "Peggy Gou",
+          "status": 200,
+          "latencyMs": 271,
+          "entitiesReturned": 3
+        },
+        {
+          "endpoint": "/search",
+          "query": "Overmono",
+          "status": 200,
+          "latencyMs": 256,
+          "entitiesReturned": 1
+        },
+        {
+          "endpoint": "/v2/insights",
+          "filterType": "urn:entity:brand",
+          "status": 200,
+          "latencyMs": 860,
+          "entitiesReturned": 20
+        },
+        {
+          "endpoint": "/v2/insights",
+          "filterType": "urn:tag",
+          "status": 200,
+          "latencyMs": 1706,
+          "entitiesReturned": 10
+        },
+        {
+          "endpoint": "/v2/insights",
+          "filterType": "urn:entity:place",
+          "status": 200,
+          "latencyMs": 610,
+          "entitiesReturned": 5
+        }
       ]
     },
     "silver-lake-indie": {
       "presetId": "silver-lake-indie",
+      "city": "Los Angeles, CA",
+      "neighborhood": "Silver Lake, Los Angeles",
+      "lineup": [
+        "Khruangbin",
+        "Steve Lacy",
+        "Clairo",
+        "Men I Trust"
+      ],
       "resolvedSeedIds": [
-        "urn:entity:artist:khruangbin_8d2a",
-        "urn:entity:artist:steve_lacy_5a7c",
-        "urn:entity:artist:clairo_2d9e",
-        "urn:entity:artist:men_i_trust_6f4b"
+        "BAF6317A-DF94-4C90-92AE-63F86560C21B",
+        "FC2E3A2F-A99A-4287-91E7-7FD8F7DE0A40",
+        "9B2140E4-8DEB-452C-BB75-C3B7B6AD198E",
+        "86E45BD3-3265-4B47-BF9A-367D583F12A6"
       ],
       "topBrandEntities": [
-        "urn:entity:brand:aesop_skincare_44",
-        "urn:entity:brand:sonos_sound_88",
-        "urn:entity:brand:patagonia_outdoor_11",
-        "urn:entity:brand:le_labo_09",
-        "urn:entity:brand:shinola_detroit_23",
-        "urn:entity:brand:kin_euphorics_55",
-        "urn:entity:brand:muji_japan_76"
+        "4F94C666-5FFA-4A42-8453-24C2F779EC36",
+        "F59D6DB5-5A85-48C6-A2EC-CAAE334D4348",
+        "977160CE-28F9-4BC9-A0B5-C022BF3A5572",
+        "8A2527C6-2C10-443F-A71C-6EDDA5F95E11",
+        "51844CEA-DECE-4071-ABF4-1A6834639F2B",
+        "7F197629-994D-4A85-9F72-49A54A6FB2AD",
+        "62926E8D-2D7E-4428-819E-BF2477D3233F",
+        "67561DC2-E5B9-473A-BA0D-344B3C49ABA9",
+        "742FBE1B-B70F-471F-AD07-A55C9A903628",
+        "55F4DCEE-DB84-42AD-A57E-D62B86AE02E3"
+      ],
+      "resolvedArtists": [
+        {
+          "inputName": "Khruangbin",
+          "resolvedName": "Khruangbin",
+          "entityId": "BAF6317A-DF94-4C90-92AE-63F86560C21B",
+          "verified": true,
+          "disambiguationScore": 0.992,
+          "genres": [
+            "Psychedelic",
+            "Funk",
+            "Rock",
+            "Psychedelic Rock",
+            "Soul",
+            "Instrumental"
+          ]
+        },
+        {
+          "inputName": "Steve Lacy",
+          "resolvedName": "Steve Lacy",
+          "entityId": "FC2E3A2F-A99A-4287-91E7-7FD8F7DE0A40",
+          "verified": true,
+          "disambiguationScore": 0.993,
+          "genres": [
+            "Soprano Sax",
+            "Jazz",
+            "Saxophone",
+            "Free Jazz",
+            "Avant Garde Jazz",
+            "R&B"
+          ]
+        },
+        {
+          "inputName": "Clairo",
+          "resolvedName": "Clairo",
+          "entityId": "9B2140E4-8DEB-452C-BB75-C3B7B6AD198E",
+          "verified": true,
+          "disambiguationScore": 0.995,
+          "genres": [
+            "Lo - Fi",
+            "Indie Pop",
+            "Bedroom Pop",
+            "Dream Pop",
+            "Electropop"
+          ]
+        },
+        {
+          "inputName": "Men I Trust",
+          "resolvedName": "Men I Trust",
+          "entityId": "86E45BD3-3265-4B47-BF9A-367D583F12A6",
+          "verified": true,
+          "disambiguationScore": 0.99,
+          "genres": [
+            "Indie",
+            "Indie Pop",
+            "Dream Pop",
+            "Sophisti-pop",
+            "Electropop"
+          ]
+        }
+      ],
+      "brandCandidates": [
+        {
+          "entityId": "4F94C666-5FFA-4A42-8453-24C2F779EC36",
+          "name": "Urban Outfitters",
+          "affinityScore": 98,
+          "categories": [
+            "Retail",
+            "Fashion & Apparel",
+            "Music",
+            "Home Goods",
+            "Fashion"
+          ],
+          "sharedTags": [
+            "Bohemian",
+            "Vintage-Inspired",
+            "Eclectic"
+          ],
+          "rawQueryUrl": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=BAF6317A-DF94-4C90-92AE-63F86560C21B,FC2E3A2F-A99A-4287-91E7-7FD8F7DE0A40,9B2140E4-8DEB-452C-BB75-C3B7B6AD198E,86E45BD3-3265-4B47-BF9A-367D583F12A6&take=20&signal.location.query=Los%20Angeles%2C%20CA",
+          "description": "Urban Outfitters is a lifestyle retailer offering clothing, homeware, and accessories inspired by creativity and cultural trends."
+        },
+        {
+          "entityId": "F59D6DB5-5A85-48C6-A2EC-CAAE334D4348",
+          "name": "Dr. Martens",
+          "affinityScore": 97.1,
+          "categories": [
+            "Fashion & Apparel",
+            "Retail",
+            "Footwear",
+            "Fashion",
+            "Other"
+          ],
+          "sharedTags": [
+            "Yellow Stitching",
+            "Air-Cushioned Soles",
+            "Smooth Leather Finish"
+          ],
+          "rawQueryUrl": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=BAF6317A-DF94-4C90-92AE-63F86560C21B,FC2E3A2F-A99A-4287-91E7-7FD8F7DE0A40,9B2140E4-8DEB-452C-BB75-C3B7B6AD198E,86E45BD3-3265-4B47-BF9A-367D583F12A6&take=20&signal.location.query=Los%20Angeles%2C%20CA",
+          "description": "Dr. Martens is a British footwear and clothing brand known for its iconic durable boots and shoes with distinctive yellow stitching."
+        },
+        {
+          "entityId": "977160CE-28F9-4BC9-A0B5-C022BF3A5572",
+          "name": "Free People",
+          "affinityScore": 96.8,
+          "categories": [
+            "Fashion & Apparel",
+            "Retail",
+            "Lifestyle",
+            "Casual",
+            "Website",
+            "Fashion"
+          ],
+          "sharedTags": [
+            "Vintage-Inspired",
+            "Flowy Silhouettes",
+            "Intricate Detailing"
+          ],
+          "rawQueryUrl": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=BAF6317A-DF94-4C90-92AE-63F86560C21B,FC2E3A2F-A99A-4287-91E7-7FD8F7DE0A40,9B2140E4-8DEB-452C-BB75-C3B7B6AD198E,86E45BD3-3265-4B47-BF9A-367D583F12A6&take=20&signal.location.query=Los%20Angeles%2C%20CA",
+          "description": "Free People is a women's clothing brand specializing in bohemian fashion, offering trendy and vintage-inspired apparel and accessories."
+        },
+        {
+          "entityId": "8A2527C6-2C10-443F-A71C-6EDDA5F95E11",
+          "name": "American Apparel",
+          "affinityScore": 96.6,
+          "categories": [
+            "Fashion & Apparel",
+            "Retail",
+            "Consumer Packaged Goods",
+            "Casual",
+            "Fashion"
+          ],
+          "sharedTags": [
+            "Minimalist Design",
+            "Solid Colors",
+            "Clean Lines"
+          ],
+          "rawQueryUrl": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=BAF6317A-DF94-4C90-92AE-63F86560C21B,FC2E3A2F-A99A-4287-91E7-7FD8F7DE0A40,9B2140E4-8DEB-452C-BB75-C3B7B6AD198E,86E45BD3-3265-4B47-BF9A-367D583F12A6&take=20&signal.location.query=Los%20Angeles%2C%20CA",
+          "description": "American Apparel is a clothing manufacturer, distributor, and retailer known for ethically made, sweatshop-free apparel including blank t-shirts and timeless basics."
+        },
+        {
+          "entityId": "51844CEA-DECE-4071-ABF4-1A6834639F2B",
+          "name": "UNIF",
+          "affinityScore": 96.4,
+          "categories": [
+            "Fashion & Apparel",
+            "Casual",
+            "Other",
+            "Fashion",
+            "Footwear"
+          ],
+          "sharedTags": [
+            "Platform Silhouettes",
+            "Graphic Prints",
+            "Vintage-Inspired Textures"
+          ],
+          "rawQueryUrl": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=BAF6317A-DF94-4C90-92AE-63F86560C21B,FC2E3A2F-A99A-4287-91E7-7FD8F7DE0A40,9B2140E4-8DEB-452C-BB75-C3B7B6AD198E,86E45BD3-3265-4B47-BF9A-367D583F12A6&take=20&signal.location.query=Los%20Angeles%2C%20CA",
+          "description": "UNIF is a fashion brand known for platform boots, baby tees, dresses, denim, and shoes, emphasizing small-batch production and quick shipping."
+        },
+        {
+          "entityId": "7F197629-994D-4A85-9F72-49A54A6FB2AD",
+          "name": "Crap Eyewear",
+          "affinityScore": 96.3,
+          "categories": [
+            "Fashion & Apparel",
+            "Retail",
+            "Eyewear",
+            "Accessories",
+            "Fashion"
+          ],
+          "sharedTags": [
+            "Bold Frames",
+            "Playful Colorways",
+            "Retro-Inspired Silhouettes"
+          ],
+          "rawQueryUrl": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=BAF6317A-DF94-4C90-92AE-63F86560C21B,FC2E3A2F-A99A-4287-91E7-7FD8F7DE0A40,9B2140E4-8DEB-452C-BB75-C3B7B6AD198E,86E45BD3-3265-4B47-BF9A-367D583F12A6&take=20&signal.location.query=Los%20Angeles%2C%20CA",
+          "description": "Independent sunglass brand offering funky, bioacetate sunglasses designed and tested beachside in Los Angeles, known for premium quality and affordable prices."
+        },
+        {
+          "entityId": "62926E8D-2D7E-4428-819E-BF2477D3233F",
+          "name": "Polaroid",
+          "affinityScore": 96.2,
+          "categories": [
+            "Consumer Electronics",
+            "Photography",
+            "Electronics",
+            "Camera & Video"
+          ],
+          "sharedTags": [
+            "Minimalist Design",
+            "Retro-Inspired Elements",
+            "Bold Primary Colors"
+          ],
+          "rawQueryUrl": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=BAF6317A-DF94-4C90-92AE-63F86560C21B,FC2E3A2F-A99A-4287-91E7-7FD8F7DE0A40,9B2140E4-8DEB-452C-BB75-C3B7B6AD198E,86E45BD3-3265-4B47-BF9A-367D583F12A6&take=20&signal.location.query=Los%20Angeles%2C%20CA",
+          "description": "Polaroid is a brand known for instant photography products, including instant cameras and film, continuing the legacy of the original Polaroid Corporation."
+        },
+        {
+          "entityId": "67561DC2-E5B9-473A-BA0D-344B3C49ABA9",
+          "name": "Lazy Oaf",
+          "affinityScore": 96.1,
+          "categories": [
+            "Fashion & Apparel",
+            "Retail",
+            "Graphic Apparel",
+            "Casual",
+            "Fashion"
+          ],
+          "sharedTags": [
+            "Bold Graphics",
+            "Vibrant Color Palettes",
+            "Whimsical Prints"
+          ],
+          "rawQueryUrl": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=BAF6317A-DF94-4C90-92AE-63F86560C21B,FC2E3A2F-A99A-4287-91E7-7FD8F7DE0A40,9B2140E4-8DEB-452C-BB75-C3B7B6AD198E,86E45BD3-3265-4B47-BF9A-367D583F12A6&take=20&signal.location.query=Los%20Angeles%2C%20CA",
+          "description": "Lazy Oaf is an independent streetwear brand known for its unique, playful, and youth nostalgia-inspired men's and women's clothing."
+        },
+        {
+          "entityId": "742FBE1B-B70F-471F-AD07-A55C9A903628",
+          "name": "Glossier",
+          "affinityScore": 95.9,
+          "categories": [
+            "Beauty & Personal Care",
+            "Retail",
+            "Cosmetics industry",
+            "Suncare",
+            "Skincare",
+            "Health & Beauty"
+          ],
+          "sharedTags": [
+            "Minimalist",
+            "Pastel Color Palette",
+            "Clean Typography"
+          ],
+          "rawQueryUrl": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=BAF6317A-DF94-4C90-92AE-63F86560C21B,FC2E3A2F-A99A-4287-91E7-7FD8F7DE0A40,9B2140E4-8DEB-452C-BB75-C3B7B6AD198E,86E45BD3-3265-4B47-BF9A-367D583F12A6&take=20&signal.location.query=Los%20Angeles%2C%20CA",
+          "description": "Glossier is a beauty brand offering skincare, makeup, and fragrances inspired by real life, emphasizing a 'Skin First. Makeup Second™' philosophy."
+        },
+        {
+          "entityId": "55F4DCEE-DB84-42AD-A57E-D62B86AE02E3",
+          "name": "Society6",
+          "affinityScore": 95.8,
+          "categories": [
+            "Retail",
+            "Home Goods",
+            "E-commerce",
+            "Art & Design",
+            "Website"
+          ],
+          "sharedTags": [
+            "Eclectic",
+            "Vibrant",
+            "Modern"
+          ],
+          "rawQueryUrl": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=BAF6317A-DF94-4C90-92AE-63F86560C21B,FC2E3A2F-A99A-4287-91E7-7FD8F7DE0A40,9B2140E4-8DEB-452C-BB75-C3B7B6AD198E,86E45BD3-3265-4B47-BF9A-367D583F12A6&take=20&signal.location.query=Los%20Angeles%2C%20CA",
+          "description": "Society6 is an online marketplace offering artist-designed wall art, home decor, tech accessories, and lifestyle products."
+        },
+        {
+          "entityId": "AB477DE2-998D-4068-A432-19BA32F2CA25",
+          "name": "Brandy Melville",
+          "affinityScore": 95.7,
+          "categories": [
+            "Fashion & Apparel",
+            "Retail",
+            "E-commerce",
+            "Fashion",
+            "Casual"
+          ],
+          "sharedTags": [
+            "Minimalist",
+            "Neutral Tones",
+            "Soft Fabrics"
+          ],
+          "rawQueryUrl": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=BAF6317A-DF94-4C90-92AE-63F86560C21B,FC2E3A2F-A99A-4287-91E7-7FD8F7DE0A40,9B2140E4-8DEB-452C-BB75-C3B7B6AD198E,86E45BD3-3265-4B47-BF9A-367D583F12A6&take=20&signal.location.query=Los%20Angeles%2C%20CA",
+          "description": "Brandy Melville is a fashion brand offering trendy clothing and accessories, including tops, bottoms, sweaters, dresses, and activewear."
+        },
+        {
+          "entityId": "8EBDD1F4-6EA0-410E-83AC-35727088764D",
+          "name": "Ban.do",
+          "affinityScore": 95.7,
+          "categories": [
+            "Retail",
+            "Fashion & Apparel",
+            "Stationery",
+            "Home Decor"
+          ],
+          "sharedTags": [
+            "Bright Colors",
+            "Whimsical Patterns",
+            "Bold Typography"
+          ],
+          "rawQueryUrl": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=BAF6317A-DF94-4C90-92AE-63F86560C21B,FC2E3A2F-A99A-4287-91E7-7FD8F7DE0A40,9B2140E4-8DEB-452C-BB75-C3B7B6AD198E,86E45BD3-3265-4B47-BF9A-367D583F12A6&take=20&signal.location.query=Los%20Angeles%2C%20CA",
+          "description": "ban.do is a lifestyle brand offering cheerful and colorful clothes, accessories, planners, and stationery designed to inspire joy and help you be your best self."
+        },
+        {
+          "entityId": "6F2D602B-11DB-4FF7-84D5-29E1C8D5991E",
+          "name": "Nasty Gal",
+          "affinityScore": 95.5,
+          "categories": [
+            "Fashion & Apparel",
+            "Retail",
+            "Other",
+            "Footwear",
+            "Bags & Leather",
+            "Website"
+          ],
+          "sharedTags": [
+            "Trend-Driven",
+            "Vibrant",
+            "Edgy"
+          ],
+          "rawQueryUrl": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=BAF6317A-DF94-4C90-92AE-63F86560C21B,FC2E3A2F-A99A-4287-91E7-7FD8F7DE0A40,9B2140E4-8DEB-452C-BB75-C3B7B6AD198E,86E45BD3-3265-4B47-BF9A-367D583F12A6&take=20&signal.location.query=Los%20Angeles%2C%20CA",
+          "description": "Nasty Gal is an American fast-fashion retailer specializing in women's clothing, footwear, and accessories with a bold, rebellious style."
+        },
+        {
+          "entityId": "2D26FF28-3B3C-4FF9-A00F-3F9518DD9CDF",
+          "name": "Reformation",
+          "affinityScore": 95.4,
+          "categories": [
+            "Fashion & Apparel",
+            "Retail",
+            "Sustainable Goods",
+            "Fashion",
+            "Formalwear",
+            "Casual"
+          ],
+          "sharedTags": [
+            "Flattering Silhouettes",
+            "Minimalist",
+            "Vintage-Inspired"
+          ],
+          "rawQueryUrl": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=BAF6317A-DF94-4C90-92AE-63F86560C21B,FC2E3A2F-A99A-4287-91E7-7FD8F7DE0A40,9B2140E4-8DEB-452C-BB75-C3B7B6AD198E,86E45BD3-3265-4B47-BF9A-367D583F12A6&take=20&signal.location.query=Los%20Angeles%2C%20CA",
+          "description": "Reformation is a sustainable women's clothing brand known for eco-friendly dresses, tops, jeans, shoes, and accessories."
+        },
+        {
+          "entityId": "01096D2C-FC7E-463B-BF8D-FDFE3C6B0256",
+          "name": "Buffalo Exchange",
+          "affinityScore": 95.4,
+          "categories": [
+            "Fashion & Apparel",
+            "Retail",
+            "Circular Economy"
+          ],
+          "sharedTags": [
+            "Eclectic",
+            "Well-Organized",
+            "Approachable"
+          ],
+          "rawQueryUrl": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=BAF6317A-DF94-4C90-92AE-63F86560C21B,FC2E3A2F-A99A-4287-91E7-7FD8F7DE0A40,9B2140E4-8DEB-452C-BB75-C3B7B6AD198E,86E45BD3-3265-4B47-BF9A-367D583F12A6&take=20&signal.location.query=Los%20Angeles%2C%20CA",
+          "description": "Buffalo Exchange is a US-based retail brand specializing in buying, selling, and trading new and recycled fashion through around 40 thrift store locations."
+        },
+        {
+          "entityId": "82A47833-2EDC-4A6A-A223-09CE1485B851",
+          "name": "Wildfox",
+          "affinityScore": 95.2,
+          "categories": [
+            "Fashion & Apparel",
+            "Retail",
+            "E-commerce",
+            "Fashion",
+            "Casual",
+            "Website"
+          ],
+          "sharedTags": [
+            "Vintage-Inspired",
+            "Pastel Color Palette",
+            "Distressed Fabrics"
+          ],
+          "rawQueryUrl": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=BAF6317A-DF94-4C90-92AE-63F86560C21B,FC2E3A2F-A99A-4287-91E7-7FD8F7DE0A40,9B2140E4-8DEB-452C-BB75-C3B7B6AD198E,86E45BD3-3265-4B47-BF9A-367D583F12A6&take=20&signal.location.query=Los%20Angeles%2C%20CA",
+          "description": "Wildfox is a women's fashion brand known for its clothing collections and accessories featuring vintage-inspired and playful designs."
+        },
+        {
+          "entityId": "693D676F-0AC5-4EE0-B1FC-EFFF92F660C4",
+          "name": "For Love & Lemons",
+          "affinityScore": 95.2,
+          "categories": [
+            "Fashion & Apparel",
+            "E-commerce",
+            "Casual",
+            "Lingerie & Sleepwear",
+            "Fashion"
+          ],
+          "sharedTags": [
+            "Floral Prints",
+            "Lace Detailing",
+            "Sheer Fabrics"
+          ],
+          "rawQueryUrl": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=BAF6317A-DF94-4C90-92AE-63F86560C21B,FC2E3A2F-A99A-4287-91E7-7FD8F7DE0A40,9B2140E4-8DEB-452C-BB75-C3B7B6AD198E,86E45BD3-3265-4B47-BF9A-367D583F12A6&take=20&signal.location.query=Los%20Angeles%2C%20CA",
+          "description": "For Love & Lemons is a women's fashion brand known for vintage-inspired dresses, lingerie, and artisan-crafted apparel."
+        },
+        {
+          "entityId": "2F7AE8C0-77ED-4ADD-A33A-255D0D969F24",
+          "name": "Girlboss",
+          "affinityScore": 95.2,
+          "categories": [
+            "Media & Entertainment",
+            "Career Development",
+            "Professional Networking",
+            "Entertainment",
+            "Media",
+            "Website"
+          ],
+          "sharedTags": [
+            "Bold Typography",
+            "Vibrant Color Palettes",
+            "Minimalist Layouts"
+          ],
+          "rawQueryUrl": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=BAF6317A-DF94-4C90-92AE-63F86560C21B,FC2E3A2F-A99A-4287-91E7-7FD8F7DE0A40,9B2140E4-8DEB-452C-BB75-C3B7B6AD198E,86E45BD3-3265-4B47-BF9A-367D583F12A6&take=20&signal.location.query=Los%20Angeles%2C%20CA",
+          "description": "Girlboss is a community and media brand empowering ambitious women with career inspiration, insights, and resources for success on their own terms."
+        },
+        {
+          "entityId": "5EA79857-0E68-48CC-8345-3A786B231326",
+          "name": "Allsaints",
+          "affinityScore": 95.1,
+          "categories": [
+            "Fashion & Apparel",
+            "Retail",
+            "Fashion",
+            "Bags & Leather",
+            "Casual",
+            "Accessories"
+          ],
+          "sharedTags": [
+            "Monochrome Palette",
+            "Distressed Textures",
+            "Minimalist Design"
+          ],
+          "rawQueryUrl": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=BAF6317A-DF94-4C90-92AE-63F86560C21B,FC2E3A2F-A99A-4287-91E7-7FD8F7DE0A40,9B2140E4-8DEB-452C-BB75-C3B7B6AD198E,86E45BD3-3265-4B47-BF9A-367D583F12A6&take=20&signal.location.query=Los%20Angeles%2C%20CA",
+          "description": "AllSaints is a British fashion retailer known for its iconic leather jackets, clothing, footwear, and accessories for men and women."
+        },
+        {
+          "entityId": "AB8D769A-CCEB-4C2D-A3D8-21641E0EC664",
+          "name": "Warby Parker",
+          "affinityScore": 95,
+          "categories": [
+            "Retail",
+            "Fashion & Apparel",
+            "Eye Care",
+            "Health & Wellness",
+            "Fashion",
+            "Accessories"
+          ],
+          "sharedTags": [
+            "Minimalist",
+            "Clean Lines",
+            "Vintage-Inspired"
+          ],
+          "rawQueryUrl": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=BAF6317A-DF94-4C90-92AE-63F86560C21B,FC2E3A2F-A99A-4287-91E7-7FD8F7DE0A40,9B2140E4-8DEB-452C-BB75-C3B7B6AD198E,86E45BD3-3265-4B47-BF9A-367D583F12A6&take=20&signal.location.query=Los%20Angeles%2C%20CA",
+          "description": "Warby Parker is a retailer of eyewear including prescription glasses, sunglasses, and contacts, known for its Buy a Pair, Give a Pair program."
+        }
+      ],
+      "tags": [
+        "Dreamy",
+        "Relaxed",
+        "Nostalgic",
+        "Courageous",
+        "Genre Blending",
+        "Moody",
+        "Introspective",
+        "Laid Back"
+      ],
+      "anchorVenues": [
+        {
+          "entityId": "0B8106D1-475C-4811-9114-221D70F2BE18",
+          "name": "Echo Park Lake",
+          "address": "Los Angeles, CA 90026",
+          "category": "Lake",
+          "popularity": 0.999,
+          "neighborhood": "Silver Lake, Los Angeles"
+        },
+        {
+          "entityId": "1DD2825A-3887-42CE-8E61-A5F1C7008F36",
+          "name": "The Echo",
+          "address": "1822 Sunset Blvd Los Angeles, CA 90026",
+          "category": "Live music venue",
+          "popularity": 0.999,
+          "neighborhood": "Silver Lake, Los Angeles"
+        },
+        {
+          "entityId": "EFE48D5D-195D-4DFD-A724-5B1FC9E13A4E",
+          "name": "Los Globos",
+          "address": "3040 Sunset Blvd Los Angeles, CA 90026",
+          "category": "Night club",
+          "popularity": 0.998,
+          "neighborhood": "Silver Lake, Los Angeles"
+        },
+        {
+          "entityId": "50CA6550-6A2E-4711-8790-5F44C525E6B0",
+          "name": "Sqirl",
+          "address": "720 Virgil Ave #4 Los Angeles, CA 90029",
+          "category": "Restaurant",
+          "popularity": 0.997,
+          "neighborhood": "Silver Lake, Los Angeles"
+        },
+        {
+          "entityId": "774B8646-429D-4BB4-B35B-C221A0AA1CEE",
+          "name": "Original Tommy's",
+          "address": "2575 Beverly Blvd Los Angeles, CA 90057",
+          "category": "Hamburger restaurant",
+          "popularity": 0.995,
+          "neighborhood": "Silver Lake, Los Angeles"
+        }
+      ],
+      "queries": {
+        "brands": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=BAF6317A-DF94-4C90-92AE-63F86560C21B,FC2E3A2F-A99A-4287-91E7-7FD8F7DE0A40,9B2140E4-8DEB-452C-BB75-C3B7B6AD198E,86E45BD3-3265-4B47-BF9A-367D583F12A6&take=20&signal.location.query=Los%20Angeles%2C%20CA",
+        "tags": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:tag&filter.tag.types=urn:tag:lifestyle:qloo,urn:tag:audience:qloo,urn:tag:music:qloo&signal.interests.entities=BAF6317A-DF94-4C90-92AE-63F86560C21B,FC2E3A2F-A99A-4287-91E7-7FD8F7DE0A40,9B2140E4-8DEB-452C-BB75-C3B7B6AD198E,86E45BD3-3265-4B47-BF9A-367D583F12A6&take=10",
+        "places": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:place&filter.location.query=Silver%20Lake%2C%20Los%20Angeles&take=5"
+      },
+      "calls": [
+        {
+          "endpoint": "/search",
+          "query": "Khruangbin",
+          "status": 200,
+          "latencyMs": 250,
+          "entitiesReturned": 3
+        },
+        {
+          "endpoint": "/search",
+          "query": "Steve Lacy",
+          "status": 200,
+          "latencyMs": 254,
+          "entitiesReturned": 3
+        },
+        {
+          "endpoint": "/search",
+          "query": "Clairo",
+          "status": 200,
+          "latencyMs": 253,
+          "entitiesReturned": 3
+        },
+        {
+          "endpoint": "/search",
+          "query": "Men I Trust",
+          "status": 200,
+          "latencyMs": 308,
+          "entitiesReturned": 3
+        },
+        {
+          "endpoint": "/v2/insights",
+          "filterType": "urn:entity:brand",
+          "status": 200,
+          "latencyMs": 656,
+          "entitiesReturned": 20
+        },
+        {
+          "endpoint": "/v2/insights",
+          "filterType": "urn:tag",
+          "status": 200,
+          "latencyMs": 878,
+          "entitiesReturned": 8
+        },
+        {
+          "endpoint": "/v2/insights",
+          "filterType": "urn:entity:place",
+          "status": 200,
+          "latencyMs": 388,
+          "entitiesReturned": 5
+        }
       ]
     },
     "hackney-jazz": {
       "presetId": "hackney-jazz",
+      "city": "London, UK",
+      "neighborhood": "Hackney, London",
+      "lineup": [
+        "Ezra Collective",
+        "Little Simz",
+        "Yussef Dayes"
+      ],
       "resolvedSeedIds": [
-        "urn:entity:artist:ezra_collective_1a3b",
-        "urn:entity:artist:little_simz_8c7d",
-        "urn:entity:artist:yussef_dayes_4e9a"
+        "4CCBC47E-4257-4B3F-A9DE-A793C2B7C65A",
+        "823E245F-17E1-49B2-95F8-255130700E2B",
+        "8AD89B8C-43AF-420E-BA13-62DB30D5F8C4"
       ],
       "topBrandEntities": [
-        "urn:entity:brand:marshall_audio_72",
-        "urn:entity:brand:fred_perry_33",
-        "urn:entity:brand:kanto_audio_18",
-        "urn:entity:brand:clarks_originals_07",
-        "urn:entity:brand:cubitts_eyewear_29",
-        "urn:entity:brand:bravado_merch_64",
-        "urn:entity:brand:rough_trade_82"
+        "BFE400C1-19BF-4491-9730-2DD7054CE2B7",
+        "A5707876-D5A1-49F0-ABF9-A793EA7736D2",
+        "7F0C0511-3968-4526-ACFB-A9420CFA96DD",
+        "33A31B51-CE46-40BB-B2BD-B446231247C0",
+        "11EA72EF-3C12-44E7-AAD6-699560C23507",
+        "BF9A9FDA-3726-49FC-93D6-81F314C975A3",
+        "CFE4B666-1F05-4AB2-864C-8E1D2679651D",
+        "20EEC96F-0433-43A7-93C7-F1BA5851D056",
+        "08E0FC76-1D07-441F-8FA1-4A22D6B32CC8",
+        "BD93E7F6-AF19-4741-A06C-A818BAEB0FFB"
+      ],
+      "resolvedArtists": [
+        {
+          "inputName": "Ezra Collective",
+          "resolvedName": "Ezra Collective",
+          "entityId": "4CCBC47E-4257-4B3F-A9DE-A793C2B7C65A",
+          "verified": true,
+          "disambiguationScore": 0.945,
+          "genres": [
+            "Trumpet",
+            "Jazz",
+            "Jazz Fusion",
+            "British",
+            "Afrobeat",
+            "Hip Hop"
+          ]
+        },
+        {
+          "inputName": "Little Simz",
+          "resolvedName": "Little Simz",
+          "entityId": "823E245F-17E1-49B2-95F8-255130700E2B",
+          "verified": true,
+          "disambiguationScore": 0.987,
+          "genres": [
+            "Hip - Hop",
+            "Grime",
+            "Rap",
+            "Hip Hop"
+          ]
+        },
+        {
+          "inputName": "Yussef Dayes",
+          "resolvedName": "Yussef Dayes",
+          "entityId": "8AD89B8C-43AF-420E-BA13-62DB30D5F8C4",
+          "verified": true,
+          "disambiguationScore": 0.807,
+          "genres": [
+            "Jazz",
+            "Funk",
+            "Soul",
+            "Jazz Fusion",
+            "Fusion",
+            "Nu Jazz"
+          ]
+        }
+      ],
+      "brandCandidates": [
+        {
+          "entityId": "BFE400C1-19BF-4491-9730-2DD7054CE2B7",
+          "name": "Stones Throw Records",
+          "affinityScore": 97.4,
+          "categories": [
+            "Media & Entertainment",
+            "Music Industry",
+            "Entertainment",
+            "Website"
+          ],
+          "sharedTags": [
+            "Lo-Fi Visuals",
+            "Retro Graphics",
+            "Textured Paper Stocks"
+          ],
+          "rawQueryUrl": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=4CCBC47E-4257-4B3F-A9DE-A793C2B7C65A,823E245F-17E1-49B2-95F8-255130700E2B,8AD89B8C-43AF-420E-BA13-62DB30D5F8C4&take=20&signal.location.query=London%2C%20UK",
+          "description": "Stones Throw Records is an independent record label known for releasing music on vinyl, CD, cassette, and digital formats, featuring hip-hop and experimental artists."
+        },
+        {
+          "entityId": "A5707876-D5A1-49F0-ABF9-A793EA7736D2",
+          "name": "Vice",
+          "affinityScore": 96.5,
+          "categories": [
+            "Media & Entertainment",
+            "Digital Publishing",
+            "News",
+            "Documentary",
+            "Mass media",
+            "Media & entertainment industry"
+          ],
+          "sharedTags": [
+            "Low-Fidelity Photography",
+            "Raw Video Editing",
+            "Bold Typography"
+          ],
+          "rawQueryUrl": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=4CCBC47E-4257-4B3F-A9DE-A793C2B7C65A,823E245F-17E1-49B2-95F8-255130700E2B,8AD89B8C-43AF-420E-BA13-62DB30D5F8C4&take=20&signal.location.query=London%2C%20UK",
+          "description": "VICE is a global media brand known for original journalism and content covering diverse cultural, social, and political topics, including its Spanish-language platform VICE en Español."
+        },
+        {
+          "entityId": "7F0C0511-3968-4526-ACFB-A9420CFA96DD",
+          "name": "Discogs",
+          "affinityScore": 96,
+          "categories": [
+            "Media & Entertainment",
+            "Retail",
+            "Music Technology",
+            "Online Database",
+            "Website"
+          ],
+          "sharedTags": [
+            "Functionalist",
+            "Information-Dense",
+            "Minimalist"
+          ],
+          "rawQueryUrl": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=4CCBC47E-4257-4B3F-A9DE-A793C2B7C65A,823E245F-17E1-49B2-95F8-255130700E2B,8AD89B8C-43AF-420E-BA13-62DB30D5F8C4&take=20&signal.location.query=London%2C%20UK",
+          "description": "Discogs is a leading online music database and marketplace for discovering, cataloging, and buying vinyl records and other music formats."
+        },
+        {
+          "entityId": "33A31B51-CE46-40BB-B2BD-B446231247C0",
+          "name": "Fred Perry",
+          "affinityScore": 95.8,
+          "categories": [
+            "Fashion & Apparel",
+            "Retail",
+            "Lifestyle",
+            "Music Culture",
+            "Bags & Leather",
+            "Lifestyle / Casual"
+          ],
+          "sharedTags": [
+            "Minimalist",
+            "Preppy",
+            "Clean Lines"
+          ],
+          "rawQueryUrl": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=4CCBC47E-4257-4B3F-A9DE-A793C2B7C65A,823E245F-17E1-49B2-95F8-255130700E2B,8AD89B8C-43AF-420E-BA13-62DB30D5F8C4&take=20&signal.location.query=London%2C%20UK",
+          "description": "Fred Perry is a British clothing brand founded in 1952, known for its iconic polo shirts and association with British subcultures."
+        },
+        {
+          "entityId": "11EA72EF-3C12-44E7-AAD6-699560C23507",
+          "name": "Urbanears",
+          "affinityScore": 95.6,
+          "categories": [
+            "Consumer Electronics",
+            "Audio Equipment",
+            "Headphones",
+            "Electronics"
+          ],
+          "sharedTags": [
+            "Minimalist",
+            "Matte Finishes",
+            "Monochromatic Palettes"
+          ],
+          "rawQueryUrl": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=4CCBC47E-4257-4B3F-A9DE-A793C2B7C65A,823E245F-17E1-49B2-95F8-255130700E2B,8AD89B8C-43AF-420E-BA13-62DB30D5F8C4&take=20&signal.location.query=London%2C%20UK",
+          "description": "Urbanears is a brand specializing in headphones and earbuds, known for wireless and wired audio products with a focus on sound quality and sustainability."
+        },
+        {
+          "entityId": "BF9A9FDA-3726-49FC-93D6-81F314C975A3",
+          "name": "Rough Trade",
+          "affinityScore": 95.2,
+          "categories": [
+            "Retail",
+            "Media & Entertainment",
+            "Music Industry",
+            "Live Events"
+          ],
+          "sharedTags": [
+            "Industrial",
+            "Eclectic",
+            "Organized Clutter"
+          ],
+          "rawQueryUrl": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=4CCBC47E-4257-4B3F-A9DE-A793C2B7C65A,823E245F-17E1-49B2-95F8-255130700E2B,8AD89B8C-43AF-420E-BA13-62DB30D5F8C4&take=20&signal.location.query=London%2C%20UK",
+          "description": "Rough Trade is an independent record store chain known for selling vinyl, CDs, books, and promoting new music since 1976."
+        },
+        {
+          "entityId": "CFE4B666-1F05-4AB2-864C-8E1D2679651D",
+          "name": "Norse Projects",
+          "affinityScore": 95.2,
+          "categories": [
+            "Fashion & Apparel",
+            "Design",
+            "Fashion",
+            "Casual"
+          ],
+          "sharedTags": [
+            "Minimalist",
+            "Neutral Color Palette",
+            "Functional Details"
+          ],
+          "rawQueryUrl": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=4CCBC47E-4257-4B3F-A9DE-A793C2B7C65A,823E245F-17E1-49B2-95F8-255130700E2B,8AD89B8C-43AF-420E-BA13-62DB30D5F8C4&take=20&signal.location.query=London%2C%20UK",
+          "description": "Norse Projects is a Danish fashion brand founded in 2004, known for timeless, functional clothing blending luxury natural fibers and technical fabrics."
+        },
+        {
+          "entityId": "20EEC96F-0433-43A7-93C7-F1BA5851D056",
+          "name": "END. Clothing",
+          "affinityScore": 95.1,
+          "categories": [
+            "Retail",
+            "Fashion & Apparel",
+            "Home Goods",
+            "Beauty & Personal Care"
+          ],
+          "sharedTags": [
+            "Minimalist",
+            "Editorial",
+            "Modern"
+          ],
+          "rawQueryUrl": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=4CCBC47E-4257-4B3F-A9DE-A793C2B7C65A,823E245F-17E1-49B2-95F8-255130700E2B,8AD89B8C-43AF-420E-BA13-62DB30D5F8C4&take=20&signal.location.query=London%2C%20UK",
+          "description": "END. Clothing is a UK-based retailer specializing in high-end streetwear and contemporary fashion, offering popular brands like Adidas and Lacoste."
+        },
+        {
+          "entityId": "08E0FC76-1D07-441F-8FA1-4A22D6B32CC8",
+          "name": "Pitchfork",
+          "affinityScore": 95.1,
+          "categories": [
+            "Media & Entertainment",
+            "Music Journalism",
+            "Digital Publishing",
+            "Website"
+          ],
+          "sharedTags": [
+            "Minimalist",
+            "Clean Typography",
+            "Editorial Photography"
+          ],
+          "rawQueryUrl": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=4CCBC47E-4257-4B3F-A9DE-A793C2B7C65A,823E245F-17E1-49B2-95F8-255130700E2B,8AD89B8C-43AF-420E-BA13-62DB30D5F8C4&take=20&signal.location.query=London%2C%20UK",
+          "description": "Pitchfork is a trusted music media brand known for in-depth album reviews, music news, and the annual Pitchfork Music Festival."
+        },
+        {
+          "entityId": "BD93E7F6-AF19-4741-A06C-A818BAEB0FFB",
+          "name": "Clarks",
+          "affinityScore": 94.9,
+          "categories": [
+            "Fashion & Apparel",
+            "Retail",
+            "Footwear",
+            "Fashion",
+            "Other",
+            "Lifestyle / Casual"
+          ],
+          "sharedTags": [
+            "Minimalist",
+            "Functional",
+            "Classic"
+          ],
+          "rawQueryUrl": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=4CCBC47E-4257-4B3F-A9DE-A793C2B7C65A,823E245F-17E1-49B2-95F8-255130700E2B,8AD89B8C-43AF-420E-BA13-62DB30D5F8C4&take=20&signal.location.query=London%2C%20UK",
+          "description": "Clarks is a global footwear brand known for its iconic Originals collection featuring classic and contemporary shoe designs."
+        },
+        {
+          "entityId": "E42C98CC-DF87-4C2B-98C9-1B58D3809B7D",
+          "name": "Grenson Shoes",
+          "affinityScore": 94.7,
+          "categories": [
+            "Fashion & Apparel",
+            "Retail",
+            "Footwear",
+            "Fashion"
+          ],
+          "sharedTags": [
+            "Sturdy Silhouettes",
+            "Premium Leather Finishes",
+            "Goodyear Welt Construction"
+          ],
+          "rawQueryUrl": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=4CCBC47E-4257-4B3F-A9DE-A793C2B7C65A,823E245F-17E1-49B2-95F8-255130700E2B,8AD89B8C-43AF-420E-BA13-62DB30D5F8C4&take=20&signal.location.query=London%2C%20UK",
+          "description": "Grenson Shoes is a British brand known for handmade men's and women's designer shoes since 1866."
+        },
+        {
+          "entityId": "488CEB9E-FC80-45B4-9F5B-857EBDB9984E",
+          "name": "Only NY",
+          "affinityScore": 94.6,
+          "categories": [
+            "Fashion & Apparel",
+            "Lifestyle",
+            "Fashion"
+          ],
+          "sharedTags": [
+            "Minimalist Branding",
+            "Graphic Prints",
+            "Utility-Inspired Details"
+          ],
+          "rawQueryUrl": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=4CCBC47E-4257-4B3F-A9DE-A793C2B7C65A,823E245F-17E1-49B2-95F8-255130700E2B,8AD89B8C-43AF-420E-BA13-62DB30D5F8C4&take=20&signal.location.query=London%2C%20UK",
+          "description": "Only NY is an independent clothing and lifestyle brand inspired by New York City, offering apparel and accessories celebrating the city."
+        },
+        {
+          "entityId": "B87D29C3-CE25-4B02-AC2D-2F08BCB0AB74",
+          "name": "Universal Works",
+          "affinityScore": 94.6,
+          "categories": [
+            "Fashion & Apparel",
+            "Retail",
+            "Menswear",
+            "Casual",
+            "Fashion"
+          ],
+          "sharedTags": [
+            "Muted Earth Tones",
+            "Functional Detailing",
+            "Structured Silhouettes"
+          ],
+          "rawQueryUrl": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=4CCBC47E-4257-4B3F-A9DE-A793C2B7C65A,823E245F-17E1-49B2-95F8-255130700E2B,8AD89B8C-43AF-420E-BA13-62DB30D5F8C4&take=20&signal.location.query=London%2C%20UK",
+          "description": "Universal Works is a contemporary clothing brand based in London, known for trousers and casual menswear."
+        },
+        {
+          "entityId": "91D22C42-E4F7-4FBC-9D0D-A0182794C86D",
+          "name": "Palace Skateboards",
+          "affinityScore": 94.6,
+          "categories": [
+            "Fashion & Apparel",
+            "Retail",
+            "Skateboarding",
+            "Fashion"
+          ],
+          "sharedTags": [
+            "Nostalgic Graphics",
+            "Bold Typography",
+            "Street-Inspired"
+          ],
+          "rawQueryUrl": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=4CCBC47E-4257-4B3F-A9DE-A793C2B7C65A,823E245F-17E1-49B2-95F8-255130700E2B,8AD89B8C-43AF-420E-BA13-62DB30D5F8C4&take=20&signal.location.query=London%2C%20UK",
+          "description": "Palace Skateboards is a British skateboarding and streetwear brand known for its distinctive apparel, skateboards, and collaborations."
+        },
+        {
+          "entityId": "D7CA95FB-4A1D-4A7F-93B6-4BECA2904BC9",
+          "name": "Ben Sherman",
+          "affinityScore": 94.6,
+          "categories": [
+            "Fashion & Apparel",
+            "Retail",
+            "Fashion",
+            "Casual"
+          ],
+          "sharedTags": [
+            "Gingham Patterns",
+            "Button-Down Collars",
+            "Clean Lines"
+          ],
+          "rawQueryUrl": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=4CCBC47E-4257-4B3F-A9DE-A793C2B7C65A,823E245F-17E1-49B2-95F8-255130700E2B,8AD89B8C-43AF-420E-BA13-62DB30D5F8C4&take=20&signal.location.query=London%2C%20UK",
+          "description": "Ben Sherman is a British menswear brand known for its iconic shirts, knitted polo shirts, cotton pants, and signature Harrington jackets."
+        },
+        {
+          "entityId": "A5C63FA9-24C7-4D4B-956D-8F9FF265660E",
+          "name": "Y-3",
+          "affinityScore": 94.5,
+          "categories": [
+            "Fashion & Apparel",
+            "Sportswear",
+            "Fashion"
+          ],
+          "sharedTags": [
+            "Monochrome Palette",
+            "Asymmetrical Tailoring",
+            "Minimalist Silhouettes"
+          ],
+          "rawQueryUrl": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=4CCBC47E-4257-4B3F-A9DE-A793C2B7C65A,823E245F-17E1-49B2-95F8-255130700E2B,8AD89B8C-43AF-420E-BA13-62DB30D5F8C4&take=20&signal.location.query=London%2C%20UK",
+          "description": "Y-3 is a fashion collaboration brand between adidas and designer Yohji Yamamoto, known for combining sportswear with high-end fashion."
+        },
+        {
+          "entityId": "91C156E6-6267-438A-92A8-E90A79A9E053",
+          "name": "Neighborhood",
+          "affinityScore": 94.3,
+          "categories": [
+            "Fashion & Apparel",
+            "Home Goods",
+            "Gardening Supplies",
+            "Fashion",
+            "Casual",
+            "Website"
+          ],
+          "sharedTags": [
+            "Military-Inspired",
+            "Utility Focus",
+            "Dark Color Palettes"
+          ],
+          "rawQueryUrl": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=4CCBC47E-4257-4B3F-A9DE-A793C2B7C65A,823E245F-17E1-49B2-95F8-255130700E2B,8AD89B8C-43AF-420E-BA13-62DB30D5F8C4&take=20&signal.location.query=London%2C%20UK",
+          "description": "NEIGHBORHOOD is a Japanese streetwear brand known for its high-quality apparel and collaborations, including with BOUNTY HUNTER."
+        },
+        {
+          "entityId": "3637BC2E-B2D1-4496-9BD7-938E4FAE81AD",
+          "name": "Comme des Garcons",
+          "affinityScore": 94.3,
+          "categories": [
+            "Fashion & Apparel",
+            "Retail",
+            "Fragrance",
+            "Design",
+            "Lifestyle / Casual",
+            "Casual"
+          ],
+          "sharedTags": [
+            "Deconstructed Silhouettes",
+            "Asymmetry",
+            "Dark Palette"
+          ],
+          "rawQueryUrl": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=4CCBC47E-4257-4B3F-A9DE-A793C2B7C65A,823E245F-17E1-49B2-95F8-255130700E2B,8AD89B8C-43AF-420E-BA13-62DB30D5F8C4&take=20&signal.location.query=London%2C%20UK",
+          "description": "Comme des Garçons is a Japanese fashion label founded by Rei Kawakubo, known for avant-garde clothing, accessories, and collaborations."
+        },
+        {
+          "entityId": "3030118A-124F-46D7-BA59-994F5FDD12F8",
+          "name": "Vision Street Wear",
+          "affinityScore": 94.2,
+          "categories": [
+            "Fashion & Apparel",
+            "Retail",
+            "Skateboarding",
+            "Casual",
+            "Fashion"
+          ],
+          "sharedTags": [
+            "Bold Graphics",
+            "Retro Logos",
+            "Durable Construction"
+          ],
+          "rawQueryUrl": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=4CCBC47E-4257-4B3F-A9DE-A793C2B7C65A,823E245F-17E1-49B2-95F8-255130700E2B,8AD89B8C-43AF-420E-BA13-62DB30D5F8C4&take=20&signal.location.query=London%2C%20UK",
+          "description": "Vision Street Wear is an American skateboarding and streetwear brand founded in 1976, known for skate shoes, apparel, and iconic skate culture style."
+        },
+        {
+          "entityId": "2E972453-B840-41DC-A9AF-B8F753798E39",
+          "name": "Maharishi",
+          "affinityScore": 94.2,
+          "categories": [
+            "Fashion & Apparel",
+            "Retail",
+            "Technical Outerwear",
+            "Military Surplus",
+            "Casual",
+            "Fashion"
+          ],
+          "sharedTags": [
+            "Military Camouflage",
+            "Functional Detailing",
+            "Embroidery"
+          ],
+          "rawQueryUrl": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=4CCBC47E-4257-4B3F-A9DE-A793C2B7C65A,823E245F-17E1-49B2-95F8-255130700E2B,8AD89B8C-43AF-420E-BA13-62DB30D5F8C4&take=20&signal.location.query=London%2C%20UK",
+          "description": "Maharishi is a fashion brand known for eco-conscious, high-performance technical clothing combining Eastern and Western design elements."
+        }
+      ],
+      "tags": [
+        "Professional Achievement",
+        "Genre Blending",
+        "Refined",
+        "Ocean Exploration",
+        "Aspirational",
+        "Chill",
+        "Thoughtful",
+        "Style Conscious Living",
+        "Sophisticated",
+        "Intellectual Pursuits"
+      ],
+      "anchorVenues": [
+        {
+          "entityId": "E89E3438-7B2E-4A17-9850-FC438DD3F018",
+          "name": "Aura x",
+          "address": "145 Shoreditch High St London E1 6JE United Kingdom",
+          "category": "Cocktail bar",
+          "popularity": 1,
+          "neighborhood": "Hackney, London"
+        },
+        {
+          "entityId": "8E9ABE05-8D3C-4B71-9F6A-189847A083B4",
+          "name": "Duck & Waffle",
+          "address": "110 Bishopsgate London EC2N 4AY United Kingdom",
+          "category": "Modern European restaurant",
+          "popularity": 1,
+          "neighborhood": "Hackney, London"
+        },
+        {
+          "entityId": "5D68CCC1-7A20-4E46-9D44-51BF7E3DAE81",
+          "name": "London Stadium",
+          "address": "London E20 2ST United Kingdom",
+          "category": "Stadium",
+          "popularity": 1,
+          "neighborhood": "Hackney, London"
+        },
+        {
+          "entityId": "054BB8E3-16B1-4FF1-9370-1782C0E4CF59",
+          "name": "Old Spitalfields Market",
+          "address": "16 Horner Square London E1 6EW United Kingdom",
+          "category": "Market",
+          "popularity": 1,
+          "neighborhood": "Hackney, London"
+        },
+        {
+          "entityId": "BEDCCEC0-57D7-4844-96FC-5D3A4C684A83",
+          "name": "BOXPARK Shoreditch",
+          "address": "2-10 Bethnal Grn Rd London E1 6GY United Kingdom",
+          "category": "Food court",
+          "popularity": 1,
+          "neighborhood": "Hackney, London"
+        }
+      ],
+      "queries": {
+        "brands": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=4CCBC47E-4257-4B3F-A9DE-A793C2B7C65A,823E245F-17E1-49B2-95F8-255130700E2B,8AD89B8C-43AF-420E-BA13-62DB30D5F8C4&take=20&signal.location.query=London%2C%20UK",
+        "tags": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:tag&filter.tag.types=urn:tag:lifestyle:qloo,urn:tag:audience:qloo,urn:tag:music:qloo&signal.interests.entities=4CCBC47E-4257-4B3F-A9DE-A793C2B7C65A,823E245F-17E1-49B2-95F8-255130700E2B,8AD89B8C-43AF-420E-BA13-62DB30D5F8C4&take=10",
+        "places": "https://hackathon.api.qloo.com/v2/insights?filter.type=urn:entity:place&filter.location.query=Hackney%2C%20London&take=5"
+      },
+      "calls": [
+        {
+          "endpoint": "/search",
+          "query": "Ezra Collective",
+          "status": 200,
+          "latencyMs": 257,
+          "entitiesReturned": 3
+        },
+        {
+          "endpoint": "/search",
+          "query": "Little Simz",
+          "status": 200,
+          "latencyMs": 255,
+          "entitiesReturned": 3
+        },
+        {
+          "endpoint": "/search",
+          "query": "Yussef Dayes",
+          "status": 200,
+          "latencyMs": 370,
+          "entitiesReturned": 3
+        },
+        {
+          "endpoint": "/v2/insights",
+          "filterType": "urn:entity:brand",
+          "status": 200,
+          "latencyMs": 560,
+          "entitiesReturned": 20
+        },
+        {
+          "endpoint": "/v2/insights",
+          "filterType": "urn:tag",
+          "status": 200,
+          "latencyMs": 549,
+          "entitiesReturned": 10
+        },
+        {
+          "endpoint": "/v2/insights",
+          "filterType": "urn:entity:place",
+          "status": 200,
+          "latencyMs": 392,
+          "entitiesReturned": 5
+        }
       ]
     }
   }

@@ -79,6 +79,8 @@ export interface BarChartProps {
   barGap?: number;
   /** Fixed bar width in pixels. If not set, bars auto-size to fill the band. */
   barWidth?: number;
+  /** Gap between grouped bars in pixels. Default: 4 */
+  groupGap?: number;
   /** Bar chart orientation. Default: "vertical" */
   orientation?: BarOrientation;
   /** Whether to stack bars instead of grouping them. Default: false */
@@ -155,6 +157,7 @@ interface ChartInnerProps {
   revealSignature?: string;
   barGap: number;
   barWidthProp?: number;
+  groupGap?: number;
   orientation: BarOrientation;
   stacked: boolean;
   stackGap: number;
@@ -185,6 +188,7 @@ const ChartCore = memo(function ChartCore({
   revealSignature = "",
   barGap,
   barWidthProp,
+  groupGap = 4,
   orientation,
   stacked,
   stackGap,
@@ -245,8 +249,8 @@ const ChartCore = memo(function ChartCore({
     });
   }, [innerWidth, innerHeight, data, categoryAccessor, barGap, isHorizontal]);
 
-  // Band width for bars - use prop if provided, otherwise use scale's bandwidth
-  const bandWidth = barWidthProp ?? categoryScale.bandwidth();
+  // Band width for bars - use scale's bandwidth
+  const bandWidth = categoryScale.bandwidth();
 
   // Compute max value considering stacking
   const maxValue = useMemo(() => {
@@ -468,11 +472,17 @@ const ChartCore = memo(function ChartCore({
       } else {
         // Vertical grouped bars
         const seriesCount = lines.length;
-        const groupGap = seriesCount > 1 ? 4 : 0;
+        const effectiveGroupGap = seriesCount > 1 ? (groupGap ?? 4) : 0;
         const individualBarWidth =
-          seriesCount > 0
-            ? (bandWidth - groupGap * (seriesCount - 1)) / seriesCount
-            : bandWidth;
+          barWidthProp ??
+          (seriesCount > 0
+            ? (bandWidth - effectiveGroupGap * (seriesCount - 1)) / seriesCount
+            : bandWidth);
+        const totalGroupWidth = stacked
+          ? individualBarWidth
+          : seriesCount * individualBarWidth +
+            (seriesCount > 1 ? effectiveGroupGap * (seriesCount - 1) : 0);
+        const groupOffset = Math.max(0, (bandWidth - totalGroupWidth) / 2);
 
         lines.forEach((line, idx) => {
           const value = d[line.dataKey];
@@ -497,7 +507,8 @@ const ChartCore = memo(function ChartCore({
 
             xPositions[line.dataKey] =
               barPos +
-              idx * (individualBarWidth + groupGap) +
+              groupOffset +
+              idx * (individualBarWidth + effectiveGroupGap) +
               individualBarWidth / 2;
           }
         });
@@ -612,6 +623,8 @@ const ChartCore = memo(function ChartCore({
     // Bar-specific properties
     barScale: categoryScale,
     bandWidth,
+    barWidthProp,
+    groupGap,
     hoveredBarIndex,
     barXAccessor: categoryAccessor,
     orientation,
@@ -681,6 +694,7 @@ export function BarChart({
   className = "",
   barGap = 0.2,
   barWidth,
+  groupGap = 4,
   orientation = "vertical",
   stacked = false,
   stackGap = 0,
@@ -705,6 +719,7 @@ export function BarChart({
             animationEasing={animationEasing}
             barGap={barGap}
             barWidthProp={barWidth}
+            groupGap={groupGap}
             containerRef={containerRef}
             data={data}
             enterTransition={enterTransition}

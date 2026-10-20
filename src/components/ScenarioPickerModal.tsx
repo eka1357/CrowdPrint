@@ -200,26 +200,22 @@ export function ScenarioPickerModal({
                           intensity={0.25}
                           className={`text-left p-4 rounded-xl border transition-all relative overflow-hidden group cursor-pointer flex flex-col justify-between ${
                             isActive
-                              ? '!bg-zinc-900 !border-emerald-500/50 ring-1 ring-emerald-500/40 shadow-lg'
+                              ? '!bg-zinc-900/90 !border-zinc-500 shadow-xl'
                               : '!bg-zinc-900/40 hover:!bg-zinc-900/80 !border-zinc-800 hover:!border-zinc-700'
                           }`}
                         >
-                          {isActive && (
-                            <div className="absolute top-0 left-0 right-0 h-[2px] bg-emerald-400" />
-                          )}
-
                           <div>
                             <div className="flex items-start justify-between gap-2 mb-2">
                               <h3 className="font-bold text-sm text-zinc-100 group-hover:text-white leading-tight">
                                 {preset.name}
                               </h3>
                               {isActive ? (
-                                <span className="flex items-center gap-1 text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-400 border border-emerald-800/60 shrink-0">
+                                <span className="flex items-center gap-1 text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-zinc-800 text-zinc-200 border border-zinc-600 shrink-0">
                                   <CheckCircle2 className="w-3 h-3 text-emerald-400" />
                                   ACTIVE
                                 </span>
                               ) : (
-                                <span className="text-[10px] font-mono text-zinc-500 group-hover:text-emerald-400 transition-colors shrink-0 flex items-center gap-0.5">
+                                <span className="text-[10px] font-mono text-zinc-500 group-hover:text-zinc-300 transition-colors shrink-0 flex items-center gap-0.5">
                                   Select <ArrowRight className="w-3 h-3" />
                                 </span>
                               )}
@@ -362,7 +358,7 @@ export function ScenarioPickerModal({
                       </label>
                       <select
                         value={customAge}
-                        onChange={(e) => setCustomAge(e.target.value as any)}
+                        onChange={(e) => setCustomAge(e.target.value as 'ALL_AGES' | '18_PLUS' | '21_PLUS')}
                         className="w-full px-3 py-2 rounded-lg bg-zinc-900 border border-zinc-700 text-sm text-white focus:outline-none focus:border-emerald-500 font-mono"
                       >
                         <option value="ALL_AGES">All Ages</option>

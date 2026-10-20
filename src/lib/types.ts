@@ -13,7 +13,7 @@ export interface ResolvedArtist {
 }
 
 export interface QlooBrandCandidate {
-  entityId: string; // e.g., "urn:entity:brand:..."
+  entityId: string; // e.g., "urn:entity:brand:..." or Qloo UUID
   name: string;
   affinityScore: number; // Raw Qloo affinity score (0-100 or 0.0-1.0 normalized to 0-100)
   categories: string[];
@@ -21,6 +21,15 @@ export interface QlooBrandCandidate {
   rawQueryUrl: string; // Sanitized Qloo query URL for the Evidence Drawer
   description?: string;
   typicalTier?: 'TIER_1_HEADLINE' | 'TIER_2_STAGE' | 'TIER_3_SUPPORTING' | 'BOUTIQUE';
+}
+
+export interface QlooAnchorVenue {
+  entityId: string;
+  name: string;
+  address?: string;
+  category?: string;
+  popularity?: number;
+  neighborhood?: string;
 }
 
 export interface CommercialConstraints {
@@ -118,6 +127,7 @@ export interface EventBrief {
   expectedAttendance?: number;
   constraints: CommercialConstraints;
   presetId?: 'brooklyn-warehouse' | 'silver-lake-indie' | 'hackney-jazz' | 'custom';
+  anchorVenues?: QlooAnchorVenue[];
 }
 
 export interface AnalyzeRequest {
@@ -136,4 +146,5 @@ export interface AnalyzeResponse {
   activeMode: QlooExecutionMode;
   executionDurationMs: number;
   timestamp: string;
+  anchorVenues?: QlooAnchorVenue[];
 }

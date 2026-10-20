@@ -232,6 +232,7 @@ export default function Home() {
                           sponsor={sponsor}
                           rank={idx + 1}
                           onInspectEvidence={handleInspectEvidence}
+                          anchorVenues={analysisData?.anchorVenues}
                         />
                       ))}
                     </div>
@@ -315,6 +316,7 @@ export default function Home() {
         isOpen={isDrawerOpen}
         onClose={() => setIsDrawerOpen(false)}
         resolvedArtists={resolvedArtists}
+        anchorVenues={analysisData?.anchorVenues}
       />
     </div>
   );

@@ -1,0 +1,3881 @@
+{
+  "meta": {
+    "benchmarkName": "Crowdprint 8-Scenario Live Qloo Benchmark",
+    "executedAt": "2026-10-20T06:07:50.081Z",
+    "qlooApiUrl": "https://hackathon.api.qloo.com",
+    "llmModel": "gemini-3.8-flash",
+    "nodeVersion": "v26.4.0"
+  },
+  "summary": {
+    "totalScenarios": 8,
+    "overallArtistResolution": "28/28 (100%)",
+    "avgBrandsRetrievedPerScenario": 20,
+    "avgJaccardDivergenceVsLlmPct": 97.6,
+    "rulesEngineDeterminism": "100.0% (Verified 3x per scenario)",
+    "totalCommercialInterceptions": 12,
+    "avgColdApiLatencyMs": 4851,
+    "avgCachedLatencyMs": 1.3
+  },
+  "scenarios": [
+    {
+      "id": "brooklyn-warehouse",
+      "name": "Brooklyn Warehouse Electronic",
+      "city": "New York City, NY",
+      "location": "Williamsburg, Brooklyn",
+      "lineup": [
+        "Fred again..",
+        "Four Tet",
+        "Peggy Gou",
+        "Overmono"
+      ],
+      "constraints": {
+        "minBudgetTier": 150000,
+        "blockedCategories": [
+          "Mass Media",
+          "Digital Publishing",
+          "Alcohol"
+        ],
+        "lockedCompetitors": [
+          "AIAIAI"
+        ],
+        "ageRestriction": "ALL_AGES",
+        "ecoConsciousOnly": false
+      },
+      "artistResolution": {
+        "resolved": 4,
+        "total": 4,
+        "ratePct": 100,
+        "artists": [
+          {
+            "inputName": "Fred again..",
+            "resolvedName": "Fred again..",
+            "entityId": "D723CAE9-2A15-4F4B-A8CE-E49F1706D7ED",
+            "verified": true,
+            "popularity": 0.981
+          },
+          {
+            "inputName": "Four Tet",
+            "resolvedName": "Four Tet",
+            "entityId": "1FCE26EB-24C4-4AD9-85E0-6F6BC8D262B8",
+            "verified": true,
+            "popularity": 0.998
+          },
+          {
+            "inputName": "Peggy Gou",
+            "resolvedName": "PEGGY GOU",
+            "entityId": "CCCDAEFE-96FC-414B-9FBD-F07D3D929FB6",
+            "verified": true,
+            "popularity": 0.958
+          },
+          {
+            "inputName": "Overmono",
+            "resolvedName": "Overmono",
+            "entityId": "EE649BE0-BA8B-4F1E-BDCE-1F5D7AD28186",
+            "verified": true,
+            "popularity": 0.953
+          }
+        ]
+      },
+      "qlooBrands": {
+        "requested": 20,
+        "retrieved": 20,
+        "top3": [
+          {
+            "name": "Rains",
+            "entityId": "9082F37F-5FFC-44A5-84C3-5C1CFD68F47A",
+            "affinityPct": 95.4,
+            "categories": [
+              "Fashion & Apparel",
+              "Retail",
+              "Formalwear"
+            ]
+          },
+          {
+            "name": "Urbanears",
+            "entityId": "11EA72EF-3C12-44E7-AAD6-699560C23507",
+            "affinityPct": 95.4,
+            "categories": [
+              "Consumer Electronics",
+              "Audio Equipment",
+              "Headphones"
+            ]
+          },
+          {
+            "name": "Vice",
+            "entityId": "A5707876-D5A1-49F0-ABF9-A793EA7736D2",
+            "affinityPct": 95.2,
+            "categories": [
+              "Media & Entertainment",
+              "Digital Publishing",
+              "News"
+            ]
+          }
+        ],
+        "all": [
+          {
+            "name": "Rains",
+            "entityId": "9082F37F-5FFC-44A5-84C3-5C1CFD68F47A",
+            "affinityPct": 95.4,
+            "categories": [
+              "Fashion & Apparel",
+              "Retail",
+              "Formalwear",
+              "Accessories",
+              "Bags & Leather",
+              "Fashion"
+            ]
+          },
+          {
+            "name": "Urbanears",
+            "entityId": "11EA72EF-3C12-44E7-AAD6-699560C23507",
+            "affinityPct": 95.4,
+            "categories": [
+              "Consumer Electronics",
+              "Audio Equipment",
+              "Headphones",
+              "Electronics"
+            ]
+          },
+          {
+            "name": "Vice",
+            "entityId": "A5707876-D5A1-49F0-ABF9-A793EA7736D2",
+            "affinityPct": 95.2,
+            "categories": [
+              "Media & Entertainment",
+              "Digital Publishing",
+              "News",
+              "Documentary",
+              "Mass media",
+              "Media & entertainment industry"
+            ]
+          },
+          {
+            "name": "ColorsxStudios",
+            "entityId": "404901FF-6E66-4EF7-BAC0-1D324828AEFB",
+            "affinityPct": 95.1,
+            "categories": [
+              "Media & Entertainment",
+              "Music Discovery",
+              "Digital Content",
+              "Music industry",
+              "Cultural Arts"
+            ]
+          },
+          {
+            "name": "Norse Projects",
+            "entityId": "CFE4B666-1F05-4AB2-864C-8E1D2679651D",
+            "affinityPct": 95.1,
+            "categories": [
+              "Fashion & Apparel",
+              "Design",
+              "Fashion",
+              "Casual"
+            ]
+          },
+          {
+            "name": "Profound",
+            "entityId": "14ED8849-CFBD-4E68-9160-F2D85EAC9CD8",
+            "affinityPct": 95,
+            "categories": [
+              "Fashion & Apparel",
+              "Luxury Goods",
+              "Casual",
+              "Fashion"
+            ]
+          },
+          {
+            "name": "Ssense",
+            "entityId": "827D80C7-BD20-4C76-B8F4-BDC131223FD0",
+            "affinityPct": 94.8,
+            "categories": [
+              "Retail",
+              "Fashion & Apparel",
+              "E-commerce",
+              "Media & Editorial"
+            ]
+          },
+          {
+            "name": "Carne Bollente",
+            "entityId": "B55163AE-468B-4873-B114-C9DC65CE4E27",
+            "affinityPct": 94.8,
+            "categories": [
+              "Fashion & Apparel",
+              "Graphic Design",
+              "Fashion",
+              "Casual"
+            ]
+          },
+          {
+            "name": "Komono",
+            "entityId": "DB045A2F-5476-47A0-98FF-B05E3723AF56",
+            "affinityPct": 94.7,
+            "categories": [
+              "Fashion & Apparel",
+              "Accessories",
+              "Eyewear",
+              "Watch",
+              "Fashion"
+            ]
+          },
+          {
+            "name": "Only NY",
+            "entityId": "488CEB9E-FC80-45B4-9F5B-857EBDB9984E",
+            "affinityPct": 94.7,
+            "categories": [
+              "Fashion & Apparel",
+              "Lifestyle",
+              "Fashion"
+            ]
+          },
+          {
+            "name": "Comme des Garcons",
+            "entityId": "3637BC2E-B2D1-4496-9BD7-938E4FAE81AD",
+            "affinityPct": 94.7,
+            "categories": [
+              "Fashion & Apparel",
+              "Retail",
+              "Fragrance",
+              "Design",
+              "Lifestyle / Casual",
+              "Casual"
+            ]
+          },
+          {
+            "name": "Acne Studios",
+            "entityId": "C90E3920-BF05-4537-903F-085BFE2E41AC",
+            "affinityPct": 94.6,
+            "categories": [
+              "Fashion & Apparel",
+              "Retail",
+              "Art",
+              "Publishing",
+              "Textile industry",
+              "Accessories"
+            ]
+          },
+          {
+            "name": "Maison Kitsuné",
+            "entityId": "DE26217C-75AC-4619-A181-CE38D3050DE7",
+            "affinityPct": 94.5,
+            "categories": [
+              "Fashion & Apparel",
+              "Retail",
+              "Hospitality & Travel",
+              "Media & Entertainment",
+              "Coffee",
+              "Music"
+            ]
+          },
+          {
+            "name": "Côte&ciel",
+            "entityId": "6EBC0BED-129B-493C-8F4D-A36ABAF4C84D",
+            "affinityPct": 94.5,
+            "categories": [
+              "Fashion & Apparel",
+              "Accessories",
+              "Fashion",
+              "Bags & Leather"
+            ]
+          },
+          {
+            "name": "Stones Throw Records",
+            "entityId": "BFE400C1-19BF-4491-9730-2DD7054CE2B7",
+            "affinityPct": 94.5,
+            "categories": [
+              "Media & Entertainment",
+              "Music Industry",
+              "Entertainment",
+              "Website"
+            ]
+          },
+          {
+            "name": "i-D",
+            "entityId": "DE3FA929-BDA9-44B8-8187-EDD76AA53F05",
+            "affinityPct": 94.5,
+            "categories": [
+              "Media & Entertainment",
+              "Fashion & Apparel",
+              "Publishing",
+              "Fashion",
+              "Entertainment",
+              "Website"
+            ]
+          },
+          {
+            "name": "Weekday",
+            "entityId": "B89E4CA2-D7F7-405B-93D4-89ABBA31502E",
+            "affinityPct": 94.5,
+            "categories": [
+              "Fashion & Apparel",
+              "Retail",
+              "Youth Culture",
+              "Fashion",
+              "Casual"
+            ]
+          },
+          {
+            "name": "Colorful Standard",
+            "entityId": "BEAF7205-E828-4F2A-979D-E48D96AA90E6",
+            "affinityPct": 94.5,
+            "categories": [
+              "Fashion & Apparel",
+              "Fashion"
+            ]
+          },
+          {
+            "name": "The Arrivals",
+            "entityId": "4734F205-F021-4903-8BAA-65D62E5E353F",
+            "affinityPct": 94.5,
+            "categories": [
+              "Fashion & Apparel",
+              "Retail",
+              "Outdoor Gear",
+              "Fashion",
+              "Casual"
+            ]
+          },
+          {
+            "name": "Crap Eyewear",
+            "entityId": "7F197629-994D-4A85-9F72-49A54A6FB2AD",
+            "affinityPct": 94.4,
+            "categories": [
+              "Fashion & Apparel",
+              "Retail",
+              "Eyewear",
+              "Accessories",
+              "Fashion"
+            ]
+          }
+        ]
+      },
+      "tasteTags": [
+        "Horror Enthusiasts",
+        "Emotive",
+        "Mystery Lovers",
+        "Textured",
+        "Youthful Rebellion",
+        "Teen-Oriented",
+        "Mature",
+        "Young Adults",
+        "Diverse",
+        "Aspirational"
+      ],
+      "anchorVenues": [
+        {
+          "name": "Domino Park",
+          "entityId": "02DAB1BD-8691-4836-B7D0-ADF459AE59F1",
+          "category": "Park"
+        },
+        {
+          "name": "Music Hall of Williamsburg",
+          "entityId": "F120AC41-430D-42A9-A2D4-9D73096391B8",
+          "category": "Event venue"
+        },
+        {
+          "name": "Baby's All Right",
+          "entityId": "CF8503DF-2014-42D7-9437-0082A70CC58E",
+          "category": "Live music venue"
+        },
+        {
+          "name": "Wythe Hotel",
+          "entityId": "ECB43FCB-D534-4F4A-A6C8-2AF4C5780B58",
+          "category": "Hotel"
+        },
+        {
+          "name": "Isola Brooklyn",
+          "entityId": "12802308-1EB2-48E5-9546-40F70D0A5744",
+          "category": "Live music venue"
+        }
+      ],
+      "plainLlm": {
+        "source": "GENERIC_FORTUNE500_BASELINE (Gemini Timeout)",
+        "latencyMs": 6015,
+        "brands": [
+          {
+            "name": "Red Bull",
+            "category": "Energy Drinks"
+          },
+          {
+            "name": "Heineken",
+            "category": "Beer & Alcohol"
+          },
+          {
+            "name": "Spotify",
+            "category": "Streaming Tech"
+          },
+          {
+            "name": "Pioneer DJ",
+            "category": "Audio Hardware"
+          },
+          {
+            "name": "Vans",
+            "category": "Footwear & Apparel"
+          },
+          {
+            "name": "Uber",
+            "category": "Rideshare"
+          },
+          {
+            "name": "Monster Energy",
+            "category": "Energy Drinks"
+          },
+          {
+            "name": "Bose",
+            "category": "Audio Tech"
+          }
+        ]
+      },
+      "divergence": {
+        "overlap": [],
+        "intersection": 0,
+        "union": 28,
+        "divergencePct": 100
+      },
+      "rules": {
+        "approvedCount": 16,
+        "rejectedCount": 4,
+        "deterministicAcross3Runs": true,
+        "rejectedBrands": [
+          {
+            "name": "Urbanears",
+            "entityId": "11EA72EF-3C12-44E7-AAD6-699560C23507",
+            "reasonCode": "COMPETITOR_LOCK",
+            "rule": "Rule: Competitor Exclusivity Lock [Locked: AIAIAI]",
+            "explanation": "Brand conflicts with exclusive locked sponsor \"AIAIAI\" in sector \"Audio Hardware & Headphones\"."
+          },
+          {
+            "name": "Vice",
+            "entityId": "A5707876-D5A1-49F0-ABF9-A793EA7736D2",
+            "reasonCode": "CATEGORY_EXCLUSION",
+            "rule": "Rule: Category Exclusivity Lock [Blocked: Mass Media]",
+            "explanation": "Brand category \"Mass media\" conflicts with organizer exclusion list (Mass Media)."
+          },
+          {
+            "name": "Acne Studios",
+            "entityId": "C90E3920-BF05-4537-903F-085BFE2E41AC",
+            "reasonCode": "CATEGORY_EXCLUSION",
+            "rule": "Rule: Category Exclusivity Lock [Blocked: Digital Publishing]",
+            "explanation": "Brand category \"Publishing\" conflicts with organizer exclusion list (Digital Publishing)."
+          },
+          {
+            "name": "i-D",
+            "entityId": "DE3FA929-BDA9-44B8-8187-EDD76AA53F05",
+            "reasonCode": "CATEGORY_EXCLUSION",
+            "rule": "Rule: Category Exclusivity Lock [Blocked: Digital Publishing]",
+            "explanation": "Brand category \"Publishing\" conflicts with organizer exclusion list (Digital Publishing)."
+          }
+        ]
+      },
+      "latency": {
+        "coldLiveQlooMs": 4175,
+        "cachedHydrateAndRulesMedianMs": 1.725
+      },
+      "calls": [
+        {
+          "endpoint": "/search",
+          "query": "Fred again..",
+          "status": 200,
+          "latencyMs": 818
+        },
+        {
+          "endpoint": "/search",
+          "query": "Four Tet",
+          "status": 200,
+          "latencyMs": 251
+        },
+        {
+          "endpoint": "/search",
+          "query": "Peggy Gou",
+          "status": 200,
+          "latencyMs": 289
+        },
+        {
+          "endpoint": "/search",
+          "query": "Overmono",
+          "status": 200,
+          "latencyMs": 249
+        },
+        {
+          "endpoint": "/v2/insights",
+          "filterType": "urn:entity:brand",
+          "status": 200,
+          "latencyMs": 1052,
+          "returned": 20
+        },
+        {
+          "endpoint": "/v2/insights",
+          "filterType": "urn:tag",
+          "status": 200,
+          "latencyMs": 735,
+          "returned": 10
+        },
+        {
+          "endpoint": "/v2/insights",
+          "filterType": "urn:entity:place",
+          "status": 200,
+          "latencyMs": 356,
+          "returned": 5
+        }
+      ]
+    },
+    {
+      "id": "silver-lake-indie",
+      "name": "Silver Lake Indie & Alt-R&B",
+      "city": "Los Angeles, CA",
+      "location": "Silver Lake, Los Angeles",
+      "lineup": [
+        "Khruangbin",
+        "Steve Lacy",
+        "Clairo",
+        "Men I Trust"
+      ],
+      "constraints": {
+        "minBudgetTier": 75000,
+        "blockedCategories": [
+          "Fast Fashion",
+          "Energy Drinks"
+        ],
+        "lockedCompetitors": [],
+        "ageRestriction": "ALL_AGES",
+        "ecoConsciousOnly": true
+      },
+      "artistResolution": {
+        "resolved": 4,
+        "total": 4,
+        "ratePct": 100,
+        "artists": [
+          {
+            "inputName": "Khruangbin",
+            "resolvedName": "Khruangbin",
+            "entityId": "BAF6317A-DF94-4C90-92AE-63F86560C21B",
+            "verified": true,
+            "popularity": 0.992
+          },
+          {
+            "inputName": "Steve Lacy",
+            "resolvedName": "Steve Lacy",
+            "entityId": "FC2E3A2F-A99A-4287-91E7-7FD8F7DE0A40",
+            "verified": true,
+            "popularity": 0.993
+          },
+          {
+            "inputName": "Clairo",
+            "resolvedName": "Clairo",
+            "entityId": "9B2140E4-8DEB-452C-BB75-C3B7B6AD198E",
+            "verified": true,
+            "popularity": 0.995
+          },
+          {
+            "inputName": "Men I Trust",
+            "resolvedName": "Men I Trust",
+            "entityId": "86E45BD3-3265-4B47-BF9A-367D583F12A6",
+            "verified": true,
+            "popularity": 0.99
+          }
+        ]
+      },
+      "qlooBrands": {
+        "requested": 20,
+        "retrieved": 20,
+        "top3": [
+          {
+            "name": "Urban Outfitters",
+            "entityId": "4F94C666-5FFA-4A42-8453-24C2F779EC36",
+            "affinityPct": 98,
+            "categories": [
+              "Retail",
+              "Fashion & Apparel",
+              "Music"
+            ]
+          },
+          {
+            "name": "Dr. Martens",
+            "entityId": "F59D6DB5-5A85-48C6-A2EC-CAAE334D4348",
+            "affinityPct": 97.1,
+            "categories": [
+              "Fashion & Apparel",
+              "Retail",
+              "Footwear"
+            ]
+          },
+          {
+            "name": "Free People",
+            "entityId": "977160CE-28F9-4BC9-A0B5-C022BF3A5572",
+            "affinityPct": 96.8,
+            "categories": [
+              "Fashion & Apparel",
+              "Retail",
+              "Lifestyle"
+            ]
+          }
+        ],
+        "all": [
+          {
+            "name": "Urban Outfitters",
+            "entityId": "4F94C666-5FFA-4A42-8453-24C2F779EC36",
+            "affinityPct": 98,
+            "categories": [
+              "Retail",
+              "Fashion & Apparel",
+              "Music",
+              "Home Goods",
+              "Fashion"
+            ]
+          },
+          {
+            "name": "Dr. Martens",
+            "entityId": "F59D6DB5-5A85-48C6-A2EC-CAAE334D4348",
+            "affinityPct": 97.1,
+            "categories": [
+              "Fashion & Apparel",
+              "Retail",
+              "Footwear",
+              "Fashion",
+              "Other"
+            ]
+          },
+          {
+            "name": "Free People",
+            "entityId": "977160CE-28F9-4BC9-A0B5-C022BF3A5572",
+            "affinityPct": 96.8,
+            "categories": [
+              "Fashion & Apparel",
+              "Retail",
+              "Lifestyle",
+              "Casual",
+              "Website",
+              "Fashion"
+            ]
+          },
+          {
+            "name": "American Apparel",
+            "entityId": "8A2527C6-2C10-443F-A71C-6EDDA5F95E11",
+            "affinityPct": 96.6,
+            "categories": [
+              "Fashion & Apparel",
+              "Retail",
+              "Consumer Packaged Goods",
+              "Casual",
+              "Fashion"
+            ]
+          },
+          {
+            "name": "UNIF",
+            "entityId": "51844CEA-DECE-4071-ABF4-1A6834639F2B",
+            "affinityPct": 96.4,
+            "categories": [
+              "Fashion & Apparel",
+              "Casual",
+              "Other",
+              "Fashion",
+              "Footwear"
+            ]
+          },
+          {
+            "name": "Crap Eyewear",
+            "entityId": "7F197629-994D-4A85-9F72-49A54A6FB2AD",
+            "affinityPct": 96.3,
+            "categories": [
+              "Fashion & Apparel",
+              "Retail",
+              "Eyewear",
+              "Accessories",
+              "Fashion"
+            ]
+          },
+          {
+            "name": "Polaroid",
+            "entityId": "62926E8D-2D7E-4428-819E-BF2477D3233F",
+            "affinityPct": 96.2,
+            "categories": [
+              "Consumer Electronics",
+              "Photography",
+              "Electronics",
+              "Camera & Video"
+            ]
+          },
+          {
+            "name": "Lazy Oaf",
+            "entityId": "67561DC2-E5B9-473A-BA0D-344B3C49ABA9",
+            "affinityPct": 96.1,
+            "categories": [
+              "Fashion & Apparel",
+              "Retail",
+              "Graphic Apparel",
+              "Casual",
+              "Fashion"
+            ]
+          },
+          {
+            "name": "Glossier",
+            "entityId": "742FBE1B-B70F-471F-AD07-A55C9A903628",
+            "affinityPct": 95.9,
+            "categories": [
+              "Beauty & Personal Care",
+              "Retail",
+              "Cosmetics industry",
+              "Suncare",
+              "Skincare",
+              "Health & Beauty"
+            ]
+          },
+          {
+            "name": "Society6",
+            "entityId": "55F4DCEE-DB84-42AD-A57E-D62B86AE02E3",
+            "affinityPct": 95.8,
+            "categories": [
+              "Retail",
+              "Home Goods",
+              "E-commerce",
+              "Art & Design",
+              "Website"
+            ]
+          },
+          {
+            "name": "Brandy Melville",
+            "entityId": "AB477DE2-998D-4068-A432-19BA32F2CA25",
+            "affinityPct": 95.7,
+            "categories": [
+              "Fashion & Apparel",
+              "Retail",
+              "E-commerce",
+              "Fashion",
+              "Casual"
+            ]
+          },
+          {
+            "name": "Ban.do",
+            "entityId": "8EBDD1F4-6EA0-410E-83AC-35727088764D",
+            "affinityPct": 95.7,
+            "categories": [
+              "Retail",
+              "Fashion & Apparel",
+              "Stationery",
+              "Home Decor"
+            ]
+          },
+          {
+            "name": "Nasty Gal",
+            "entityId": "6F2D602B-11DB-4FF7-84D5-29E1C8D5991E",
+            "affinityPct": 95.5,
+            "categories": [
+              "Fashion & Apparel",
+              "Retail",
+              "Other",
+              "Footwear",
+              "Bags & Leather",
+              "Website"
+            ]
+          },
+          {
+            "name": "Reformation",
+            "entityId": "2D26FF28-3B3C-4FF9-A00F-3F9518DD9CDF",
+            "affinityPct": 95.4,
+            "categories": [
+              "Fashion & Apparel",
+              "Retail",
+              "Sustainable Goods",
+              "Fashion",
+              "Formalwear",
+              "Casual"
+            ]
+          },
+          {
+            "name": "Buffalo Exchange",
+            "entityId": "01096D2C-FC7E-463B-BF8D-FDFE3C6B0256",
+            "affinityPct": 95.4,
+            "categories": [
+              "Fashion & Apparel",
+              "Retail",
+              "Circular Economy"
+            ]
+          },
+          {
+            "name": "Wildfox",
+            "entityId": "82A47833-2EDC-4A6A-A223-09CE1485B851",
+            "affinityPct": 95.2,
+            "categories": [
+              "Fashion & Apparel",
+              "Retail",
+              "E-commerce",
+              "Fashion",
+              "Casual",
+              "Website"
+            ]
+          },
+          {
+            "name": "For Love & Lemons",
+            "entityId": "693D676F-0AC5-4EE0-B1FC-EFFF92F660C4",
+            "affinityPct": 95.2,
+            "categories": [
+              "Fashion & Apparel",
+              "E-commerce",
+              "Casual",
+              "Lingerie & Sleepwear",
+              "Fashion"
+            ]
+          },
+          {
+            "name": "Girlboss",
+            "entityId": "2F7AE8C0-77ED-4ADD-A33A-255D0D969F24",
+            "affinityPct": 95.2,
+            "categories": [
+              "Media & Entertainment",
+              "Career Development",
+              "Professional Networking",
+              "Entertainment",
+              "Media",
+              "Website"
+            ]
+          },
+          {
+            "name": "Allsaints",
+            "entityId": "5EA79857-0E68-48CC-8345-3A786B231326",
+            "affinityPct": 95.1,
+            "categories": [
+              "Fashion & Apparel",
+              "Retail",
+              "Fashion",
+              "Bags & Leather",
+              "Casual",
+              "Accessories"
+            ]
+          },
+          {
+            "name": "Warby Parker",
+            "entityId": "AB8D769A-CCEB-4C2D-A3D8-21641E0EC664",
+            "affinityPct": 95,
+            "categories": [
+              "Retail",
+              "Fashion & Apparel",
+              "Eye Care",
+              "Health & Wellness",
+              "Fashion",
+              "Accessories"
+            ]
+          }
+        ]
+      },
+      "tasteTags": [
+        "Dreamy",
+        "Relaxed",
+        "Nostalgic",
+        "Courageous",
+        "Genre Blending",
+        "Moody",
+        "Introspective",
+        "Laid Back"
+      ],
+      "anchorVenues": [
+        {
+          "name": "Echo Park Lake",
+          "entityId": "0B8106D1-475C-4811-9114-221D70F2BE18",
+          "category": "Lake"
+        },
+        {
+          "name": "The Echo",
+          "entityId": "1DD2825A-3887-42CE-8E61-A5F1C7008F36",
+          "category": "Live music venue"
+        },
+        {
+          "name": "Los Globos",
+          "entityId": "EFE48D5D-195D-4DFD-A724-5B1FC9E13A4E",
+          "category": "Night club"
+        },
+        {
+          "name": "Sqirl",
+          "entityId": "50CA6550-6A2E-4711-8790-5F44C525E6B0",
+          "category": "Restaurant"
+        },
+        {
+          "name": "Original Tommy's",
+          "entityId": "774B8646-429D-4BB4-B35B-C221A0AA1CEE",
+          "category": "Hamburger restaurant"
+        }
+      ],
+      "plainLlm": {
+        "source": "GENERIC_FORTUNE500_BASELINE (Gemini Timeout)",
+        "latencyMs": 6007,
+        "brands": [
+          {
+            "name": "Urban Outfitters",
+            "category": "Fast Fashion & Retail"
+          },
+          {
+            "name": "Dr. Martens",
+            "category": "Footwear"
+          },
+          {
+            "name": "Subaru",
+            "category": "Automotive"
+          },
+          {
+            "name": "Pabst Blue Ribbon",
+            "category": "Beer & Alcohol"
+          },
+          {
+            "name": "Fender",
+            "category": "Musical Instruments"
+          },
+          {
+            "name": "Ray-Ban",
+            "category": "Eyewear"
+          },
+          {
+            "name": "Chipotle",
+            "category": "Dining"
+          },
+          {
+            "name": "Spotify",
+            "category": "Streaming Tech"
+          }
+        ]
+      },
+      "divergence": {
+        "overlap": [
+          "Urban Outfitters",
+          "Dr. Martens"
+        ],
+        "intersection": 2,
+        "union": 26,
+        "divergencePct": 92.3
+      },
+      "rules": {
+        "approvedCount": 17,
+        "rejectedCount": 3,
+        "deterministicAcross3Runs": true,
+        "rejectedBrands": [
+          {
+            "name": "American Apparel",
+            "entityId": "8A2527C6-2C10-443F-A71C-6EDDA5F95E11",
+            "reasonCode": "ECO_NON_COMPLIANT",
+            "rule": "Rule: 100% Eco-Conscious Mandate",
+            "explanation": "Event mandates 100% Eco-Conscious / Sustainable partners. Brand \"American Apparel\" classified as fast-fashion / high-waste retail, failing festival sustainability audit."
+          },
+          {
+            "name": "Brandy Melville",
+            "entityId": "AB477DE2-998D-4068-A432-19BA32F2CA25",
+            "reasonCode": "ECO_NON_COMPLIANT",
+            "rule": "Rule: 100% Eco-Conscious Mandate",
+            "explanation": "Event mandates 100% Eco-Conscious / Sustainable partners. Brand \"Brandy Melville\" classified as fast-fashion / high-waste retail, failing festival sustainability audit."
+          },
+          {
+            "name": "Nasty Gal",
+            "entityId": "6F2D602B-11DB-4FF7-84D5-29E1C8D5991E",
+            "reasonCode": "ECO_NON_COMPLIANT",
+            "rule": "Rule: 100% Eco-Conscious Mandate",
+            "explanation": "Event mandates 100% Eco-Conscious / Sustainable partners. Brand \"Nasty Gal\" classified as fast-fashion / high-waste retail, failing festival sustainability audit."
+          }
+        ]
+      },
+      "latency": {
+        "coldLiveQlooMs": 4197,
+        "cachedHydrateAndRulesMedianMs": 1.298
+      },
+      "calls": [
+        {
+          "endpoint": "/search",
+          "query": "Khruangbin",
+          "status": 200,
+          "latencyMs": 722
+        },
+        {
+          "endpoint": "/search",
+          "query": "Steve Lacy",
+          "status": 200,
+          "latencyMs": 264
+        },
+        {
+          "endpoint": "/search",
+          "query": "Clairo",
+          "status": 200,
+          "latencyMs": 246
+        },
+        {
+          "endpoint": "/search",
+          "query": "Men I Trust",
+          "status": 200,
+          "latencyMs": 296
+        },
+        {
+          "endpoint": "/v2/insights",
+          "filterType": "urn:entity:brand",
+          "status": 200,
+          "latencyMs": 1090,
+          "returned": 20
+        },
+        {
+          "endpoint": "/v2/insights",
+          "filterType": "urn:tag",
+          "status": 200,
+          "latencyMs": 783,
+          "returned": 8
+        },
+        {
+          "endpoint": "/v2/insights",
+          "filterType": "urn:entity:place",
+          "status": 200,
+          "latencyMs": 388,
+          "returned": 5
+        }
+      ]
+    },
+    {
+      "id": "hackney-jazz",
+      "name": "Hackney Underground Jazz & Grime",
+      "city": "London, UK",
+      "location": "Hackney, London",
+      "lineup": [
+        "Ezra Collective",
+        "Little Simz",
+        "Yussef Dayes"
+      ],
+      "constraints": {
+        "minBudgetTier": 50000,
+        "blockedCategories": [
+          "Tobacco",
+          "Gambling"
+        ],
+        "lockedCompetitors": [
+          "Nike"
+        ],
+        "ageRestriction": "18_PLUS",
+        "ecoConsciousOnly": false
+      },
+      "artistResolution": {
+        "resolved": 3,
+        "total": 3,
+        "ratePct": 100,
+        "artists": [
+          {
+            "inputName": "Ezra Collective",
+            "resolvedName": "Ezra Collective",
+            "entityId": "4CCBC47E-4257-4B3F-A9DE-A793C2B7C65A",
+            "verified": true,
+            "popularity": 0.945
+          },
+          {
+            "inputName": "Little Simz",
+            "resolvedName": "Little Simz",
+            "entityId": "823E245F-17E1-49B2-95F8-255130700E2B",
+            "verified": true,
+            "popularity": 0.987
+          },
+          {
+            "inputName": "Yussef Dayes",
+            "resolvedName": "Yussef Dayes",
+            "entityId": "8AD89B8C-43AF-420E-BA13-62DB30D5F8C4",
+            "verified": true,
+            "popularity": 0.807
+          }
+        ]
+      },
+      "qlooBrands": {
+        "requested": 20,
+        "retrieved": 20,
+        "top3": [
+          {
+            "name": "Stones Throw Records",
+            "entityId": "BFE400C1-19BF-4491-9730-2DD7054CE2B7",
+            "affinityPct": 97.4,
+            "categories": [
+              "Media & Entertainment",
+              "Music Industry",
+              "Entertainment"
+            ]
+          },
+          {
+            "name": "Vice",
+            "entityId": "A5707876-D5A1-49F0-ABF9-A793EA7736D2",
+            "affinityPct": 96.5,
+            "categories": [
+              "Media & Entertainment",
+              "Digital Publishing",
+              "News"
+            ]
+          },
+          {
+            "name": "Discogs",
+            "entityId": "7F0C0511-3968-4526-ACFB-A9420CFA96DD",
+            "affinityPct": 96,
+            "categories": [
+              "Media & Entertainment",
+              "Retail",
+              "Music Technology"
+            ]
+          }
+        ],
+        "all": [
+          {
+            "name": "Stones Throw Records",
+            "entityId": "BFE400C1-19BF-4491-9730-2DD7054CE2B7",
+            "affinityPct": 97.4,
+            "categories": [
+              "Media & Entertainment",
+              "Music Industry",
+              "Entertainment",
+              "Website"
+            ]
+          },
+          {
+            "name": "Vice",
+            "entityId": "A5707876-D5A1-49F0-ABF9-A793EA7736D2",
+            "affinityPct": 96.5,
+            "categories": [
+              "Media & Entertainment",
+              "Digital Publishing",
+              "News",
+              "Documentary",
+              "Mass media",
+              "Media & entertainment industry"
+            ]
+          },
+          {
+            "name": "Discogs",
+            "entityId": "7F0C0511-3968-4526-ACFB-A9420CFA96DD",
+            "affinityPct": 96,
+            "categories": [
+              "Media & Entertainment",
+              "Retail",
+              "Music Technology",
+              "Online Database",
+              "Website"
+            ]
+          },
+          {
+            "name": "Fred Perry",
+            "entityId": "33A31B51-CE46-40BB-B2BD-B446231247C0",
+            "affinityPct": 95.8,
+            "categories": [
+              "Fashion & Apparel",
+              "Retail",
+              "Lifestyle",
+              "Music Culture",
+              "Bags & Leather",
+              "Lifestyle / Casual"
+            ]
+          },
+          {
+            "name": "Urbanears",
+            "entityId": "11EA72EF-3C12-44E7-AAD6-699560C23507",
+            "affinityPct": 95.6,
+            "categories": [
+              "Consumer Electronics",
+              "Audio Equipment",
+              "Headphones",
+              "Electronics"
+            ]
+          },
+          {
+            "name": "Rough Trade",
+            "entityId": "BF9A9FDA-3726-49FC-93D6-81F314C975A3",
+            "affinityPct": 95.2,
+            "categories": [
+              "Retail",
+              "Media & Entertainment",
+              "Music Industry",
+              "Live Events"
+            ]
+          },
+          {
+            "name": "Norse Projects",
+            "entityId": "CFE4B666-1F05-4AB2-864C-8E1D2679651D",
+            "affinityPct": 95.2,
+            "categories": [
+              "Fashion & Apparel",
+              "Design",
+              "Fashion",
+              "Casual"
+            ]
+          },
+          {
+            "name": "END. Clothing",
+            "entityId": "20EEC96F-0433-43A7-93C7-F1BA5851D056",
+            "affinityPct": 95.1,
+            "categories": [
+              "Retail",
+              "Fashion & Apparel",
+              "Home Goods",
+              "Beauty & Personal Care"
+            ]
+          },
+          {
+            "name": "Pitchfork",
+            "entityId": "08E0FC76-1D07-441F-8FA1-4A22D6B32CC8",
+            "affinityPct": 95.1,
+            "categories": [
+              "Media & Entertainment",
+              "Music Journalism",
+              "Digital Publishing",
+              "Website"
+            ]
+          },
+          {
+            "name": "Clarks",
+            "entityId": "BD93E7F6-AF19-4741-A06C-A818BAEB0FFB",
+            "affinityPct": 94.9,
+            "categories": [
+              "Fashion & Apparel",
+              "Retail",
+              "Footwear",
+              "Fashion",
+              "Other",
+              "Lifestyle / Casual"
+            ]
+          },
+          {
+            "name": "Grenson Shoes",
+            "entityId": "E42C98CC-DF87-4C2B-98C9-1B58D3809B7D",
+            "affinityPct": 94.7,
+            "categories": [
+              "Fashion & Apparel",
+              "Retail",
+              "Footwear",
+              "Fashion"
+            ]
+          },
+          {
+            "name": "Only NY",
+            "entityId": "488CEB9E-FC80-45B4-9F5B-857EBDB9984E",
+            "affinityPct": 94.6,
+            "categories": [
+              "Fashion & Apparel",
+              "Lifestyle",
+              "Fashion"
+            ]
+          },
+          {
+            "name": "Universal Works",
+            "entityId": "B87D29C3-CE25-4B02-AC2D-2F08BCB0AB74",
+            "affinityPct": 94.6,
+            "categories": [
+              "Fashion & Apparel",
+              "Retail",
+              "Menswear",
+              "Casual",
+              "Fashion"
+            ]
+          },
+          {
+            "name": "Palace Skateboards",
+            "entityId": "91D22C42-E4F7-4FBC-9D0D-A0182794C86D",
+            "affinityPct": 94.6,
+            "categories": [
+              "Fashion & Apparel",
+              "Retail",
+              "Skateboarding",
+              "Fashion"
+            ]
+          },
+          {
+            "name": "Ben Sherman",
+            "entityId": "D7CA95FB-4A1D-4A7F-93B6-4BECA2904BC9",
+            "affinityPct": 94.6,
+            "categories": [
+              "Fashion & Apparel",
+              "Retail",
+              "Fashion",
+              "Casual"
+            ]
+          },
+          {
+            "name": "Y-3",
+            "entityId": "A5C63FA9-24C7-4D4B-956D-8F9FF265660E",
+            "affinityPct": 94.5,
+            "categories": [
+              "Fashion & Apparel",
+              "Sportswear",
+              "Fashion"
+            ]
+          },
+          {
+            "name": "Neighborhood",
+            "entityId": "91C156E6-6267-438A-92A8-E90A79A9E053",
+            "affinityPct": 94.3,
+            "categories": [
+              "Fashion & Apparel",
+              "Home Goods",
+              "Gardening Supplies",
+              "Fashion",
+              "Casual",
+              "Website"
+            ]
+          },
+          {
+            "name": "Comme des Garcons",
+            "entityId": "3637BC2E-B2D1-4496-9BD7-938E4FAE81AD",
+            "affinityPct": 94.3,
+            "categories": [
+              "Fashion & Apparel",
+              "Retail",
+              "Fragrance",
+              "Design",
+              "Lifestyle / Casual",
+              "Casual"
+            ]
+          },
+          {
+            "name": "Vision Street Wear",
+            "entityId": "3030118A-124F-46D7-BA59-994F5FDD12F8",
+            "affinityPct": 94.2,
+            "categories": [
+              "Fashion & Apparel",
+              "Retail",
+              "Skateboarding",
+              "Casual",
+              "Fashion"
+            ]
+          },
+          {
+            "name": "Maharishi",
+            "entityId": "2E972453-B840-41DC-A9AF-B8F753798E39",
+            "affinityPct": 94.2,
+            "categories": [
+              "Fashion & Apparel",
+              "Retail",
+              "Technical Outerwear",
+              "Military Surplus",
+              "Casual",
+              "Fashion"
+            ]
+          }
+        ]
+      },
+      "tasteTags": [
+        "Professional Achievement",
+        "Genre Blending",
+        "Refined",
+        "Ocean Exploration",
+        "Aspirational",
+        "Chill",
+        "Thoughtful",
+        "Style Conscious Living",
+        "Sophisticated",
+        "Intellectual Pursuits"
+      ],
+      "anchorVenues": [
+        {
+          "name": "Aura x",
+          "entityId": "E89E3438-7B2E-4A17-9850-FC438DD3F018",
+          "category": "Cocktail bar"
+        },
+        {
+          "name": "Duck & Waffle",
+          "entityId": "8E9ABE05-8D3C-4B71-9F6A-189847A083B4",
+          "category": "Modern European restaurant"
+        },
+        {
+          "name": "London Stadium",
+          "entityId": "5D68CCC1-7A20-4E46-9D44-51BF7E3DAE81",
+          "category": "Stadium"
+        },
+        {
+          "name": "Old Spitalfields Market",
+          "entityId": "054BB8E3-16B1-4FF1-9370-1782C0E4CF59",
+          "category": "Market"
+        },
+        {
+          "name": "BOXPARK Shoreditch",
+          "entityId": "BEDCCEC0-57D7-4844-96FC-5D3A4C684A83",
+          "category": "Food court"
+        }
+      ],
+      "plainLlm": {
+        "source": "GENERIC_FORTUNE500_BASELINE (Gemini Timeout)",
+        "latencyMs": 6010,
+        "brands": [
+          {
+            "name": "Jameson Irish Whiskey",
+            "category": "Spirits & Alcohol"
+          },
+          {
+            "name": "Yamaha Music",
+            "category": "Instruments & Audio"
+          },
+          {
+            "name": "Rolex",
+            "category": "Luxury Watches"
+          },
+          {
+            "name": "Starbucks",
+            "category": "Coffee"
+          },
+          {
+            "name": "Guinness",
+            "category": "Beer & Stout"
+          },
+          {
+            "name": "Apple Music",
+            "category": "Streaming Tech"
+          },
+          {
+            "name": "Bose",
+            "category": "Audio Tech"
+          }
+        ]
+      },
+      "divergence": {
+        "overlap": [],
+        "intersection": 0,
+        "union": 27,
+        "divergencePct": 100
+      },
+      "rules": {
+        "approvedCount": 17,
+        "rejectedCount": 3,
+        "deterministicAcross3Runs": true,
+        "rejectedBrands": [
+          {
+            "name": "Clarks",
+            "entityId": "BD93E7F6-AF19-4741-A06C-A818BAEB0FFB",
+            "reasonCode": "COMPETITOR_LOCK",
+            "rule": "Rule: Competitor Exclusivity Lock [Locked: Nike]",
+            "explanation": "Brand conflicts with exclusive locked sponsor \"Nike\" in sector \"Footwear & Athletic Apparel\"."
+          },
+          {
+            "name": "Grenson Shoes",
+            "entityId": "E42C98CC-DF87-4C2B-98C9-1B58D3809B7D",
+            "reasonCode": "COMPETITOR_LOCK",
+            "rule": "Rule: Competitor Exclusivity Lock [Locked: Nike]",
+            "explanation": "Brand conflicts with exclusive locked sponsor \"Nike\" in sector \"Footwear & Athletic Apparel\"."
+          },
+          {
+            "name": "Y-3",
+            "entityId": "A5C63FA9-24C7-4D4B-956D-8F9FF265660E",
+            "reasonCode": "COMPETITOR_LOCK",
+            "rule": "Rule: Competitor Exclusivity Lock [Locked: Nike]",
+            "explanation": "Brand conflicts with exclusive locked sponsor \"Nike\" in sector \"Footwear & Athletic Apparel\"."
+          }
+        ]
+      },
+      "latency": {
+        "coldLiveQlooMs": 3321,
+        "cachedHydrateAndRulesMedianMs": 1.025
+      },
+      "calls": [
+        {
+          "endpoint": "/search",
+          "query": "Ezra Collective",
+          "status": 200,
+          "latencyMs": 746
+        },
+        {
+          "endpoint": "/search",
+          "query": "Little Simz",
+          "status": 200,
+          "latencyMs": 259
+        },
+        {
+          "endpoint": "/search",
+          "query": "Yussef Dayes",
+          "status": 200,
+          "latencyMs": 255
+        },
+        {
+          "endpoint": "/v2/insights",
+          "filterType": "urn:entity:brand",
+          "status": 200,
+          "latencyMs": 805,
+          "returned": 20
+        },
+        {
+          "endpoint": "/v2/insights",
+          "filterType": "urn:tag",
+          "status": 200,
+          "latencyMs": 515,
+          "returned": 10
+        },
+        {
+          "endpoint": "/v2/insights",
+          "filterType": "urn:entity:place",
+          "status": 200,
+          "latencyMs": 404,
+          "returned": 5
+        }
+      ]
+    },
+    {
+      "id": "austin-psych",
+      "name": "Austin Psych & Garage Rock",
+      "city": "Austin, TX",
+      "location": "East Austin, Austin",
+      "lineup": [
+        "King Gizzard & The Lizard Wizard",
+        "Tame Impala",
+        "Black Pumas"
+      ],
+      "constraints": {
+        "minBudgetTier": 60000,
+        "blockedCategories": [
+          "Energy Drinks",
+          "Crypto"
+        ],
+        "lockedCompetitors": [
+          "Nike"
+        ],
+        "ageRestriction": "18_PLUS",
+        "ecoConsciousOnly": false
+      },
+      "artistResolution": {
+        "resolved": 3,
+        "total": 3,
+        "ratePct": 100,
+        "artists": [
+          {
+            "inputName": "King Gizzard & The Lizard Wizard",
+            "resolvedName": "King Gizzard & The Lizard Wizard",
+            "entityId": "C95B2953-272C-4076-8F10-749D99B5F833",
+            "verified": true,
+            "popularity": 0.994
+          },
+          {
+            "inputName": "Tame Impala",
+            "resolvedName": "Tame Impala",
+            "entityId": "D1AE8792-9129-46E0-AEE7-2C3A81E91385",
+            "verified": true,
+            "popularity": 0.999
+          },
+          {
+            "inputName": "Black Pumas",
+            "resolvedName": "Black Pumas",
+            "entityId": "37E7653C-A9DB-4313-892B-FEAC54A46F59",
+            "verified": true,
+            "popularity": 0.973
+          }
+        ]
+      },
+      "qlooBrands": {
+        "requested": 20,
+        "retrieved": 20,
+        "top3": [
+          {
+            "name": "Patagonia",
+            "entityId": "DB4CE34E-3A63-4947-946F-9D52502C5762",
+            "affinityPct": 97,
+            "categories": [
+              "Fashion & Apparel",
+              "Outdoor Equipment",
+              "Casual"
+            ]
+          },
+          {
+            "name": "The North Face",
+            "entityId": "DB03F250-64F3-47AB-8756-BC1C4E13EBFD",
+            "affinityPct": 96.7,
+            "categories": [
+              "Fashion & Apparel",
+              "Retail",
+              "Sports & Fitness"
+            ]
+          },
+          {
+            "name": "Vice",
+            "entityId": "A5707876-D5A1-49F0-ABF9-A793EA7736D2",
+            "affinityPct": 96.3,
+            "categories": [
+              "Media & Entertainment",
+              "Digital Publishing",
+              "News"
+            ]
+          }
+        ],
+        "all": [
+          {
+            "name": "Patagonia",
+            "entityId": "DB4CE34E-3A63-4947-946F-9D52502C5762",
+            "affinityPct": 97,
+            "categories": [
+              "Fashion & Apparel",
+              "Outdoor Equipment",
+              "Casual",
+              "Fashion",
+              "Athletic"
+            ]
+          },
+          {
+            "name": "The North Face",
+            "entityId": "DB03F250-64F3-47AB-8756-BC1C4E13EBFD",
+            "affinityPct": 96.7,
+            "categories": [
+              "Fashion & Apparel",
+              "Retail",
+              "Sports & Fitness",
+              "Outdoor Recreation",
+              "Clothing industry",
+              "Sneakers"
+            ]
+          },
+          {
+            "name": "Vice",
+            "entityId": "A5707876-D5A1-49F0-ABF9-A793EA7736D2",
+            "affinityPct": 96.3,
+            "categories": [
+              "Media & Entertainment",
+              "Digital Publishing",
+              "News",
+              "Documentary",
+              "Mass media",
+              "Media & entertainment industry"
+            ]
+          },
+          {
+            "name": "Brixton",
+            "entityId": "E0FC33FC-37A4-4BD3-8B9A-41D2A9ECFAFA",
+            "affinityPct": 96.1,
+            "categories": [
+              "Fashion & Apparel",
+              "Streetwear",
+              "Casual",
+              "Fashion"
+            ]
+          },
+          {
+            "name": "Huckberry",
+            "entityId": "82BC424A-68CF-4F14-A831-826F28143F54",
+            "affinityPct": 95.1,
+            "categories": [
+              "Retail",
+              "Fashion & Apparel",
+              "E-commerce",
+              "Outdoor Gear",
+              "Fashion"
+            ]
+          },
+          {
+            "name": "Polaroid",
+            "entityId": "62926E8D-2D7E-4428-819E-BF2477D3233F",
+            "affinityPct": 95,
+            "categories": [
+              "Consumer Electronics",
+              "Photography",
+              "Electronics",
+              "Camera & Video"
+            ]
+          },
+          {
+            "name": "Recreational Equipment Inc",
+            "entityId": "205AF33F-118E-4C49-9721-6BDBAF981DA0",
+            "affinityPct": 94.9,
+            "categories": [
+              "Retail",
+              "Sports & Fitness",
+              "Outdoor Recreation",
+              "Consumer Cooperative",
+              "Fashion",
+              "Casual"
+            ]
+          },
+          {
+            "name": "Stance",
+            "entityId": "7FA755DB-AC72-49F4-8724-255017EABA3A",
+            "affinityPct": 94.8,
+            "categories": [
+              "Fashion & Apparel",
+              "Lifestyle",
+              "Fashion",
+              "Casual"
+            ]
+          },
+          {
+            "name": "Herschel Supply Co",
+            "entityId": "29D35818-60FF-4833-B2D7-7EB74E4633CF",
+            "affinityPct": 94.7,
+            "categories": [
+              "Fashion & Apparel",
+              "Retail",
+              "Travel Goods",
+              "Bags & Leather",
+              "Fashion",
+              "Accessories"
+            ]
+          },
+          {
+            "name": "Nixon",
+            "entityId": "9DC3F560-9E8C-4D98-89CF-282D5B5440FE",
+            "affinityPct": 94.7,
+            "categories": [
+              "Fashion & Apparel",
+              "Sporting Goods",
+              "Fashion",
+              "Watch",
+              "Accessories",
+              "Bags & Leather"
+            ]
+          },
+          {
+            "name": "Fjällräven",
+            "entityId": "E9A70778-6E65-49A4-8C38-A24D20C05BDA",
+            "affinityPct": 94.6,
+            "categories": [
+              "Fashion & Apparel",
+              "Outdoor Gear",
+              "Fashion"
+            ]
+          },
+          {
+            "name": "Leica Camera",
+            "entityId": "75105C50-F33A-4507-BAB8-E15A2A9B4596",
+            "affinityPct": 94.5,
+            "categories": [
+              "Consumer Electronics",
+              "Optical Instruments",
+              "Precision Engineering",
+              "Precision engineering and optical industry",
+              "Photo industry",
+              "Optical instrument"
+            ]
+          },
+          {
+            "name": "Guayakí",
+            "entityId": "F20CB0FE-4A65-4B77-81C0-3733338E6329",
+            "affinityPct": 94.5,
+            "categories": [
+              "Food & Beverage",
+              "Consumer Packaged Goods",
+              "Drinks",
+              "Carbonated"
+            ]
+          },
+          {
+            "name": "Pendleton Woolen Mills",
+            "entityId": "D69A3BE9-3C01-4786-9EFD-8B70586A977E",
+            "affinityPct": 94.2,
+            "categories": [
+              "Fashion & Apparel",
+              "Retail",
+              "Textile Manufacturing",
+              "Home Goods",
+              "Fashion"
+            ]
+          },
+          {
+            "name": "Noon Pacific",
+            "entityId": "10AA9026-91FC-4873-820C-CD2898603B32",
+            "affinityPct": 94.1,
+            "categories": [
+              "Media & Entertainment",
+              "Music Curation",
+              "Website",
+              "Mobile App",
+              "Music App"
+            ]
+          },
+          {
+            "name": "Urban Outfitters",
+            "entityId": "4F94C666-5FFA-4A42-8453-24C2F779EC36",
+            "affinityPct": 94.1,
+            "categories": [
+              "Retail",
+              "Fashion & Apparel",
+              "Music",
+              "Home Goods",
+              "Fashion"
+            ]
+          },
+          {
+            "name": "Fender",
+            "entityId": "4584672D-C702-4E58-AEE3-D8DE584C36C8",
+            "affinityPct": 94,
+            "categories": [
+              "Media & Entertainment",
+              "Musical Instruments",
+              "Audio Equipment",
+              "Electronics",
+              "Music Instruments"
+            ]
+          },
+          {
+            "name": "VSCO",
+            "entityId": "DE1ED5FF-5282-4A92-8272-0BB4CB870C43",
+            "affinityPct": 94,
+            "categories": [
+              "Media & Entertainment",
+              "Technology",
+              "Software",
+              "Photography"
+            ]
+          },
+          {
+            "name": "Stones Throw Records",
+            "entityId": "BFE400C1-19BF-4491-9730-2DD7054CE2B7",
+            "affinityPct": 94,
+            "categories": [
+              "Media & Entertainment",
+              "Music Industry",
+              "Entertainment",
+              "Website"
+            ]
+          },
+          {
+            "name": "Gibson",
+            "entityId": "93B4EDF6-FF9A-4059-BF78-C1CA1B64B3AD",
+            "affinityPct": 93.8,
+            "categories": [
+              "Consumer Electronics",
+              "Musical Instruments",
+              "Music Instruments",
+              "Electronics"
+            ]
+          }
+        ]
+      },
+      "tasteTags": [
+        "Vibrant",
+        "Warm",
+        "Psychedelic",
+        "Soulful",
+        "Dreamy",
+        "Science Enthusiast",
+        "Surreal",
+        "Drama Lovers",
+        "Skate",
+        "Experimental"
+      ],
+      "anchorVenues": [
+        {
+          "name": "Mohawk Austin",
+          "entityId": "767937AF-5EBA-4276-9B67-9CD6F8A82321",
+          "category": "Live music venue"
+        },
+        {
+          "name": "Franklin Barbecue",
+          "entityId": "CE9EE2BD-D7AE-4349-B627-3D051D98AE77",
+          "category": "Barbecue restaurant"
+        },
+        {
+          "name": "Blanton Museum of Art",
+          "entityId": "C1A96FC0-E6AD-40CB-95D4-5840AE160292",
+          "category": "Art museum"
+        },
+        {
+          "name": "Empire Control Room & Garage",
+          "entityId": "CD216205-9956-4055-AC1A-CC9001D236C1",
+          "category": "Event venue"
+        },
+        {
+          "name": "Bullock Texas State History Museum",
+          "entityId": "FF8EE5EC-7755-4E33-8B0E-CACD0AA042EC",
+          "category": "History museum"
+        }
+      ],
+      "plainLlm": {
+        "source": "GENERIC_FORTUNE500_BASELINE (Gemini Timeout)",
+        "latencyMs": 6008,
+        "brands": [
+          {
+            "name": "Vans",
+            "category": "Footwear"
+          },
+          {
+            "name": "Pabst Blue Ribbon",
+            "category": "Beer"
+          },
+          {
+            "name": "Fender",
+            "category": "Musical Instruments"
+          },
+          {
+            "name": "Gibson",
+            "category": "Guitars"
+          },
+          {
+            "name": "Marshall",
+            "category": "Amplifiers"
+          },
+          {
+            "name": "Converse",
+            "category": "Footwear"
+          },
+          {
+            "name": "Levi's",
+            "category": "Denim & Apparel"
+          },
+          {
+            "name": "Red Bull",
+            "category": "Energy Drinks"
+          }
+        ]
+      },
+      "divergence": {
+        "overlap": [
+          "Fender",
+          "Gibson"
+        ],
+        "intersection": 2,
+        "union": 26,
+        "divergencePct": 92.3
+      },
+      "rules": {
+        "approvedCount": 20,
+        "rejectedCount": 0,
+        "deterministicAcross3Runs": true,
+        "rejectedBrands": []
+      },
+      "latency": {
+        "coldLiveQlooMs": 5054,
+        "cachedHydrateAndRulesMedianMs": 0.723
+      },
+      "calls": [
+        {
+          "endpoint": "/search",
+          "query": "King Gizzard & The Lizard Wizard",
+          "status": 200,
+          "latencyMs": 724
+        },
+        {
+          "endpoint": "/search",
+          "query": "Tame Impala",
+          "status": 200,
+          "latencyMs": 243
+        },
+        {
+          "endpoint": "/search",
+          "query": "Black Pumas",
+          "status": 200,
+          "latencyMs": 252
+        },
+        {
+          "endpoint": "/v2/insights",
+          "filterType": "urn:entity:brand",
+          "status": 200,
+          "latencyMs": 1038,
+          "returned": 20
+        },
+        {
+          "endpoint": "/v2/insights",
+          "filterType": "urn:tag",
+          "status": 200,
+          "latencyMs": 2022,
+          "returned": 10
+        },
+        {
+          "endpoint": "/v2/insights",
+          "filterType": "urn:entity:place",
+          "status": 200,
+          "latencyMs": 443,
+          "returned": 5
+        }
+      ]
+    },
+    {
+      "id": "miami-urbano",
+      "name": "Miami Latin Urbano Stadium Showcase",
+      "city": "Miami, FL",
+      "location": "Wynwood, Miami",
+      "lineup": [
+        "Bad Bunny",
+        "Feid",
+        "Karol G",
+        "Rauw Alejandro"
+      ],
+      "constraints": {
+        "minBudgetTier": 500000,
+        "blockedCategories": [
+          "Gambling",
+          "Tobacco"
+        ],
+        "lockedCompetitors": [
+          "Adidas",
+          "Pepsi"
+        ],
+        "ageRestriction": "ALL_AGES",
+        "ecoConsciousOnly": false
+      },
+      "artistResolution": {
+        "resolved": 4,
+        "total": 4,
+        "ratePct": 100,
+        "artists": [
+          {
+            "inputName": "Bad Bunny",
+            "resolvedName": "Bad Bunny",
+            "entityId": "BDA1B73F-10E7-4D09-AC51-B796CCEC5FF3",
+            "verified": true,
+            "popularity": 0.994
+          },
+          {
+            "inputName": "Feid",
+            "resolvedName": "Feid",
+            "entityId": "3A191450-43F7-4FBA-B9B1-4269D812E030",
+            "verified": true,
+            "popularity": 0.939
+          },
+          {
+            "inputName": "Karol G",
+            "resolvedName": "Karol G",
+            "entityId": "658495BB-DF77-472E-A6B2-9E37FF248FB3",
+            "verified": true,
+            "popularity": 0.983
+          },
+          {
+            "inputName": "Rauw Alejandro",
+            "resolvedName": "Rauw Alejandro",
+            "entityId": "77A93A61-4A62-4466-B031-B9CC7485AA56",
+            "verified": true,
+            "popularity": 0.967
+          }
+        ]
+      },
+      "qlooBrands": {
+        "requested": 20,
+        "retrieved": 20,
+        "top3": [
+          {
+            "name": "Studio F",
+            "entityId": "27279EE0-A5BE-4236-A325-E00C8EF6CA54",
+            "affinityPct": 95.9,
+            "categories": [
+              "Fashion & Apparel",
+              "Retail",
+              "E-commerce"
+            ]
+          },
+          {
+            "name": "Colombia national football team",
+            "entityId": "15A855CF-F03D-4297-AC87-554BB519B42A",
+            "affinityPct": 95.3,
+            "categories": [
+              "Media & Entertainment",
+              "Sports & Fitness",
+              "Soccer"
+            ]
+          },
+          {
+            "name": "Leonisa",
+            "entityId": "6B872AD2-6E84-4EC5-93A4-8CFDFE854AD9",
+            "affinityPct": 94.7,
+            "categories": [
+              "Fashion & Apparel",
+              "Retail",
+              "Shapewear"
+            ]
+          }
+        ],
+        "all": [
+          {
+            "name": "Studio F",
+            "entityId": "27279EE0-A5BE-4236-A325-E00C8EF6CA54",
+            "affinityPct": 95.9,
+            "categories": [
+              "Fashion & Apparel",
+              "Retail",
+              "E-commerce",
+              "Fashion",
+              "Footwear",
+              "Casual"
+            ]
+          },
+          {
+            "name": "Colombia national football team",
+            "entityId": "15A855CF-F03D-4297-AC87-554BB519B42A",
+            "affinityPct": 95.3,
+            "categories": [
+              "Media & Entertainment",
+              "Sports & Fitness",
+              "Soccer",
+              "International Soccer",
+              "Sports Organization"
+            ]
+          },
+          {
+            "name": "Leonisa",
+            "entityId": "6B872AD2-6E84-4EC5-93A4-8CFDFE854AD9",
+            "affinityPct": 94.7,
+            "categories": [
+              "Fashion & Apparel",
+              "Retail",
+              "Shapewear",
+              "Casual",
+              "Fashion",
+              "Lingerie & Sleepwear"
+            ]
+          },
+          {
+            "name": "Danfive",
+            "entityId": "E10CBF4C-D40D-440F-86BE-44DF76D1ADB5",
+            "affinityPct": 94.5,
+            "categories": [
+              "Fashion & Apparel",
+              "Sports & Fitness",
+              "Health & Wellness",
+              "Athletic",
+              "Fashion"
+            ]
+          },
+          {
+            "name": "Avianca",
+            "entityId": "0912A42E-7847-4345-8067-EEEB9590364B",
+            "affinityPct": 94.2,
+            "categories": [
+              "Hospitality & Travel",
+              "Aviation",
+              "Travel",
+              "Airline"
+            ]
+          },
+          {
+            "name": "Agua Bendita",
+            "entityId": "19E6F45F-456F-4015-8B1E-2ECA5D656EC4",
+            "affinityPct": 93.9,
+            "categories": [
+              "Fashion & Apparel",
+              "Beachwear",
+              "Fashion",
+              "Casual",
+              "Swimwear",
+              "Website"
+            ]
+          },
+          {
+            "name": "Mario Hernandez",
+            "entityId": "DFFAF953-40D6-462E-BC0C-15CD37AC7D2A",
+            "affinityPct": 93.5,
+            "categories": [
+              "Fashion & Apparel",
+              "Leather Goods",
+              "Luxury Accessories",
+              "Footwear",
+              "Fashion",
+              "Bags & Leather"
+            ]
+          },
+          {
+            "name": "LifeMiles",
+            "entityId": "068EE31C-F324-4521-B7B5-68B01DC7851B",
+            "affinityPct": 93.4,
+            "categories": [
+              "Hospitality & Travel",
+              "Loyalty Programs",
+              "Financial Services",
+              "Travel",
+              "Airline"
+            ]
+          },
+          {
+            "name": "Jon Sonen",
+            "entityId": "B4CB249C-2364-491C-8716-CB7E22792E63",
+            "affinityPct": 93,
+            "categories": [
+              "Fashion & Apparel",
+              "Fashion",
+              "Formalwear",
+              "Casual"
+            ]
+          },
+          {
+            "name": "8fit",
+            "entityId": "8C4AA07F-4BCE-4CDF-8A8D-37D438139CB1",
+            "affinityPct": 92.9,
+            "categories": [
+              "Health & Wellness",
+              "Media & Entertainment",
+              "Digital Fitness",
+              "Nutrition",
+              "Mobile App",
+              "Fitness App"
+            ]
+          },
+          {
+            "name": "Tizkka",
+            "entityId": "FFF3FB92-9FEE-4BC2-BFBA-9B6F2FD5CF62",
+            "affinityPct": 92.8,
+            "categories": [
+              "Media & Entertainment",
+              "Fashion Tech",
+              "Website"
+            ]
+          },
+          {
+            "name": "Tous",
+            "entityId": "902F2BFF-94C6-48C3-88E6-0200C2513D5B",
+            "affinityPct": 92.8,
+            "categories": [
+              "Fashion & Apparel",
+              "Retail",
+              "Jewelry",
+              "Watches",
+              "Accessories",
+              "Bags & Leather"
+            ]
+          },
+          {
+            "name": "Silvia Tcherassi",
+            "entityId": "FC043065-7E51-44A3-B6E6-A26070B03238",
+            "affinityPct": 92.8,
+            "categories": [
+              "Fashion & Apparel",
+              "Luxury Goods",
+              "Fashion"
+            ]
+          },
+          {
+            "name": "Fitplan",
+            "entityId": "B7EF0F86-64D4-438F-A490-2D8CC1667555",
+            "affinityPct": 92.7,
+            "categories": [
+              "Health & Wellness",
+              "Technology",
+              "Mobile Applications",
+              "Digital Fitness",
+              "Mobile App",
+              "Software"
+            ]
+          },
+          {
+            "name": "Forever 21",
+            "entityId": "276A83F6-C4E3-43DD-B42A-6BF9CFAF51CB",
+            "affinityPct": 92.7,
+            "categories": [
+              "Fashion & Apparel",
+              "Retail",
+              "Fast Fashion",
+              "Jeans",
+              "Casual",
+              "Fashion"
+            ]
+          },
+          {
+            "name": "Pajón & Cartagena",
+            "entityId": "93ABA288-F5AA-4674-A1F5-2342E1F059D5",
+            "affinityPct": 92.6,
+            "categories": [
+              "Fashion & Apparel",
+              "Fragrance",
+              "Fashion",
+              "Formalwear"
+            ]
+          },
+          {
+            "name": "Carolina Herrera",
+            "entityId": "5D5672A4-D587-4D90-A913-326997914611",
+            "affinityPct": 92.6,
+            "categories": [
+              "Fashion & Apparel",
+              "Beauty & Personal Care",
+              "Luxury Goods",
+              "Health & Beauty",
+              "Footwear",
+              "Casual"
+            ]
+          },
+          {
+            "name": "LifeCell",
+            "entityId": "A2DAD367-2926-4E5B-BDDC-00A31BD56D9A",
+            "affinityPct": 92.6,
+            "categories": [
+              "Beauty & Personal Care",
+              "Health & Wellness",
+              "Health & Beauty"
+            ]
+          },
+          {
+            "name": "Copa Airlines",
+            "entityId": "EA7B7C4E-021F-4B5F-ACD7-AB641644072A",
+            "affinityPct": 92.5,
+            "categories": [
+              "Hospitality & Travel",
+              "Aviation",
+              "Travel",
+              "Airline",
+              "Attraction"
+            ]
+          },
+          {
+            "name": "Taeq",
+            "entityId": "11B3EFF3-5EF2-4471-A5CB-872C0E5D7D66",
+            "affinityPct": 92.4,
+            "categories": [
+              "Food & Beverage",
+              "Consumer Packaged Goods",
+              "Food",
+              "Drinks",
+              "Dairy & Substitutes",
+              "Frozen"
+            ]
+          }
+        ]
+      },
+      "tasteTags": [
+        "Diverse",
+        "Sensual",
+        "Vibrant",
+        "Dramatic",
+        "Contemporary",
+        "Biographical Enthusiasts",
+        "Teen",
+        "Modern",
+        "Bold",
+        "Non-Conformist"
+      ],
+      "anchorVenues": [
+        {
+          "name": "Wynwood Walls",
+          "entityId": "45D0086F-DFEB-4344-9DE3-D170333A1D4B",
+          "category": "Museum"
+        },
+        {
+          "name": "Pérez Art Museum Miami",
+          "entityId": "81779AEF-B6AE-4C96-B1D3-5E4FFD744090",
+          "category": "Art museum"
+        },
+        {
+          "name": "Phillip & Patricia Frost Museum of Science",
+          "entityId": "41720031-8A25-412E-868D-9EB31ADC2886",
+          "category": "Science museum"
+        },
+        {
+          "name": "Adrienne Arsht Center for the Performing Arts of Miami-Dade County",
+          "entityId": "B94F8F03-9642-467A-BCB9-8B3AD8A68824",
+          "category": "Performing arts theater"
+        },
+        {
+          "name": "E11EVEN MIAMI",
+          "entityId": "6C6741BB-259B-47D8-A70D-302422E9887C",
+          "category": "Night club"
+        }
+      ],
+      "plainLlm": {
+        "source": "GENERIC_FORTUNE500_BASELINE (Gemini Timeout)",
+        "latencyMs": 6008,
+        "brands": [
+          {
+            "name": "Corona",
+            "category": "Beer & Alcohol"
+          },
+          {
+            "name": "Pepsi",
+            "category": "Soft Drinks"
+          },
+          {
+            "name": "Buchanan's",
+            "category": "Whisky"
+          },
+          {
+            "name": "Goya Foods",
+            "category": "Food & Beverage"
+          },
+          {
+            "name": "AT&T",
+            "category": "Telecommunications"
+          },
+          {
+            "name": "Toyota",
+            "category": "Automotive"
+          },
+          {
+            "name": "Spotify",
+            "category": "Streaming"
+          },
+          {
+            "name": "Nike",
+            "category": "Sportswear"
+          }
+        ]
+      },
+      "divergence": {
+        "overlap": [],
+        "intersection": 0,
+        "union": 28,
+        "divergencePct": 100
+      },
+      "rules": {
+        "approvedCount": 20,
+        "rejectedCount": 0,
+        "deterministicAcross3Runs": true,
+        "rejectedBrands": []
+      },
+      "latency": {
+        "coldLiveQlooMs": 5239,
+        "cachedHydrateAndRulesMedianMs": 1.505
+      },
+      "calls": [
+        {
+          "endpoint": "/search",
+          "query": "Bad Bunny",
+          "status": 200,
+          "latencyMs": 748
+        },
+        {
+          "endpoint": "/search",
+          "query": "Feid",
+          "status": 200,
+          "latencyMs": 268
+        },
+        {
+          "endpoint": "/search",
+          "query": "Karol G",
+          "status": 200,
+          "latencyMs": 280
+        },
+        {
+          "endpoint": "/search",
+          "query": "Rauw Alejandro",
+          "status": 200,
+          "latencyMs": 286
+        },
+        {
+          "endpoint": "/v2/insights",
+          "filterType": "urn:entity:brand",
+          "status": 200,
+          "latencyMs": 1587,
+          "returned": 20
+        },
+        {
+          "endpoint": "/v2/insights",
+          "filterType": "urn:tag",
+          "status": 200,
+          "latencyMs": 1285,
+          "returned": 10
+        },
+        {
+          "endpoint": "/v2/insights",
+          "filterType": "urn:entity:place",
+          "status": 200,
+          "latencyMs": 373,
+          "returned": 5
+        }
+      ]
+    },
+    {
+      "id": "atlanta-trap",
+      "name": "Atlanta Trap & Southern Hip-Hop",
+      "city": "Atlanta, GA",
+      "location": "Old Fourth Ward, Atlanta",
+      "lineup": [
+        "Future",
+        "21 Savage",
+        "Metro Boomin",
+        "Gunna"
+      ],
+      "constraints": {
+        "minBudgetTier": 250000,
+        "blockedCategories": [
+          "Crypto",
+          "Gambling"
+        ],
+        "lockedCompetitors": [
+          "Nike",
+          "Spotify"
+        ],
+        "ageRestriction": "18_PLUS",
+        "ecoConsciousOnly": false
+      },
+      "artistResolution": {
+        "resolved": 4,
+        "total": 4,
+        "ratePct": 100,
+        "artists": [
+          {
+            "inputName": "Future",
+            "resolvedName": "Future",
+            "entityId": "4233865C-095A-47B8-8499-8D20A9C25367",
+            "verified": true,
+            "popularity": 0.997
+          },
+          {
+            "inputName": "21 Savage",
+            "resolvedName": "21 Savage",
+            "entityId": "3D8CC570-78AB-4989-AC0E-34FD09E39601",
+            "verified": true,
+            "popularity": 0.993
+          },
+          {
+            "inputName": "Metro Boomin",
+            "resolvedName": "Metro Boomin",
+            "entityId": "E7662D3B-FDE3-4574-82EA-87150B3D3948",
+            "verified": true,
+            "popularity": 0.984
+          },
+          {
+            "inputName": "Gunna",
+            "resolvedName": "Gunna",
+            "entityId": "0BA5EE95-1923-438E-BA6D-D410A4BB64AC",
+            "verified": true,
+            "popularity": 0.985
+          }
+        ]
+      },
+      "qlooBrands": {
+        "requested": 20,
+        "retrieved": 20,
+        "top3": [
+          {
+            "name": "Off-white",
+            "entityId": "B6B09679-E8F9-4A42-B6D4-E648E2A1F435",
+            "affinityPct": 97.1,
+            "categories": [
+              "Fashion & Apparel",
+              "Luxury Goods",
+              "Accessories"
+            ]
+          },
+          {
+            "name": "Nice Kicks",
+            "entityId": "91F32353-09CC-4374-B718-67041FD7E694",
+            "affinityPct": 96.9,
+            "categories": [
+              "Media & Entertainment",
+              "Sneaker Culture",
+              "Footwear"
+            ]
+          },
+          {
+            "name": "Beats Electronics",
+            "entityId": "B038AF1A-FFE7-4214-ADA0-89289BF30D7C",
+            "affinityPct": 96.9,
+            "categories": [
+              "Consumer Electronics",
+              "Audio Equipment",
+              "Headphones"
+            ]
+          }
+        ],
+        "all": [
+          {
+            "name": "Off-white",
+            "entityId": "B6B09679-E8F9-4A42-B6D4-E648E2A1F435",
+            "affinityPct": 97.1,
+            "categories": [
+              "Fashion & Apparel",
+              "Luxury Goods",
+              "Accessories",
+              "Other",
+              "Fashion",
+              "Lifestyle / Casual"
+            ]
+          },
+          {
+            "name": "Nice Kicks",
+            "entityId": "91F32353-09CC-4374-B718-67041FD7E694",
+            "affinityPct": 96.9,
+            "categories": [
+              "Media & Entertainment",
+              "Sneaker Culture",
+              "Footwear",
+              "Entertainment",
+              "Media",
+              "Fashion"
+            ]
+          },
+          {
+            "name": "Beats Electronics",
+            "entityId": "B038AF1A-FFE7-4214-ADA0-89289BF30D7C",
+            "affinityPct": 96.9,
+            "categories": [
+              "Consumer Electronics",
+              "Audio Equipment",
+              "Headphones",
+              "Electronics"
+            ]
+          },
+          {
+            "name": "Flight Club",
+            "entityId": "458D3BED-B4E9-472D-9156-B21DDC6EDEDF",
+            "affinityPct": 96.8,
+            "categories": [
+              "Retail",
+              "Fashion & Apparel",
+              "Footwear"
+            ]
+          },
+          {
+            "name": "Balenciaga",
+            "entityId": "BB047D19-D3D5-47A1-B9AA-ECCEBE9470AE",
+            "affinityPct": 96.4,
+            "categories": [
+              "Fashion & Apparel",
+              "Retail",
+              "Luxury Goods",
+              "Fashion",
+              "Luxury",
+              "Haute Couture"
+            ]
+          },
+          {
+            "name": "DOPE",
+            "entityId": "23CB1066-5345-445F-9899-30AC76871493",
+            "affinityPct": 96.1,
+            "categories": [
+              "Media & Entertainment",
+              "Music",
+              "Fashion",
+              "Athletic",
+              "Health & Beauty",
+              "Casual"
+            ]
+          },
+          {
+            "name": "Fear Of God",
+            "entityId": "73C9B585-08D4-4ECA-9500-3745F70C81F1",
+            "affinityPct": 96,
+            "categories": [
+              "Fashion & Apparel",
+              "Retail",
+              "Basketball",
+              "Sandals",
+              "Fashion"
+            ]
+          },
+          {
+            "name": "Genius",
+            "entityId": "4C2CD4FB-C29E-44C1-853F-1D2CFB2AFB4A",
+            "affinityPct": 95.9,
+            "categories": [
+              "Media & Entertainment",
+              "Online Lyrics Database",
+              "Publishing",
+              "Entertainment",
+              "Website"
+            ]
+          },
+          {
+            "name": "MCM",
+            "entityId": "8E3D777C-4C07-4EA7-8BD8-01D51821EBAF",
+            "affinityPct": 95.7,
+            "categories": [
+              "Fashion & Apparel",
+              "Retail",
+              "Clothing industry",
+              "Bags & Leather",
+              "Fashion",
+              "Other"
+            ]
+          },
+          {
+            "name": "Sprayground",
+            "entityId": "EF978395-840C-48CA-886C-46EE61E8FC65",
+            "affinityPct": 95.7,
+            "categories": [
+              "Fashion & Apparel",
+              "Retail",
+              "Bags",
+              "Luggage",
+              "Casual",
+              "Fashion"
+            ]
+          },
+          {
+            "name": "Yves Saint Laurent",
+            "entityId": "0B67CD5A-152C-470B-9577-A052E3A092F7",
+            "affinityPct": 95.6,
+            "categories": [
+              "Fashion & Apparel",
+              "Beauty & Personal Care",
+              "Luxury Goods",
+              "Fashion",
+              "Haute Couture",
+              "Other"
+            ]
+          },
+          {
+            "name": "A Bathing Ape",
+            "entityId": "AD26FF70-F3E0-4B80-90CF-A86BD4C3D7AD",
+            "affinityPct": 95.6,
+            "categories": [
+              "Fashion & Apparel",
+              "Textile Industry",
+              "Casual",
+              "Skateboarding",
+              "Bags & Leather",
+              "Other"
+            ]
+          },
+          {
+            "name": "October's Very Own",
+            "entityId": "CA2D631C-C34A-4846-8F00-C212A1E98528",
+            "affinityPct": 95.6,
+            "categories": [
+              "Fashion & Apparel",
+              "Retail",
+              "Media & Entertainment",
+              "Music Production",
+              "Fashion",
+              "Casual"
+            ]
+          },
+          {
+            "name": "Stadium Goods",
+            "entityId": "CBEE1F3B-0927-4621-BA16-B941B736E308",
+            "affinityPct": 95.5,
+            "categories": [
+              "Fashion & Apparel",
+              "Retail",
+              "Resale",
+              "Collectibles"
+            ]
+          },
+          {
+            "name": "Kith",
+            "entityId": "F3DF06A0-49FA-439D-9D74-534EA2A0C5E9",
+            "affinityPct": 95.4,
+            "categories": [
+              "Fashion & Apparel",
+              "Retail",
+              "Lifestyle",
+              "Casual",
+              "Fashion"
+            ]
+          },
+          {
+            "name": "Alexander Wang",
+            "entityId": "D2C6D7FD-B21D-478C-8B29-68B10E9DCACB",
+            "affinityPct": 95.4,
+            "categories": [
+              "Fashion & Apparel",
+              "Luxury Accessories",
+              "Other",
+              "Fashion",
+              "Formalwear",
+              "Accessories"
+            ]
+          },
+          {
+            "name": "Billionaire Boys Club",
+            "entityId": "9A180424-C0FD-4013-9431-18B70E1A7176",
+            "affinityPct": 95.4,
+            "categories": [
+              "Fashion & Apparel",
+              "Streetwear",
+              "Culture",
+              "Casual",
+              "Other",
+              "Footwear"
+            ]
+          },
+          {
+            "name": "Balmain",
+            "entityId": "9D4B36F8-6512-4247-A481-E5D8FAF3EB5B",
+            "affinityPct": 95.3,
+            "categories": [
+              "Fashion & Apparel",
+              "Luxury Goods",
+              "Fashion",
+              "Casual",
+              "Bags & Leather",
+              "Eyewear"
+            ]
+          },
+          {
+            "name": "True Religion",
+            "entityId": "7F638597-720C-4700-A26A-5A846F5DB71A",
+            "affinityPct": 95.3,
+            "categories": [
+              "Fashion & Apparel",
+              "Retail",
+              "Denim",
+              "Streetwear",
+              "Fashion",
+              "Jeans"
+            ]
+          },
+          {
+            "name": "Givenchy",
+            "entityId": "C7C2B636-E5F5-42BE-8068-C8A1F1C463F6",
+            "affinityPct": 95.1,
+            "categories": [
+              "Fashion & Apparel",
+              "Retail",
+              "Luxury Goods",
+              "Fashion",
+              "Lifestyle / Casual",
+              "Health & Beauty"
+            ]
+          }
+        ]
+      },
+      "tasteTags": [
+        "Stylish",
+        "Eccentric",
+        "Moody",
+        "Unpredictable",
+        "Gritty",
+        "Emotionally Resonant",
+        "Hard-Hitting",
+        "Resilient",
+        "Fashion Conscious",
+        "Basketball Enthusiasts"
+      ],
+      "anchorVenues": [
+        {
+          "name": "Ponce City Market",
+          "entityId": "A0601D98-2540-43AB-BBF4-02FBD818C543",
+          "category": "Shopping mall"
+        },
+        {
+          "name": "World of Coca-Cola",
+          "entityId": "FDDE9A93-24E9-4C47-8AE0-60FF9D569B35",
+          "category": "Museum"
+        },
+        {
+          "name": "Fox Theatre",
+          "entityId": "09427618-CE62-47C1-B712-88F68BC18C18",
+          "category": "Performing arts theater"
+        },
+        {
+          "name": "Centennial Olympic Park",
+          "entityId": "600E5499-A257-4FAF-8D31-009D6B9DCCC9",
+          "category": "Park"
+        },
+        {
+          "name": "Atlanta Marriott Marquis",
+          "entityId": "1C38F641-643D-4E18-B3FC-22C413A1F1B8",
+          "category": "Hotel"
+        }
+      ],
+      "plainLlm": {
+        "source": "GENERIC_FORTUNE500_BASELINE (Gemini Timeout)",
+        "latencyMs": 6011,
+        "brands": [
+          {
+            "name": "Hennessy",
+            "category": "Cognac & Spirits"
+          },
+          {
+            "name": "Sprite",
+            "category": "Soft Drinks"
+          },
+          {
+            "name": "Nike",
+            "category": "Sportswear & Footwear"
+          },
+          {
+            "name": "Luc Belaire",
+            "category": "Champagne & Sparkling"
+          },
+          {
+            "name": "Balenciaga",
+            "category": "Luxury Fashion"
+          },
+          {
+            "name": "Beats by Dre",
+            "category": "Audio Tech"
+          },
+          {
+            "name": "Rolling Loud",
+            "category": "Festival Brand"
+          },
+          {
+            "name": "Uber",
+            "category": "Rideshare"
+          }
+        ]
+      },
+      "divergence": {
+        "overlap": [
+          "Balenciaga"
+        ],
+        "intersection": 1,
+        "union": 27,
+        "divergencePct": 96.3
+      },
+      "rules": {
+        "approvedCount": 20,
+        "rejectedCount": 0,
+        "deterministicAcross3Runs": true,
+        "rejectedBrands": []
+      },
+      "latency": {
+        "coldLiveQlooMs": 7205,
+        "cachedHydrateAndRulesMedianMs": 0.876
+      },
+      "calls": [
+        {
+          "endpoint": "/search",
+          "query": "Future",
+          "status": 200,
+          "latencyMs": 751
+        },
+        {
+          "endpoint": "/search",
+          "query": "21 Savage",
+          "status": 200,
+          "latencyMs": 302
+        },
+        {
+          "endpoint": "/search",
+          "query": "Metro Boomin",
+          "status": 200,
+          "latencyMs": 273
+        },
+        {
+          "endpoint": "/search",
+          "query": "Gunna",
+          "status": 200,
+          "latencyMs": 277
+        },
+        {
+          "endpoint": "/v2/insights",
+          "filterType": "urn:entity:brand",
+          "status": 200,
+          "latencyMs": 1207,
+          "returned": 20
+        },
+        {
+          "endpoint": "/v2/insights",
+          "filterType": "urn:tag",
+          "status": 200,
+          "latencyMs": 3573,
+          "returned": 10
+        },
+        {
+          "endpoint": "/v2/insights",
+          "filterType": "urn:entity:place",
+          "status": 200,
+          "latencyMs": 407,
+          "returned": 5
+        }
+      ]
+    },
+    {
+      "id": "nashville-americana",
+      "name": "Nashville Americana & Alt-Country",
+      "city": "Nashville, TN",
+      "location": "East Nashville, Nashville",
+      "lineup": [
+        "Zach Bryan",
+        "Kacey Musgraves",
+        "Tyler Childers"
+      ],
+      "constraints": {
+        "minBudgetTier": 100000,
+        "blockedCategories": [
+          "Tobacco",
+          "Fast Fashion"
+        ],
+        "lockedCompetitors": [],
+        "ageRestriction": "ALL_AGES",
+        "ecoConsciousOnly": true
+      },
+      "artistResolution": {
+        "resolved": 3,
+        "total": 3,
+        "ratePct": 100,
+        "artists": [
+          {
+            "inputName": "Zach Bryan",
+            "resolvedName": "Zach Bryan",
+            "entityId": "3221FBAC-2C10-4BAA-ADE0-AB40D02D5670",
+            "verified": true,
+            "popularity": 0.971
+          },
+          {
+            "inputName": "Kacey Musgraves",
+            "resolvedName": "Kacey Musgraves",
+            "entityId": "9AAE0224-F8E2-447A-BD05-26D2A9E72573",
+            "verified": true,
+            "popularity": 0.993
+          },
+          {
+            "inputName": "Tyler Childers",
+            "resolvedName": "Tyler Childers",
+            "entityId": "9B5028F6-5808-4BF4-A623-24C6C148D24B",
+            "verified": true,
+            "popularity": 0.959
+          }
+        ]
+      },
+      "qlooBrands": {
+        "requested": 20,
+        "retrieved": 20,
+        "top3": [
+          {
+            "name": "Chubbies",
+            "entityId": "80C93E1C-141F-4F06-B6A4-784A08379882",
+            "affinityPct": 97.6,
+            "categories": [
+              "Fashion & Apparel",
+              "E-Commerce",
+              "Fashion"
+            ]
+          },
+          {
+            "name": "Southern Tide",
+            "entityId": "E867557B-459C-49B1-A572-50EB012D5708",
+            "affinityPct": 97,
+            "categories": [
+              "Fashion & Apparel",
+              "Retail",
+              "Home Goods"
+            ]
+          },
+          {
+            "name": "Shinesty",
+            "entityId": "E7A28956-B442-4D00-A203-7EFA8B90D8E8",
+            "affinityPct": 96.7,
+            "categories": [
+              "Fashion & Apparel",
+              "Personal Goods",
+              "Lingerie & Sleepwear"
+            ]
+          }
+        ],
+        "all": [
+          {
+            "name": "Chubbies",
+            "entityId": "80C93E1C-141F-4F06-B6A4-784A08379882",
+            "affinityPct": 97.6,
+            "categories": [
+              "Fashion & Apparel",
+              "E-Commerce",
+              "Fashion",
+              "Casual",
+              "Swimwear"
+            ]
+          },
+          {
+            "name": "Southern Tide",
+            "entityId": "E867557B-459C-49B1-A572-50EB012D5708",
+            "affinityPct": 97,
+            "categories": [
+              "Fashion & Apparel",
+              "Retail",
+              "Home Goods",
+              "Fashion",
+              "Formalwear"
+            ]
+          },
+          {
+            "name": "Shinesty",
+            "entityId": "E7A28956-B442-4D00-A203-7EFA8B90D8E8",
+            "affinityPct": 96.7,
+            "categories": [
+              "Fashion & Apparel",
+              "Personal Goods",
+              "Lingerie & Sleepwear",
+              "Fashion"
+            ]
+          },
+          {
+            "name": "Tecovas",
+            "entityId": "156EB220-ECFB-4BB1-80C5-AB7DA82C5A1C",
+            "affinityPct": 96.5,
+            "categories": [
+              "Fashion & Apparel",
+              "Retail",
+              "Footwear",
+              "Western Wear",
+              "Accessories",
+              "Fashion"
+            ]
+          },
+          {
+            "name": "Vineyard Vines",
+            "entityId": "20310A12-2D45-46F9-B983-C45CB140618D",
+            "affinityPct": 96.4,
+            "categories": [
+              "Fashion & Apparel",
+              "Retail",
+              "Casual",
+              "Fashion"
+            ]
+          },
+          {
+            "name": "L.L.Bean",
+            "entityId": "0E3A4DBB-917E-47D7-8147-6A36213A40D7",
+            "affinityPct": 96.4,
+            "categories": [
+              "Retail",
+              "Fashion & Apparel",
+              "Sports & Fitness",
+              "Outdoor Recreation",
+              "Home Goods",
+              "Fashion"
+            ]
+          },
+          {
+            "name": "Barstool Sports",
+            "entityId": "D5B3FCC0-3603-40AF-ACEE-996376014820",
+            "affinityPct": 96.4,
+            "categories": [
+              "Media & Entertainment",
+              "Sports Betting",
+              "Website"
+            ]
+          },
+          {
+            "name": "The Normal Brand",
+            "entityId": "11507007-923D-4F42-98F6-13782A4884F8",
+            "affinityPct": 96.1,
+            "categories": [
+              "Fashion & Apparel",
+              "Lifestyle",
+              "Fashion",
+              "Casual"
+            ]
+          },
+          {
+            "name": "Tipsy Elves",
+            "entityId": "0489F9F7-B3BA-4424-88BB-CC2D733C8476",
+            "affinityPct": 96,
+            "categories": [
+              "Fashion & Apparel",
+              "Retail",
+              "E-commerce",
+              "Casual",
+              "Fashion"
+            ]
+          },
+          {
+            "name": "The Frye Company",
+            "entityId": "15817070-EEC5-49C9-BE35-02FE0A6416A1",
+            "affinityPct": 95.9,
+            "categories": [
+              "Fashion & Apparel",
+              "Retail",
+              "Leather Goods",
+              "Other",
+              "Fashion",
+              "Footwear"
+            ]
+          },
+          {
+            "name": "Buckle",
+            "entityId": "5D0DD386-C35C-479B-98F6-407938E29949",
+            "affinityPct": 95.6,
+            "categories": [
+              "Retail",
+              "Fashion & Apparel",
+              "Specialty Retail",
+              "Clothing industry",
+              "Fashion",
+              "Jeans"
+            ]
+          },
+          {
+            "name": "White Claw",
+            "entityId": "AD828904-A227-445B-8E97-E4DB3CAE6A98",
+            "affinityPct": 95.6,
+            "categories": [
+              "Food & Beverage",
+              "Alcoholic Beverages",
+              "Spirits",
+              "Wine & Spirits",
+              "Hard Seltzer"
+            ]
+          },
+          {
+            "name": "Ole Smoky Distillery",
+            "entityId": "F2AB50B8-52FC-40A5-ABCD-B7708440BAEC",
+            "affinityPct": 95.5,
+            "categories": [
+              "Food & Beverage",
+              "Tourism",
+              "Wine & Spirits",
+              "Bourbon",
+              "Whiskey",
+              "Other"
+            ]
+          },
+          {
+            "name": "Untuckit",
+            "entityId": "C4438E6F-8EA9-463E-850E-43C5D72C4BDF",
+            "affinityPct": 95.3,
+            "categories": [
+              "Fashion & Apparel",
+              "Retail",
+              "E-commerce",
+              "Clothing industry",
+              "Casual",
+              "Fashion"
+            ]
+          },
+          {
+            "name": "Retro Brand",
+            "entityId": "4257C46F-8128-4E7A-97D9-65AF5AD45D99",
+            "affinityPct": 95.1,
+            "categories": [
+              "Fashion & Apparel",
+              "Sports Memorabilia",
+              "Fashion",
+              "Casual"
+            ]
+          },
+          {
+            "name": "Tribe Kelley",
+            "entityId": "06E9C82C-B2DB-4904-BB31-D8F863B90B77",
+            "affinityPct": 95,
+            "categories": [
+              "Fashion & Apparel",
+              "Retail",
+              "Casual",
+              "Fashion"
+            ]
+          },
+          {
+            "name": "OluKai",
+            "entityId": "58EF7B18-01E0-43D1-905B-EB00D0D3EF6B",
+            "affinityPct": 95,
+            "categories": [
+              "Fashion & Apparel",
+              "Footwear",
+              "Other",
+              "Fashion"
+            ]
+          },
+          {
+            "name": "Kendra Scott",
+            "entityId": "98110AE6-7C15-4B69-88DF-DB4E040C26B0",
+            "affinityPct": 94.9,
+            "categories": [
+              "Fashion & Apparel",
+              "Retail",
+              "Home Goods",
+              "Fragrance",
+              "Jewelry",
+              "Accessories"
+            ]
+          },
+          {
+            "name": "Lucky Brand Jeans",
+            "entityId": "16CFD8B8-8BBB-4C6E-8A84-6E05BC1A3C0A",
+            "affinityPct": 94.9,
+            "categories": [
+              "Fashion & Apparel",
+              "Retail",
+              "Personal Goods",
+              "Fashion",
+              "Footwear",
+              "Casual"
+            ]
+          },
+          {
+            "name": "Faherty",
+            "entityId": "42A589B2-8C86-4C63-820B-0977038CAE7F",
+            "affinityPct": 94.7,
+            "categories": [
+              "Fashion & Apparel",
+              "Retail",
+              "Hospitality",
+              "Fashion",
+              "Casual"
+            ]
+          }
+        ]
+      },
+      "tasteTags": [
+        "Western Enthusiasts",
+        "Honest",
+        "Work Oriented",
+        "Heartfelt",
+        "Outdoor Adventure",
+        "Beach Life",
+        "Empathetic",
+        "Outdoor",
+        "Motivational",
+        "Vacation"
+      ],
+      "anchorVenues": [
+        {
+          "name": "Courtyard by Marriott Nashville Downtown",
+          "entityId": "484BB4E7-3EEC-44A5-B789-4E6E40F084B6",
+          "category": "Hotel"
+        },
+        {
+          "name": "Nissan Stadium",
+          "entityId": "32B81F55-A9CE-4D8D-A08F-D9D2D04DE2A0",
+          "category": "Stadium"
+        },
+        {
+          "name": "Ryman Auditorium",
+          "entityId": "893FD89A-D7B1-41ED-9FC2-ACB23CFC64A7",
+          "category": "Live music venue"
+        },
+        {
+          "name": "Country Music Hall of Fame and Museum",
+          "entityId": "43E29A3A-91A8-4091-A46E-B74E50A0C20B",
+          "category": "Museum"
+        },
+        {
+          "name": "Ascend Federal Credit Union Amphitheater",
+          "entityId": "01FC3132-074E-4BC9-B3C1-48DC0561B3AE",
+          "category": "Amphitheater"
+        }
+      ],
+      "plainLlm": {
+        "source": "GENERIC_FORTUNE500_BASELINE (Gemini Timeout)",
+        "latencyMs": 6010,
+        "brands": [
+          {
+            "name": "Wrangler",
+            "category": "Western Apparel"
+          },
+          {
+            "name": "Jack Daniel's",
+            "category": "Whiskey"
+          },
+          {
+            "name": "Ford",
+            "category": "Automotive / Trucks"
+          },
+          {
+            "name": "Carhartt",
+            "category": "Workwear"
+          },
+          {
+            "name": "Coors Banquet",
+            "category": "Beer"
+          },
+          {
+            "name": "Yeti",
+            "category": "Outdoor Coolers"
+          },
+          {
+            "name": "Boot Barn",
+            "category": "Western Retail"
+          },
+          {
+            "name": "Gibson",
+            "category": "Acoustic Guitars"
+          }
+        ]
+      },
+      "divergence": {
+        "overlap": [],
+        "intersection": 0,
+        "union": 28,
+        "divergencePct": 100
+      },
+      "rules": {
+        "approvedCount": 18,
+        "rejectedCount": 2,
+        "deterministicAcross3Runs": true,
+        "rejectedBrands": [
+          {
+            "name": "White Claw",
+            "entityId": "AD828904-A227-445B-8E97-E4DB3CAE6A98",
+            "reasonCode": "AGE_RESTRICTION",
+            "rule": "Rule: ALL_AGES venue filter [ALL_AGES]",
+            "explanation": "Venue is designated ALL AGES. Adult-classified sponsor category \"Spirits\" is legally restricted."
+          },
+          {
+            "name": "Ole Smoky Distillery",
+            "entityId": "F2AB50B8-52FC-40A5-ABCD-B7708440BAEC",
+            "reasonCode": "AGE_RESTRICTION",
+            "rule": "Rule: ALL_AGES venue filter [ALL_AGES]",
+            "explanation": "Venue is designated ALL AGES. Adult-classified sponsor category \"Wine & Spirits\" is legally restricted."
+          }
+        ]
+      },
+      "latency": {
+        "coldLiveQlooMs": 4260,
+        "cachedHydrateAndRulesMedianMs": 1.347
+      },
+      "calls": [
+        {
+          "endpoint": "/search",
+          "query": "Zach Bryan",
+          "status": 200,
+          "latencyMs": 771
+        },
+        {
+          "endpoint": "/search",
+          "query": "Kacey Musgraves",
+          "status": 200,
+          "latencyMs": 252
+        },
+        {
+          "endpoint": "/search",
+          "query": "Tyler Childers",
+          "status": 200,
+          "latencyMs": 256
+        },
+        {
+          "endpoint": "/v2/insights",
+          "filterType": "urn:entity:brand",
+          "status": 200,
+          "latencyMs": 1000,
+          "returned": 20
+        },
+        {
+          "endpoint": "/v2/insights",
+          "filterType": "urn:tag",
+          "status": 200,
+          "latencyMs": 1209,
+          "returned": 10
+        },
+        {
+          "endpoint": "/v2/insights",
+          "filterType": "urn:entity:place",
+          "status": 200,
+          "latencyMs": 450,
+          "returned": 5
+        }
+      ]
+    },
+    {
+      "id": "kpop-la-arena",
+      "name": "Seoul & LA K-Pop Arena Tour",
+      "city": "Los Angeles, CA",
+      "location": "Koreatown, Los Angeles",
+      "lineup": [
+        "NewJeans",
+        "LE SSERAFIM",
+        "Stray Kids"
+      ],
+      "constraints": {
+        "minBudgetTier": 300000,
+        "blockedCategories": [
+          "Alcohol",
+          "Energy Drinks"
+        ],
+        "lockedCompetitors": [
+          "Coca_Cola"
+        ],
+        "ageRestriction": "ALL_AGES",
+        "ecoConsciousOnly": false
+      },
+      "artistResolution": {
+        "resolved": 3,
+        "total": 3,
+        "ratePct": 100,
+        "artists": [
+          {
+            "inputName": "NewJeans",
+            "resolvedName": "NewJeans",
+            "entityId": "E3B96B9A-665E-4258-B446-4A5CFDFD882E",
+            "verified": true,
+            "popularity": 0.989
+          },
+          {
+            "inputName": "LE SSERAFIM",
+            "resolvedName": "LE SSERAFIM",
+            "entityId": "678A2524-3788-4263-B1FB-8B8725860A3F",
+            "verified": true,
+            "popularity": 0.984
+          },
+          {
+            "inputName": "Stray Kids",
+            "resolvedName": "STRAY KIDS",
+            "entityId": "C47948A8-9DE8-4214-B66D-6962B54533FD",
+            "verified": true,
+            "popularity": 0.988
+          }
+        ]
+      },
+      "qlooBrands": {
+        "requested": 20,
+        "retrieved": 20,
+        "top3": [
+          {
+            "name": "LA Kings",
+            "entityId": "1A55A450-FDE5-4EF4-9442-FBA4923ACD73",
+            "affinityPct": 94.9,
+            "categories": [
+              "Sports & Fitness",
+              "Media & Entertainment",
+              "Professional Sports"
+            ]
+          },
+          {
+            "name": "Yves Saint Laurent",
+            "entityId": "0B67CD5A-152C-470B-9577-A052E3A092F7",
+            "affinityPct": 94,
+            "categories": [
+              "Fashion & Apparel",
+              "Beauty & Personal Care",
+              "Luxury Goods"
+            ]
+          },
+          {
+            "name": "Iheartradio",
+            "entityId": "267EC130-F6B5-4BED-941D-BFAA566667E5",
+            "affinityPct": 94,
+            "categories": [
+              "Media & Entertainment",
+              "Internet Radio",
+              "Music Streaming"
+            ]
+          }
+        ],
+        "all": [
+          {
+            "name": "LA Kings",
+            "entityId": "1A55A450-FDE5-4EF4-9442-FBA4923ACD73",
+            "affinityPct": 94.9,
+            "categories": [
+              "Sports & Fitness",
+              "Media & Entertainment",
+              "Professional Sports",
+              "National Hockey League",
+              "Sports Organization",
+              "Hockey"
+            ]
+          },
+          {
+            "name": "Yves Saint Laurent",
+            "entityId": "0B67CD5A-152C-470B-9577-A052E3A092F7",
+            "affinityPct": 94,
+            "categories": [
+              "Fashion & Apparel",
+              "Beauty & Personal Care",
+              "Luxury Goods",
+              "Fashion",
+              "Haute Couture",
+              "Other"
+            ]
+          },
+          {
+            "name": "Iheartradio",
+            "entityId": "267EC130-F6B5-4BED-941D-BFAA566667E5",
+            "affinityPct": 94,
+            "categories": [
+              "Media & Entertainment",
+              "Internet Radio",
+              "Music Streaming",
+              "Podcasting",
+              "Music App",
+              "Mobile App"
+            ]
+          },
+          {
+            "name": "Pandora",
+            "entityId": "85A033B3-3618-43FD-AE0C-C20C5F5F5EE9",
+            "affinityPct": 93.6,
+            "categories": [
+              "Media & Entertainment",
+              "Technology",
+              "Digital Audio",
+              "Streaming Services",
+              "Software"
+            ]
+          },
+          {
+            "name": "Stüssy",
+            "entityId": "92384FD1-363D-4423-926C-EAF478CE079B",
+            "affinityPct": 93.6,
+            "categories": [
+              "Fashion & Apparel",
+              "Retail",
+              "Fashion",
+              "Casual"
+            ]
+          },
+          {
+            "name": "Givenchy",
+            "entityId": "C7C2B636-E5F5-42BE-8068-C8A1F1C463F6",
+            "affinityPct": 93.5,
+            "categories": [
+              "Fashion & Apparel",
+              "Retail",
+              "Luxury Goods",
+              "Fashion",
+              "Lifestyle / Casual",
+              "Health & Beauty"
+            ]
+          },
+          {
+            "name": "American Apparel",
+            "entityId": "8A2527C6-2C10-443F-A71C-6EDDA5F95E11",
+            "affinityPct": 93.3,
+            "categories": [
+              "Fashion & Apparel",
+              "Retail",
+              "Consumer Packaged Goods",
+              "Casual",
+              "Fashion"
+            ]
+          },
+          {
+            "name": "Balenciaga",
+            "entityId": "BB047D19-D3D5-47A1-B9AA-ECCEBE9470AE",
+            "affinityPct": 93.3,
+            "categories": [
+              "Fashion & Apparel",
+              "Retail",
+              "Luxury Goods",
+              "Fashion",
+              "Luxury",
+              "Haute Couture"
+            ]
+          },
+          {
+            "name": "K-swiss",
+            "entityId": "7336C2F5-A6FF-4015-B7B6-56061E576331",
+            "affinityPct": 93.3,
+            "categories": [
+              "Fashion & Apparel",
+              "Sports & Fitness",
+              "Footwear",
+              "Running",
+              "Sneakers",
+              "Fashion"
+            ]
+          },
+          {
+            "name": "Off-white",
+            "entityId": "B6B09679-E8F9-4A42-B6D4-E648E2A1F435",
+            "affinityPct": 93.3,
+            "categories": [
+              "Fashion & Apparel",
+              "Luxury Goods",
+              "Accessories",
+              "Other",
+              "Fashion",
+              "Lifestyle / Casual"
+            ]
+          },
+          {
+            "name": "Los Angeles Lakers",
+            "entityId": "9EA0A171-B6E8-49BE-A216-739460F6FC91",
+            "affinityPct": 93,
+            "categories": [
+              "Sports & Fitness",
+              "Media & Entertainment",
+              "Professional Sports",
+              "NBA",
+              "Sports Organization",
+              "Basketball"
+            ]
+          },
+          {
+            "name": "Urban Outfitters",
+            "entityId": "4F94C666-5FFA-4A42-8453-24C2F779EC36",
+            "affinityPct": 92.9,
+            "categories": [
+              "Retail",
+              "Fashion & Apparel",
+              "Music",
+              "Home Goods",
+              "Fashion"
+            ]
+          },
+          {
+            "name": "Balmain",
+            "entityId": "9D4B36F8-6512-4247-A481-E5D8FAF3EB5B",
+            "affinityPct": 92.8,
+            "categories": [
+              "Fashion & Apparel",
+              "Luxury Goods",
+              "Fashion",
+              "Casual",
+              "Bags & Leather",
+              "Eyewear"
+            ]
+          },
+          {
+            "name": "Uber",
+            "entityId": "DAA03219-916F-491D-9F1C-E780DFA8A5DB",
+            "affinityPct": 92.7,
+            "categories": [
+              "Retail",
+              "Technology",
+              "Transportation",
+              "Logistics",
+              "Food Delivery",
+              "Software"
+            ]
+          },
+          {
+            "name": "Hulu",
+            "entityId": "866E0085-3C8E-4780-BA28-B837CAFC3D6B",
+            "affinityPct": 92.6,
+            "categories": [
+              "Media & Entertainment",
+              "Video Streaming",
+              "Telecommunications",
+              "Streaming Service App",
+              "Website",
+              "Entertainment"
+            ]
+          },
+          {
+            "name": "Just Jared",
+            "entityId": "3C23A978-C433-4062-915C-596F32CACCDD",
+            "affinityPct": 92.6,
+            "categories": [
+              "Media & Entertainment",
+              "Digital Publishing",
+              "Website"
+            ]
+          },
+          {
+            "name": "Getty Images",
+            "entityId": "8467E9C4-C5BA-4C74-8FAD-49DEEEB7A85D",
+            "affinityPct": 92.5,
+            "categories": [
+              "Media & Entertainment",
+              "Digital Media",
+              "Photography Services",
+              "Creative Software",
+              "Publishing",
+              "Entertainment"
+            ]
+          },
+          {
+            "name": "Rolling Stone",
+            "entityId": "F1C02FB3-D0DD-428C-A9B1-0A0EE9F22925",
+            "affinityPct": 92.5,
+            "categories": [
+              "Media & Entertainment",
+              "Journalism",
+              "Publishing",
+              "Website",
+              "Entertainment",
+              "Media"
+            ]
+          },
+          {
+            "name": "Christian Louboutin",
+            "entityId": "24E52EF4-CE85-4C5C-B961-DB3454785F4A",
+            "affinityPct": 92.5,
+            "categories": [
+              "Fashion & Apparel",
+              "Luxury Goods",
+              "Beauty & Personal Care",
+              "Bags & Leather",
+              "Fashion",
+              "Footwear"
+            ]
+          },
+          {
+            "name": "Alexander Wang",
+            "entityId": "D2C6D7FD-B21D-478C-8B29-68B10E9DCACB",
+            "affinityPct": 92.4,
+            "categories": [
+              "Fashion & Apparel",
+              "Luxury Accessories",
+              "Other",
+              "Fashion",
+              "Formalwear",
+              "Accessories"
+            ]
+          }
+        ]
+      },
+      "tasteTags": [
+        "Meaningful",
+        "Versatile",
+        "Fun",
+        "Supportive",
+        "Modern Urban Living",
+        "Unique",
+        "Engaging",
+        "Bold",
+        "Diverse",
+        "Youthful"
+      ],
+      "anchorVenues": [
+        {
+          "name": "The Wiltern",
+          "entityId": "44900455-A680-43B6-A23A-F35BA330D31F",
+          "category": "Live music venue"
+        },
+        {
+          "name": "Marciano Art Foundation",
+          "entityId": "92651E0B-9D61-4B4B-8F61-2A8074B6420F",
+          "category": "Art museum"
+        },
+        {
+          "name": "California Donuts",
+          "entityId": "B6E7BA32-8F1A-4094-8A01-BF2A419CD412",
+          "category": "Donut shop"
+        },
+        {
+          "name": "Quarters Korean BBQ",
+          "entityId": "5E2384C3-97DD-4AE0-8582-56C6FCE7BDA9",
+          "category": "Korean barbecue restaurant"
+        },
+        {
+          "name": "Guelaguetza Restaurant",
+          "entityId": "A0AD5611-ADBB-4F6A-81FE-E9B9CA57063D",
+          "category": "Mexican restaurant"
+        }
+      ],
+      "plainLlm": {
+        "source": "GENERIC_FORTUNE500_BASELINE (Gemini Timeout)",
+        "latencyMs": 6010,
+        "brands": [
+          {
+            "name": "Samsung",
+            "category": "Consumer Electronics"
+          },
+          {
+            "name": "Hyundai",
+            "category": "Automotive"
+          },
+          {
+            "name": "McDonald's",
+            "category": "Fast Food"
+          },
+          {
+            "name": "Coca-Cola",
+            "category": "Beverages"
+          },
+          {
+            "name": "Gentle Monster",
+            "category": "Eyewear"
+          },
+          {
+            "name": "Kia",
+            "category": "Automotive"
+          },
+          {
+            "name": "CJ ENM",
+            "category": "Entertainment"
+          },
+          {
+            "name": "Line Friends",
+            "category": "Character Goods"
+          }
+        ]
+      },
+      "divergence": {
+        "overlap": [],
+        "intersection": 0,
+        "union": 28,
+        "divergencePct": 100
+      },
+      "rules": {
+        "approvedCount": 20,
+        "rejectedCount": 0,
+        "deterministicAcross3Runs": true,
+        "rejectedBrands": []
+      },
+      "latency": {
+        "coldLiveQlooMs": 5353,
+        "cachedHydrateAndRulesMedianMs": 1.566
+      },
+      "calls": [
+        {
+          "endpoint": "/search",
+          "query": "NewJeans",
+          "status": 200,
+          "latencyMs": 1077
+        },
+        {
+          "endpoint": "/search",
+          "query": "LE SSERAFIM",
+          "status": 200,
+          "latencyMs": 260
+        },
+        {
+          "endpoint": "/search",
+          "query": "Stray Kids",
+          "status": 200,
+          "latencyMs": 281
+        },
+        {
+          "endpoint": "/v2/insights",
+          "filterType": "urn:entity:brand",
+          "status": 200,
+          "latencyMs": 1121,
+          "returned": 20
+        },
+        {
+          "endpoint": "/v2/insights",
+          "filterType": "urn:tag",
+          "status": 200,
+          "latencyMs": 1859,
+          "returned": 10
+        },
+        {
+          "endpoint": "/v2/insights",
+          "filterType": "urn:entity:place",
+          "status": 200,
+          "latencyMs": 413,
+          "returned": 5
+        }
+      ]
+    }
+  ]
+}

@@ -24,6 +24,12 @@ function getGeminiKey(): string | null {
   return key;
 }
 
+// gemini-2.5-flash is no longer served to new keys (404), so default to the rolling alias.
+function geminiEndpoint(apiKey: string): string {
+  const model = process.env.GEMINI_MODEL || 'gemini-flash-latest';
+  return `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+}
+
 /**
  * Common generic Fortune-500 sponsors hallucinated by plain LLMs for music events
  */
@@ -91,7 +97,7 @@ Respond ONLY in clean JSON array matching:
 [{"name": "Brand", "category": "Category", "predictedReason": "1 sentence reason", "isGenericFortune500": true}]`;
 
       const res = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
+        geminiEndpoint(apiKey),
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -461,7 +467,7 @@ Respond ONLY in clean JSON:
 }`;
 
         const res = await fetch(
-          `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
+          geminiEndpoint(apiKey),
           {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },

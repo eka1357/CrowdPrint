@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { SynthesizedSponsor } from '@/lib/types';
+import { QlooAnchorVenue, SynthesizedSponsor } from '@/lib/types';
 import {
   ExternalLink,
   ChevronDown,
@@ -12,6 +12,7 @@ import {
   Check,
   ShieldCheck,
   TrendingUp,
+  MapPin,
 } from 'lucide-react';
 import SpotlightCard from '@/components/ui/SpotlightCard';
 import { CountUp } from '@/components/ui/CountUp';
@@ -20,9 +21,10 @@ interface SponsorCardProps {
   sponsor: SynthesizedSponsor;
   rank: number;
   onInspectEvidence: (sponsor: SynthesizedSponsor) => void;
+  anchorVenues?: QlooAnchorVenue[];
 }
 
-export function SponsorCard({ sponsor, rank, onInspectEvidence }: SponsorCardProps) {
+export function SponsorCard({ sponsor, rank, onInspectEvidence, anchorVenues }: SponsorCardProps) {
   // Collapsed by default so #1, #2, #3 are immediately visible above the fold
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
   const [copiedEmail, setCopiedEmail] = useState<boolean>(false);
@@ -227,6 +229,50 @@ export function SponsorCard({ sponsor, rank, onInspectEvidence }: SponsorCardPro
                       <div className="pt-2 border-t border-zinc-800/60 flex items-center justify-between text-[11px] font-mono text-zinc-400">
                         <span>Reach: {act.estimatedReach || 'High Impact'}</span>
                         <span className="text-emerald-400">{act.suggestedZone || 'VIP Lounge & On-Site'}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Qloo Local Activation Venues (Check 4 Upgrade) */}
+            {anchorVenues && anchorVenues.length > 0 && (
+              <div className="p-3.5 rounded-xl bg-zinc-950/70 border border-zinc-800/80">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-2">
+                    <MapPin className="w-3.5 h-3.5 text-emerald-400" />
+                    <span className="text-xs font-mono font-semibold uppercase tracking-wider text-zinc-300">
+                      Qloo Local Activation Venues <span className="text-[10px] text-zinc-500 lowercase">(urn:entity:place)</span>
+                    </span>
+                  </div>
+                  <span className="text-[10px] font-mono text-emerald-400/90 bg-emerald-950/50 px-2 py-0.5 rounded border border-emerald-800/40">
+                    Hyper-Local Geo-Correlation
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 mt-2">
+                  {anchorVenues.slice(0, 3).map((venue) => (
+                    <div
+                      key={venue.entityId}
+                      className="p-2.5 rounded-lg bg-zinc-900/60 border border-zinc-850 flex flex-col justify-between"
+                    >
+                      <div>
+                        <div className="font-semibold text-xs text-zinc-200 truncate">{venue.name}</div>
+                        <div className="text-[10px] font-mono text-zinc-400 truncate mt-0.5">
+                          {typeof venue.category === 'string'
+                            ? venue.category
+                            : (venue.category as unknown as { name?: string })?.name || 'Local Cultural Venue'}
+                        </div>
+                        {venue.address && (
+                          <div className="text-[10px] text-zinc-500 truncate mt-0.5">{venue.address}</div>
+                        )}
+                      </div>
+                      <div className="mt-1.5 pt-1.5 border-t border-zinc-800/50 flex items-center justify-between text-[9px] font-mono text-zinc-500">
+                        <span className="truncate max-w-[120px] font-mono">{venue.entityId}</span>
+                        {venue.popularity && (
+                          <span className="text-emerald-400 font-semibold">{Math.round(venue.popularity * 100)}% pop</span>
+                        )}
                       </div>
                     </div>
                   ))}

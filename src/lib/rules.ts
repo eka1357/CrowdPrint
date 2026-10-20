@@ -1,4 +1,4 @@
-import {
+import type {
   CommercialConstraints,
   CommercialRuleRejection,
   FilteredSponsorResult,
@@ -17,23 +17,34 @@ const CATEGORY_SYNONYMS: Record<string, string[]> = {
   alcohol: ['alcohol', 'hard liquor', 'beer', 'spirits', 'wine', 'malt beverage', 'liquor', 'distillery'],
   'hard liquor': ['hard liquor', 'spirits', 'gin', 'vodka', 'whiskey', 'tequila', 'rum'],
   beer: ['beer', 'malt beverage', 'lager', 'ale', 'brewery'],
-  'fast fashion': ['fast fashion', 'ultra fast fashion', 'budget apparel', 'disposable fashion'],
+  'fast fashion': ['fast fashion', 'ultra fast fashion', 'budget apparel', 'disposable fashion', 'brandy melville', 'nasty gal'],
   'energy drinks': ['energy drinks', 'high caffeine energy', 'caffeinated beverage'],
   crypto: ['crypto', 'cryptocurrency', 'web3', 'nft', 'blockchain'],
   tobacco: ['tobacco', 'smoking accessories', 'cigarettes', 'vape', 'nicotine', 'paper goods'],
   gambling: ['gambling', 'sports betting', 'digital wagering', 'casino', 'lottery'],
   sportswear: ['sportswear', 'athletic apparel', 'athletic footwear'],
+  'mass media': ['mass media', 'digital publishing', 'news', 'broadcasting', 'media & entertainment industry', 'documentary'],
+  'digital publishing': ['digital publishing', 'publishing', 'mass media', 'news', 'music journalism', 'magazine'],
+  'media & publishing': ['media & entertainment industry', 'digital publishing', 'mass media', 'publishing', 'news', 'music journalism'],
 };
 
 // Known competitor mapping for common marquee sponsor sectors
 const COMPETITOR_SECTORS: Record<string, { sector: string; brands: string[] }> = {
   nike: {
     sector: 'Footwear & Athletic Apparel',
-    brands: ['adidas', 'puma', 'reebok', 'new balance', 'asics', 'under armour', 'on running', 'hoka'],
+    brands: ['adidas', 'puma', 'reebok', 'new balance', 'asics', 'under armour', 'on running', 'hoka', 'y-3', 'clarks', 'grenson'],
   },
   adidas: {
     sector: 'Footwear & Athletic Apparel',
-    brands: ['nike', 'puma', 'reebok', 'new balance', 'asics', 'under armour', 'on running'],
+    brands: ['nike', 'puma', 'reebok', 'new balance', 'asics', 'under armour', 'on running', 'y-3', 'clarks'],
+  },
+  aiaiai: {
+    sector: 'Audio Hardware & Headphones',
+    brands: ['urbanears', 'sony', 'bose', 'beats', 'audio-technica', 'sennheiser'],
+  },
+  urbanears: {
+    sector: 'Audio Hardware & Headphones',
+    brands: ['aiaiai', 'sony', 'bose', 'beats', 'audio-technica', 'sennheiser'],
   },
   redbull: {
     sector: 'Energy Drinks',
@@ -204,6 +215,18 @@ function checkEcoCompliance(
 
   const nonEcoCategories = ['fast fashion', 'ultra fast fashion', 'disposable plastic'];
   const brandCategories = brand.categories.map(normalize);
+  const brandName = normalize(brand.name);
+
+  // Check known fast-fashion / high-waste apparel brands
+  const nonEcoBrandNames = ['brandy melville', 'nasty gal', 'shein', 'boohoo', 'fashion nova', 'forever 21', 'american apparel'];
+  for (const badName of nonEcoBrandNames) {
+    if (brandName.includes(badName) || badName.includes(brandName)) {
+      return {
+        nonCompliant: true,
+        reason: `Event mandates 100% Eco-Conscious / Sustainable partners. Brand "${brand.name}" classified as fast-fashion / high-waste retail, failing festival sustainability audit.`,
+      };
+    }
+  }
 
   for (const badCat of nonEcoCategories) {
     const matched = brandCategories.some((c) => c.includes(badCat));

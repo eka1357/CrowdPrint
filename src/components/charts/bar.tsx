@@ -74,6 +74,8 @@ export interface BarProps {
   stackGap?: number;
   /** Gap between grouped bars in pixels. Default: 4 */
   groupGap?: number;
+  /** Specific width for this bar in pixels (e.g. 12 for 12px / w-3). */
+  barWidth?: number;
   /** Shrink each positive bar's top by its perspective rise so the front face
    * lines up with `<BarDepthBack>`'s lid (instead of the lid sitting above the
    * front face). Pass `true` whenever the chart also renders the bar-depth 3D
@@ -187,6 +189,7 @@ const BarInner = memo(function BarInner({
   staggerDelay,
   stackGap = 0,
   groupGap = 4,
+  barWidth: barWidthProp,
   perspective = false,
   minBarHeight = 0,
   barScale,
@@ -207,6 +210,8 @@ const BarInner = memo(function BarInner({
     animationDuration,
     enterTransition,
     revealEpoch = 0,
+    barWidthProp: chartBarWidth,
+    groupGap: chartGroupGap,
   } = useChart();
 
   // Calculate stagger delay automatically if not provided
@@ -236,8 +241,15 @@ const BarInner = memo(function BarInner({
   const seriesCount = lines.length;
   const isLastSeries = seriesIndex === seriesCount - 1;
 
+  const effectiveGroupGap =
+    seriesCount > 1 ? (groupGap ?? chartGroupGap ?? 4) : 0;
+
   // Calculate the width for each bar within a group (for non-stacked)
   const barWidth = useMemo(() => {
+    const fixedWidth = barWidthProp ?? chartBarWidth;
+    if (fixedWidth != null) {
+      return fixedWidth;
+    }
     if (!bandWidth || seriesCount === 0) {
       return 0;
     }
@@ -246,9 +258,29 @@ const BarInner = memo(function BarInner({
       return bandWidth;
     }
     // Leave a gap between grouped bars (controlled by groupGap prop)
-    const effectiveGroupGap = seriesCount > 1 ? groupGap : 0;
     return (bandWidth - effectiveGroupGap * (seriesCount - 1)) / seriesCount;
-  }, [bandWidth, seriesCount, stacked, groupGap]);
+  }, [
+    barWidthProp,
+    chartBarWidth,
+    bandWidth,
+    seriesCount,
+    stacked,
+    effectiveGroupGap,
+  ]);
+
+  const groupTotalWidth = useMemo(() => {
+    if (stacked) {
+      return barWidth;
+    }
+    return (
+      seriesCount * barWidth +
+      (seriesCount > 1 ? effectiveGroupGap * (seriesCount - 1) : 0)
+    );
+  }, [stacked, barWidth, seriesCount, effectiveGroupGap]);
+
+  const groupOffset = useMemo(() => {
+    return Math.max(0, (bandWidth - groupTotalWidth) / 2);
+  }, [bandWidth, groupTotalWidth]);
 
   // Calculate corner radius based on lineCap. Perspective bars force a flat
   // top (radius 0) so the 3D lid from `<BarDepthBack>` meets the bar with no
@@ -261,7 +293,7 @@ const BarInner = memo(function BarInner({
       return lineCap;
     }
     if (lineCap === "round" && barWidth) {
-      return Math.min(barWidth / 2, 8);
+      return Math.min(barWidth / 2, 4);
     }
     return 0;
   }, [lineCap, barWidth, perspective]);
@@ -277,10 +309,10 @@ const BarInner = memo(function BarInner({
         const categoryValue = barXAccessor(d);
         const bandPos = barScale(categoryValue) ?? 0;
 
-        let x: number;
-        let y: number;
-        let barHeight: number;
-        let barW: number;
+        let x = 0;
+        let y = 0;
+        let barHeight = 0;
+        let barW = 0;
 
         const scale = isHorizontal ? chartYScale : valueScale;
 
@@ -303,13 +335,11 @@ const BarInner = memo(function BarInner({
           } else {
             x = 0;
             // For grouped bars, offset y position
-            const effectiveGroupGap = seriesCount > 1 ? groupGap : 0;
-            y = bandPos + seriesIndex * (barWidth + effectiveGroupGap);
+            y = bandPos + groupOffset + seriesIndex * (barWidth + effectiveGroupGap);
           }
-          y = stacked
-            ? bandPos
-            : bandPos +
-              seriesIndex * (barWidth + (seriesCount > 1 ? groupGap : 0));
+          if (stacked) {
+            y = bandPos + groupOffset;
+          }
         } else {
           // Vertical bars: category on x-axis, value on y-axis
           const valuePos = scale(value) ?? 0;
@@ -328,14 +358,12 @@ const BarInner = memo(function BarInner({
             }
           } else {
             y = valuePos;
-            // For grouped bars, offset x position
-            const effectiveGroupGap = seriesCount > 1 ? groupGap : 0;
-            x = bandPos + seriesIndex * (barWidth + effectiveGroupGap);
+            // For grouped bars, offset x position with group centering
+            x = bandPos + groupOffset + seriesIndex * (barWidth + effectiveGroupGap);
           }
-          x = stacked
-            ? bandPos
-            : bandPos +
-              seriesIndex * (barWidth + (seriesCount > 1 ? groupGap : 0));
+          if (stacked) {
+            x = bandPos + groupOffset;
+          }
 
           // Minimum visible height — floor short/zero non-stacked bars so a
           // zero-value data point still reads as a tiny bar instead of

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { ResolvedArtist, SynthesizedSponsor } from '@/lib/types';
+import { QlooAnchorVenue, ResolvedArtist, SynthesizedSponsor } from '@/lib/types';
 import {
   X,
   ShieldCheck,
@@ -12,6 +12,7 @@ import {
   Terminal,
   Layers,
   Database,
+  MapPin,
 } from 'lucide-react';
 import CountUp from '@/components/CountUp';
 import DecryptedText from '@/components/DecryptedText';
@@ -21,6 +22,7 @@ interface EvidenceDrawerProps {
   isOpen: boolean;
   onClose: () => void;
   resolvedArtists: ResolvedArtist[];
+  anchorVenues?: QlooAnchorVenue[];
 }
 
 export function EvidenceDrawer({
@@ -28,6 +30,7 @@ export function EvidenceDrawer({
   isOpen,
   onClose,
   resolvedArtists,
+  anchorVenues,
 }: EvidenceDrawerProps) {
   const [copiedUrl, setCopiedUrl] = useState(false);
   const [copiedJson, setCopiedJson] = useState(false);
@@ -250,6 +253,52 @@ export function EvidenceDrawer({
                         >
                           {tag}
                         </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Qloo Neighborhood Anchor Venues */}
+                {anchorVenues && anchorVenues.length > 0 && (
+                  <div className="rounded-xl p-4 bg-zinc-900/60 border border-zinc-800 shadow-sm">
+                    <div className="text-xs font-mono font-semibold uppercase tracking-wider text-zinc-300 mb-2 flex items-center justify-between">
+                      <div className="flex items-center gap-1.5">
+                        <MapPin className="w-4 h-4 text-emerald-400" />
+                        <span>Local Activation Venues (urn:entity:place)</span>
+                      </div>
+                      <span className="text-[10px] font-mono text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-800/50">
+                        Geo-Differentiated
+                      </span>
+                    </div>
+                    <p className="text-[11px] text-zinc-400 mb-2.5">
+                      Qloo Taste Graph verified local venues in {anchorVenues[0]?.neighborhood || 'the event market'} for off-site brand takeovers:
+                    </p>
+                    <div className="space-y-2">
+                      {anchorVenues.map((venue) => (
+                        <div
+                          key={venue.entityId}
+                          className="p-2.5 rounded-lg bg-zinc-950 border border-zinc-800/70 flex items-start justify-between gap-2"
+                        >
+                          <div className="min-w-0">
+                            <div className="text-zinc-100 font-semibold text-xs truncate">{venue.name}</div>
+                            <div className="text-[10px] font-mono text-zinc-400 truncate">
+                              {typeof venue.category === 'string'
+                                ? venue.category
+                                : (venue.category as unknown as { name?: string })?.name || 'Local Cultural Venue'}
+                            </div>
+                            {venue.address && (
+                              <div className="text-[10px] text-zinc-500 truncate mt-0.5">{venue.address}</div>
+                            )}
+                          </div>
+                          <div className="text-right shrink-0">
+                            <span className="text-[10px] font-mono text-zinc-500 block">{venue.entityId.slice(0, 8)}...</span>
+                            {venue.popularity && (
+                              <span className="text-[10px] font-mono text-emerald-400 font-semibold">
+                                {Math.round(venue.popularity * 100)}% pop
+                              </span>
+                            )}
+                          </div>
+                        </div>
                       ))}
                     </div>
                   </div>

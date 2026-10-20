@@ -197,6 +197,10 @@ export interface ChartContextValue extends ChartHoverContextValue {
   stacked?: boolean;
   /** Stack offsets: Map of data index -> Map of dataKey -> cumulative offset */
   stackOffsets?: Map<number, Map<string, number>>;
+  /** Specific width per individual bar in pixels */
+  barWidthProp?: number;
+  /** Gap between grouped bars in pixels */
+  groupGap?: number;
   /** Squares variant — snap tooltip to top square and size ring dots. */
   squareSnap?: { squareGap: number; groupGap?: number; fit?: boolean };
 
@@ -281,6 +285,8 @@ export function ChartProvider({
       orientation: value.orientation,
       stacked: value.stacked,
       stackOffsets: value.stackOffsets,
+      barWidthProp: value.barWidthProp,
+      groupGap: value.groupGap,
       composedBarDataKeys: value.composedBarDataKeys,
       composedBarSize: value.composedBarSize,
       composedMaxBarSize: value.composedMaxBarSize,
@@ -326,6 +332,8 @@ export function ChartProvider({
       value.orientation,
       value.stacked,
       value.stackOffsets,
+      value.barWidthProp,
+      value.groupGap,
       value.composedBarDataKeys,
       value.composedBarSize,
       value.composedMaxBarSize,

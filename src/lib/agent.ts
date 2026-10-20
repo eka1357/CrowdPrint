@@ -82,7 +82,7 @@ export async function runCrowdprintPipeline(
   );
 
   allTraces.push(...qlooData.traces);
-  const { candidates: rawCandidates, tags: tasteTags } = qlooData;
+  const { candidates: rawCandidates, tags: tasteTags, anchorVenues } = qlooData;
 
   // Recompute precise Jaccard divergence with actual Qloo brand candidates
   const finalBaseline = await generatePlainLlmBaseline(brief, rawCandidates);
@@ -134,7 +134,7 @@ export async function runCrowdprintPipeline(
     : 'MOCK_FIXTURE';
 
   return {
-    brief,
+    brief: { ...brief, anchorVenues },
     resolvedArtists,
     approvedSponsors: allApprovedSponsors,
     rejectedSponsors,
@@ -144,5 +144,6 @@ export async function runCrowdprintPipeline(
     activeMode,
     executionDurationMs,
     timestamp: new Date().toISOString(),
+    anchorVenues,
   };
 }

@@ -1,15 +1,16 @@
 import type { Metadata, Viewport } from 'next';
-import { Plus_Jakarta_Sans, JetBrains_Mono, Geist } from 'next/font/google';
+import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { cn } from "@/lib/utils";
 
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
+const geistSans = Geist({
+  variable: '--font-sans',
+  subsets: ['latin'],
+});
 
-const jetbrainsMono = JetBrains_Mono({
+const geistMono = Geist_Mono({
   variable: '--font-mono',
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  display: 'swap',
 });
 
 export const viewport: Viewport = {
@@ -37,9 +38,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={cn("dark scroll-smooth", "font-sans", geist.variable)}>
+    <html lang="en" className={cn("dark scroll-smooth", geistSans.variable, geistMono.variable)}>
       <body
-        className={`${geist.variable} ${jetbrainsMono.variable} font-sans bg-[#090A0F] text-[#F3F4F6] antialiased selection:bg-[#10B981]/20 selection:text-[#10B981]`}
+        className={`${geistSans.variable} ${geistMono.variable} font-sans bg-[#090A0F] text-[#F3F4F6] antialiased selection:bg-[#10B981]/20 selection:text-[#10B981]`}
       >
         {children}
       </body>

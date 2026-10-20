@@ -1,3 +1,4 @@
+import presetsCacheJson from '../data/presets_cache.json';
 import {
   MOCK_PRESET_BRANDS,
   MOCK_PRESET_TAGS,
@@ -6,11 +7,27 @@ import {
   generateMockBrandsFallback,
 } from '../data/mock_fixtures';
 import {
+  QlooAnchorVenue,
   QlooBrandCandidate,
   QlooCallTrace,
   QlooExecutionMode,
   ResolvedArtist,
 } from './types';
+import {
+  buildBrandInsightsPath,
+  buildPlaceInsightsPath,
+  buildSearchPath,
+  buildTagInsightsPath,
+  extractInsightEntities,
+  extractInsightTags,
+  extractSearchResults,
+  normalizeName,
+  pickArtistMatch,
+  toAnchorVenue,
+  toBrandCandidate,
+  toResolvedArtist,
+  toTasteTags,
+} from './qloo_parse';
 
 /**
  * Dual-Mode Qloo Taste Graph API Client
@@ -94,8 +111,36 @@ export async function resolveArtist(
     return result;
   }
 
-  // --- LIVE QLOO API MODE ---
-  const endpointUrl = `${apiUrl}/search?query=${encodeURIComponent(artistName)}&types=urn:entity:artist&limit=1`;
+  // --- LIVE / CACHED QLOO API MODE ---
+  // If not force-refresh, check if this artist is in verified presets_cache.json
+  if (!options?.forceRefresh) {
+    const target = normalizeName(artistName);
+    const presetsMap = (presetsCacheJson as { presets: Record<string, { resolvedArtists: ResolvedArtist[] }> }).presets;
+    for (const preset of Object.values(presetsMap)) {
+      const match = preset.resolvedArtists.find(
+        (a) => normalizeName(a.inputName) === target || normalizeName(a.resolvedName) === target
+      );
+      if (match) {
+        const trace: QlooCallTrace = {
+          stepId: `trace-resolve-cache-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`,
+          endpoint: '/search',
+          params: { query: artistName, types: 'urn:entity:artist', take: '3' },
+          status: 200,
+          latencyMs: 14,
+          entitiesReturned: 1,
+          mode: 'CACHED_QLOO',
+          timestamp: new Date().toISOString(),
+        };
+        const result = { artist: match, trace };
+        memoryCache.set(cacheKey, { data: result, traces: [trace], cachedAt: Date.now() });
+        return result;
+      }
+    }
+  }
+
+  // Live /search request against hackathon.api.qloo.com
+  const searchPath = buildSearchPath(artistName, 'urn:entity:artist', 3);
+  const endpointUrl = `${apiUrl}${searchPath}`;
   try {
     const response = await fetch(endpointUrl, {
       method: 'GET',
@@ -106,43 +151,39 @@ export async function resolveArtist(
     });
 
     const latencyMs = Date.now() - startTime;
-    const json = await response.json();
-    const results = json?.results || json?.data || [];
-    const first = results[0];
+    const json = response.ok ? await response.json() : {};
+    const results = extractSearchResults(json);
+    const match = pickArtistMatch(results, artistName);
 
-    const resolved: ResolvedArtist = first
-      ? {
-          inputName: artistName,
-          resolvedName: first.name || artistName,
-          entityId: first.id || first.entity_id || `urn:entity:artist:${encodeURIComponent(artistName)}`,
-          verified: true,
-          disambiguationScore: first.score || 0.95,
-          genres: first.genres || [],
-        }
-      : generateMockArtistFallback(artistName);
+    // Unresolvable artists get a clearly-unverified placeholder so they are never sent as Qloo seeds
+    const resolved: ResolvedArtist = match
+      ? toResolvedArtist(artistName, match)
+      : { ...generateMockArtistFallback(artistName), verified: false };
 
     const trace: QlooCallTrace = {
       stepId: `trace-resolve-live-${Date.now()}`,
       endpoint: '/search',
-      params: { query: artistName, types: 'urn:entity:artist', limit: '1' },
+      params: { query: artistName, types: 'urn:entity:artist', take: '3' },
       status: response.status,
       latencyMs,
       entitiesReturned: results.length,
-      mode: 'LIVE_QLOO',
+      mode: match ? 'LIVE_QLOO' : 'MOCK_FIXTURE',
       timestamp: new Date().toISOString(),
     };
 
     const result = { artist: resolved, trace };
-    memoryCache.set(cacheKey, { data: result, traces: [trace], cachedAt: Date.now() });
+    if (match) {
+      memoryCache.set(cacheKey, { data: result, traces: [trace], cachedAt: Date.now() });
+    }
     return result;
   } catch {
     const latencyMs = Date.now() - startTime;
     // Fallback gracefully on network error
-    const fallback = generateMockArtistFallback(artistName);
+    const fallback = { ...generateMockArtistFallback(artistName), verified: false };
     const trace: QlooCallTrace = {
       stepId: `trace-resolve-error-${Date.now()}`,
       endpoint: '/search',
-      params: { query: artistName, types: 'urn:entity:artist', limit: '1' },
+      params: { query: artistName, types: 'urn:entity:artist', take: '3' },
       status: 500,
       latencyMs,
       entitiesReturned: 0,
@@ -180,6 +221,7 @@ export async function fetchBrandAffinities(
 ): Promise<{
   candidates: QlooBrandCandidate[];
   tags: string[];
+  anchorVenues: QlooAnchorVenue[];
   traces: QlooCallTrace[];
   executionMode: QlooExecutionMode;
 }> {
@@ -188,13 +230,23 @@ export async function fetchBrandAffinities(
   const cacheKey = `insights:${city}:${sortedSeeds}`;
   const startTime = Date.now();
 
-  // Cache check
+  const neighborhood =
+    presetId === 'brooklyn-warehouse' || city.includes('New York') || city.includes('Brooklyn')
+      ? 'Williamsburg, Brooklyn'
+      : presetId === 'silver-lake-indie' || city.includes('Los Angeles')
+      ? 'Silver Lake, Los Angeles'
+      : presetId === 'hackney-jazz' || city.includes('London')
+      ? 'Hackney, London'
+      : city;
+
+  // In-memory cache check
   if (!options?.forceRefresh && memoryCache.has(cacheKey)) {
     const cached = memoryCache.get(cacheKey)!;
     if (Date.now() - cached.cachedAt < CACHE_TTL_MS) {
       const data = cached.data as {
         candidates: QlooBrandCandidate[];
         tags: string[];
+        anchorVenues: QlooAnchorVenue[];
         executionMode: QlooExecutionMode;
       };
       const cachedTrace: QlooCallTrace = {
@@ -236,6 +288,12 @@ export async function fetchBrandAffinities(
       ];
     }
 
+    const mockVenues: QlooAnchorVenue[] = [
+      { entityId: 'MOCK-VENUE-01', name: 'Domino Park', category: 'Park & Cultural Space', neighborhood },
+      { entityId: 'MOCK-VENUE-02', name: 'Music Hall of Williamsburg', category: 'Live Music Hall', neighborhood },
+      { entityId: 'MOCK-VENUE-03', name: "Baby's All Right", category: 'Bar & Music Venue', neighborhood },
+    ];
+
     const latencyBrands = Math.floor(25 + Math.random() * 30);
     const latencyTags = Math.floor(18 + Math.random() * 20);
 
@@ -271,52 +329,127 @@ export async function fetchBrandAffinities(
     };
 
     const traces = [brandsTrace, tagsTrace];
-    const result = { candidates, tags, traces, executionMode: 'MOCK_FIXTURE' as QlooExecutionMode };
+    const result = {
+      candidates,
+      tags,
+      anchorVenues: mockVenues,
+      traces,
+      executionMode: 'MOCK_FIXTURE' as QlooExecutionMode,
+    };
     memoryCache.set(cacheKey, { data: result, traces, cachedAt: Date.now() });
     return result;
   }
 
-  // --- LIVE QLOO API MODE ---
-  const brandsUrl = `${apiUrl}/v2/insights?filter.type=urn:entity:brand&signal.interests.entities=${encodeURIComponent(sortedSeeds)}&limit=20`;
-  const tagsUrl = `${apiUrl}/v2/insights?filter.type=urn:tag&signal.interests.entities=${encodeURIComponent(sortedSeeds)}&limit=10`;
+  // --- LIVE / CACHED QLOO API MODE ---
+  // If not force refresh, check if this matches one of our 3 verified presets from presets_cache.json
+  interface PresetEntry {
+    presetId: string;
+    city: string;
+    neighborhood?: string;
+    resolvedSeedIds: string[];
+    brandCandidates: QlooBrandCandidate[];
+    tags: string[];
+    anchorVenues?: QlooAnchorVenue[];
+  }
+  const presetsMap = (presetsCacheJson as { presets: Record<string, PresetEntry> }).presets;
+
+  if (!options?.forceRefresh) {
+    const matchedPreset =
+      (presetId && presetsMap[presetId]) ||
+      Object.values(presetsMap).find((p) => {
+        const pSeeds = [...p.resolvedSeedIds].sort().join(',');
+        return pSeeds === sortedSeeds || p.city.toLowerCase() === city.toLowerCase();
+      });
+
+    if (matchedPreset) {
+      const brandsTrace: QlooCallTrace = {
+        stepId: `trace-cache-brands-${Date.now()}`,
+        endpoint: '/v2/insights',
+        params: {
+          'filter.type': 'urn:entity:brand',
+          'signal.interests.entities': sortedSeeds,
+          'signal.location.query': matchedPreset.city,
+          take: '20',
+        },
+        status: 200,
+        latencyMs: 16,
+        entitiesReturned: matchedPreset.brandCandidates.length,
+        mode: 'CACHED_QLOO',
+        timestamp: new Date().toISOString(),
+      };
+
+      const tagsTrace: QlooCallTrace = {
+        stepId: `trace-cache-tags-${Date.now()}`,
+        endpoint: '/v2/insights',
+        params: {
+          'filter.type': 'urn:tag',
+          'signal.interests.entities': sortedSeeds,
+          take: '10',
+        },
+        status: 200,
+        latencyMs: 11,
+        entitiesReturned: matchedPreset.tags.length,
+        mode: 'CACHED_QLOO',
+        timestamp: new Date().toISOString(),
+      };
+
+      const placesTrace: QlooCallTrace = {
+        stepId: `trace-cache-places-${Date.now()}`,
+        endpoint: '/v2/insights',
+        params: {
+          'filter.type': 'urn:entity:place',
+          'filter.location.query': matchedPreset.neighborhood || matchedPreset.city,
+          take: '5',
+        },
+        status: 200,
+        latencyMs: 14,
+        entitiesReturned: (matchedPreset.anchorVenues || []).length,
+        mode: 'CACHED_QLOO',
+        timestamp: new Date().toISOString(),
+      };
+
+      const traces = [brandsTrace, tagsTrace, placesTrace];
+      const result = {
+        candidates: matchedPreset.brandCandidates,
+        tags: matchedPreset.tags,
+        anchorVenues: matchedPreset.anchorVenues || [],
+        traces,
+        executionMode: 'CACHED_QLOO' as QlooExecutionMode,
+      };
+      memoryCache.set(cacheKey, { data: result, traces, cachedAt: Date.now() });
+      return result;
+    }
+  }
+
+  // --- LIVE QLOO API MODE (Re-run or Custom Brief) ---
+  const brandsUrl = `${apiUrl}${buildBrandInsightsPath(seedEntityIds, { city, take: 20 })}`;
+  const tagsUrl = `${apiUrl}${buildTagInsightsPath(seedEntityIds, 10)}`;
+  const placesUrl = `${apiUrl}${buildPlaceInsightsPath(neighborhood, 5)}`;
 
   try {
-    const [brandsRes, tagsRes] = await Promise.all([
-      fetch(brandsUrl, {
-        headers: { 'X-Api-Key': apiKey, Accept: 'application/json' },
-      }),
-      fetch(tagsUrl, {
-        headers: { 'X-Api-Key': apiKey, Accept: 'application/json' },
-      }),
+    if (seedEntityIds.length === 0) {
+      throw new Error('No resolved Qloo seed entities');
+    }
+
+    const [brandsRes, tagsRes, placesRes] = await Promise.all([
+      fetch(brandsUrl, { headers: { 'X-Api-Key': apiKey, Accept: 'application/json' } }),
+      fetch(tagsUrl, { headers: { 'X-Api-Key': apiKey, Accept: 'application/json' } }),
+      fetch(placesUrl, { headers: { 'X-Api-Key': apiKey, Accept: 'application/json' } }),
     ]);
 
     const latencyMs = Date.now() - startTime;
-    const brandsJson = await brandsRes.json();
-    const tagsJson = await tagsRes.json();
+    const brandsJson = brandsRes.ok ? await brandsRes.json() : {};
+    const tagsJson = tagsRes.ok ? await tagsRes.json() : {};
+    const placesJson = placesRes.ok ? await placesRes.json() : {};
 
-    const rawBrands = brandsJson?.results || brandsJson?.data || [];
-    const rawTags = (tagsJson?.results || tagsJson?.data || []).map(
-      (t: { name?: string; tag?: string }) => t.name || t.tag || ''
-    ).filter(Boolean);
+    const rawTags = toTasteTags(extractInsightTags(tagsJson));
+    const liveCandidates: QlooBrandCandidate[] = extractInsightEntities(brandsJson)
+      .filter((b) => b.entity_id)
+      .map((b) => toBrandCandidate(b, { rawQueryUrl: brandsUrl, fallbackTags: rawTags }));
 
-    const candidates: QlooBrandCandidate[] = rawBrands.map((b: {
-      id?: string;
-      entity_id?: string;
-      name?: string;
-      affinity?: number;
-      score?: number;
-      categories?: string[];
-      tags?: string[];
-      description?: string;
-    }) => ({
-      entityId: b.id || b.entity_id || `urn:entity:brand:${encodeURIComponent(b.name || 'unknown')}`,
-      name: b.name || 'Unnamed Brand',
-      affinityScore: Math.round((b.affinity ?? b.score ?? 0.85) * (b.affinity && b.affinity <= 1 ? 100 : 1)),
-      categories: b.categories || ['Commercial Brand'],
-      sharedTags: b.tags || rawTags.slice(0, 3),
-      rawQueryUrl: brandsUrl,
-      description: b.description || 'Grounded brand match from Qloo Taste Graph.',
-    }));
+    const liveVenues: QlooAnchorVenue[] = extractInsightEntities(placesJson)
+      .filter((p) => p.entity_id)
+      .map((p) => toAnchorVenue(p, neighborhood));
 
     const brandsTrace: QlooCallTrace = {
       stepId: `trace-live-brands-${Date.now()}`,
@@ -324,11 +457,12 @@ export async function fetchBrandAffinities(
       params: {
         'filter.type': 'urn:entity:brand',
         'signal.interests.entities': sortedSeeds,
-        limit: '20',
+        'signal.location.query': city,
+        take: '20',
       },
       status: brandsRes.status,
-      latencyMs: Math.round(latencyMs * 0.6),
-      entitiesReturned: candidates.length,
+      latencyMs: Math.round(latencyMs * 0.45),
+      entitiesReturned: liveCandidates.length,
       mode: 'LIVE_QLOO',
       timestamp: new Date().toISOString(),
     };
@@ -339,24 +473,47 @@ export async function fetchBrandAffinities(
       params: {
         'filter.type': 'urn:tag',
         'signal.interests.entities': sortedSeeds,
-        limit: '10',
+        take: '10',
       },
       status: tagsRes.status,
-      latencyMs: Math.round(latencyMs * 0.4),
+      latencyMs: Math.round(latencyMs * 0.3),
       entitiesReturned: rawTags.length,
       mode: 'LIVE_QLOO',
       timestamp: new Date().toISOString(),
     };
 
-    const traces = [brandsTrace, tagsTrace];
-    const result = {
-      candidates: candidates.length > 0 ? candidates : generateMockBrandsFallback(seedEntityIds, city),
-      tags: rawTags.length > 0 ? rawTags : ['Contemporary Live Music', 'Underground Culture'],
-      traces,
-      executionMode: 'LIVE_QLOO' as QlooExecutionMode,
+    const placesTrace: QlooCallTrace = {
+      stepId: `trace-live-places-${Date.now()}`,
+      endpoint: '/v2/insights',
+      params: {
+        'filter.type': 'urn:entity:place',
+        'filter.location.query': neighborhood,
+        take: '5',
+      },
+      status: placesRes.status,
+      latencyMs: Math.round(latencyMs * 0.25),
+      entitiesReturned: liveVenues.length,
+      mode: 'LIVE_QLOO',
+      timestamp: new Date().toISOString(),
     };
 
-    memoryCache.set(cacheKey, { data: result, traces, cachedAt: Date.now() });
+    const usedFallback = liveCandidates.length === 0;
+    if (usedFallback) {
+      brandsTrace.mode = 'MOCK_FIXTURE';
+    }
+
+    const traces = [brandsTrace, tagsTrace, placesTrace];
+    const result = {
+      candidates: usedFallback ? generateMockBrandsFallback(seedEntityIds, city) : liveCandidates,
+      tags: rawTags.length > 0 ? rawTags : ['Contemporary Live Music', 'Underground Culture'],
+      anchorVenues: liveVenues,
+      traces,
+      executionMode: (usedFallback ? 'MOCK_FIXTURE' : 'LIVE_QLOO') as QlooExecutionMode,
+    };
+
+    if (!usedFallback) {
+      memoryCache.set(cacheKey, { data: result, traces, cachedAt: Date.now() });
+    }
     return result;
   } catch {
     const fallbackCandidates = generateMockBrandsFallback(seedEntityIds, city);
@@ -374,6 +531,7 @@ export async function fetchBrandAffinities(
     return {
       candidates: fallbackCandidates,
       tags: ['Independent Music & Culture', 'Audio Hardware', 'Sustainable Craft'],
+      anchorVenues: [],
       traces: [fallbackTrace],
       executionMode: 'MOCK_FIXTURE',
     };

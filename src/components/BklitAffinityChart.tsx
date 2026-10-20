@@ -150,7 +150,7 @@ export function BklitAffinityChart({
           <span className="text-[10px] text-zinc-500 font-normal">avg {avgQloo}%</span>
         </div>
         <div className="flex items-center gap-1.5">
-          <span className="w-2.5 h-2.5 rounded-sm bg-[#52525B] inline-block" />
+          <span className="w-2.5 h-2.5 rounded-sm bg-[#3F3F46] inline-block border border-zinc-600/50" />
           <span className="text-zinc-400 font-medium">Plain LLM Baseline (Un-grounded)</span>
           <span className="text-[10px] text-zinc-500 font-normal">avg {avgLlm}%</span>
         </div>
@@ -162,6 +162,7 @@ export function BklitAffinityChart({
           data={chartData}
           xDataKey="name"
           barWidth={12}
+          groupGap={6}
           barGap={0.25}
           aspectRatio="3.2 / 1"
           className="w-full h-full"
@@ -178,18 +179,108 @@ export function BklitAffinityChart({
             <Bar
               dataKey="qloo"
               fill="#10B981"
+              barWidth={12}
+              groupGap={6}
             />
           )}
           {(activeMetric === 'both' || activeMetric === 'llm') && (
             <Bar
               dataKey="llm"
-              fill="#52525B"
+              fill="#3F3F46"
+              barWidth={12}
+              groupGap={6}
             />
           )}
           <ChartTooltip
             showCrosshair
             showDots
             indicatorColor="rgba(255, 255, 255, 0.25)"
+            rows={(point) => {
+              const p = point as {
+                qloo: number;
+                llm: number;
+                delta: number;
+              };
+              const items = [];
+              if (activeMetric === 'both' || activeMetric === 'qloo') {
+                items.push({
+                  color: '#10B981',
+                  label: 'Qloo Taste Graph',
+                  value: `${p.qloo}%`,
+                });
+              }
+              if (activeMetric === 'both' || activeMetric === 'llm') {
+                items.push({
+                  color: '#3F3F46',
+                  label: 'Plain LLM Baseline',
+                  value: `${p.llm}%`,
+                });
+              }
+              if (activeMetric === 'both') {
+                items.push({
+                  color: '#34D399',
+                  label: 'Empirical Delta',
+                  value: `+${p.delta}%`,
+                });
+              }
+              return items;
+            }}
+            content={({ point }) => {
+              const p = point as {
+                name: string;
+                fullName?: string;
+                qloo: number;
+                llm: number;
+                category?: string;
+                delta: number;
+              };
+              return (
+                <div className="p-3 text-xs font-mono min-w-[210px] bg-zinc-950/95 border border-zinc-800 rounded-xl shadow-2xl backdrop-blur-md">
+                  <div className="flex items-center justify-between pb-2 mb-2 border-b border-zinc-800/80">
+                    <span className="font-bold text-zinc-100 text-sm">
+                      {p.fullName || p.name}
+                    </span>
+                    {p.category && (
+                      <span className="text-[10px] text-zinc-400 px-1.5 py-0.5 rounded bg-zinc-900 border border-zinc-800">
+                        {p.category}
+                      </span>
+                    )}
+                  </div>
+                  <div className="space-y-1.5">
+                    {(activeMetric === 'both' || activeMetric === 'qloo') && (
+                      <div className="flex items-center justify-between gap-4">
+                        <div className="flex items-center gap-1.5 text-zinc-300">
+                          <span className="w-2 h-2 rounded-full bg-[#10B981]" />
+                          <span>Qloo Grounded:</span>
+                        </div>
+                        <span className="font-bold text-emerald-400 font-mono text-xs">
+                          {p.qloo}%
+                        </span>
+                      </div>
+                    )}
+                    {(activeMetric === 'both' || activeMetric === 'llm') && (
+                      <div className="flex items-center justify-between gap-4">
+                        <div className="flex items-center gap-1.5 text-zinc-400">
+                          <span className="w-2 h-2 rounded-full bg-[#3F3F46] border border-zinc-600/50" />
+                          <span>Plain LLM:</span>
+                        </div>
+                        <span className="font-medium text-zinc-300 font-mono text-xs">
+                          {p.llm}%
+                        </span>
+                      </div>
+                    )}
+                    {activeMetric === 'both' && (
+                      <div className="flex items-center justify-between gap-4 pt-1.5 mt-1 border-t border-zinc-800/60">
+                        <span className="text-zinc-400">Empirical Delta:</span>
+                        <span className="font-bold text-emerald-400 font-mono text-xs">
+                          +{p.delta}%
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              );
+            }}
           />
         </BarChart>
       </div>
