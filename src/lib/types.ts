@@ -140,6 +140,7 @@ export interface AnalyzeResponse {
   resolvedArtists: ResolvedArtist[];
   approvedSponsors: SynthesizedSponsor[];
   rejectedSponsors: CommercialRuleRejection[];
+  allEvaluatedBrands?: QlooBrandCandidate[];
   plainLlmBaseline: LlmDiffComparison;
   tasteTags: string[];
   telemetryTraces: QlooCallTrace[];

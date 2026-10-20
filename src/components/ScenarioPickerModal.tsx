@@ -7,13 +7,13 @@ import { EventBrief } from '@/lib/types';
 import SpotlightCard from '@/components/ui/SpotlightCard';
 import {
   X,
-  SlidersHorizontal,
   MapPin,
   CheckCircle2,
-  DollarSign,
-  ShieldAlert,
   ArrowRight,
   Radio,
+  Search,
+  Plus,
+  Loader2,
 } from 'lucide-react';
 
 interface ScenarioPickerModalProps {
@@ -37,23 +37,102 @@ export function ScenarioPickerModal({
   const [customName, setCustomName] = useState('Secret Warehouse Project');
   const [customCity, setCustomCity] = useState('New York City, NY');
   const [customVenue, setCustomVenue] = useState('Navy Yard Hangar 4');
-  const [customLineup, setCustomLineup] = useState('Bicep, Jamie xx, Floating Points');
   const [customBudget, setCustomBudget] = useState(100000);
   const [customLockedComp, setCustomLockedComp] = useState('');
   const [customBlockedCats, setCustomBlockedCats] = useState<string[]>(['Alcohol']);
   const [customAge, setCustomAge] = useState<'ALL_AGES' | '18_PLUS' | '21_PLUS'>('ALL_AGES');
   const [customEco, setCustomEco] = useState(false);
 
+  // Artist Chip & Autocomplete State
+  const [artistChips, setArtistChips] = useState<string[]>(['Bicep', 'Jamie xx', 'Floating Points']);
+  const [artistInput, setArtistInput] = useState('');
+  const [autocompleteResults, setAutocompleteResults] = useState<
+    Array<{ entityId: string; name: string; disambiguation?: string; popularity?: number; genres?: string[]; verified: boolean }>
+  >([]);
+  const [isSearching, setIsSearching] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [focusedIndex, setFocusedIndex] = useState(-1);
+
+  // 250ms Debounced live search
+  useEffect(() => {
+    const q = artistInput.trim();
+    if (q.length < 2) {
+      setAutocompleteResults([]);
+      setShowDropdown(false);
+      return;
+    }
+
+    const timer = setTimeout(async () => {
+      setIsSearching(true);
+      try {
+        const res = await fetch(`/api/qloo/search?q=${encodeURIComponent(q)}&take=5`);
+        if (res.ok) {
+          const data = await res.json();
+          setAutocompleteResults(data.results || []);
+          setShowDropdown(true);
+          setFocusedIndex(-1);
+        }
+      } catch (err) {
+        console.warn('[Qloo Autocomplete Error]:', err);
+      } finally {
+        setIsSearching(false);
+      }
+    }, 250);
+
+    return () => clearTimeout(timer);
+  }, [artistInput]);
+
+  const addArtistChip = (name: string) => {
+    const trimmed = name.trim();
+    if (!trimmed) return;
+    if (!artistChips.some((c) => c.toLowerCase() === trimmed.toLowerCase())) {
+      setArtistChips([...artistChips, trimmed]);
+    }
+    setArtistInput('');
+    setShowDropdown(false);
+    setAutocompleteResults([]);
+  };
+
+  const removeArtistChip = (indexToRemove: number) => {
+    setArtistChips(artistChips.filter((_, idx) => idx !== indexToRemove));
+  };
+
+  const handleArtistInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      setFocusedIndex((prev) => Math.min(prev + 1, autocompleteResults.length - 1));
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      setFocusedIndex((prev) => Math.max(prev - 1, -1));
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      if (focusedIndex >= 0 && autocompleteResults[focusedIndex]) {
+        addArtistChip(autocompleteResults[focusedIndex].name);
+      } else if (artistInput.trim()) {
+        addArtistChip(artistInput);
+      }
+    } else if (e.key === ',' || e.key === 'Tab') {
+      if (artistInput.trim()) {
+        e.preventDefault();
+        addArtistChip(artistInput);
+      }
+    } else if (e.key === 'Backspace' && !artistInput && artistChips.length > 0) {
+      removeArtistChip(artistChips.length - 1);
+    } else if (e.key === 'Escape') {
+      setShowDropdown(false);
+    }
+  };
+
   // Close on Escape key
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && isOpen) {
+      if (e.key === 'Escape' && isOpen && !showDropdown) {
         onClose();
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, onClose]);
+  }, [isOpen, onClose, showDropdown]);
 
   const toggleCategory = (cat: string) => {
     if (customBlockedCats.includes(cat)) {
@@ -65,17 +144,18 @@ export function ScenarioPickerModal({
 
   const handleCustomSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const artists = customLineup
-      .split(',')
-      .map((s) => s.trim())
-      .filter(Boolean);
+    const finalArtists = [...artistChips];
+    const pendingInput = artistInput.trim();
+    if (pendingInput && !finalArtists.some((a) => a.toLowerCase() === pendingInput.toLowerCase())) {
+      finalArtists.push(pendingInput);
+    }
 
-    if (artists.length === 0) return;
+    if (finalArtists.length === 0) return;
 
     const brief: EventBrief = {
       name: customName || 'Custom Showcase',
       tagline: 'Custom Lineup Sponsorship Evaluation',
-      lineup: artists,
+      lineup: finalArtists,
       city: customCity,
       venueName: customVenue,
       expectedAttendance: 3500,
@@ -307,20 +387,128 @@ export function ScenarioPickerModal({
                     </div>
                   </div>
 
-                  <div>
-                    <label className="block text-xs font-mono uppercase text-zinc-400 mb-1">
-                      Festival / Venue Lineup (Comma Separated)
-                    </label>
-                    <input
-                      type="text"
-                      value={customLineup}
-                      onChange={(e) => setCustomLineup(e.target.value)}
-                      className="w-full px-3 py-2 rounded-lg bg-zinc-900 border border-zinc-700 text-sm text-white focus:outline-none focus:border-emerald-500 font-mono"
-                      placeholder="e.g. Fred again.., Jamie xx, Bicep"
-                      required
-                    />
-                    <p className="text-[11px] font-mono text-zinc-500 mt-1">
-                      Each artist will be resolved into a canonical Qloo entity ID via /v2/insights.
+                  <div className="relative">
+                    <div className="flex items-center justify-between mb-1.5">
+                      <label className="block text-xs font-mono uppercase text-zinc-300 font-semibold flex items-center gap-1.5">
+                        <Search className="w-3.5 h-3.5 text-emerald-400" />
+                        <span>Festival / Venue Lineup (Live Qloo Autocomplete)</span>
+                      </label>
+                      <span className="text-[10px] font-mono text-emerald-400/90 bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-800/40">
+                        {artistChips.length} Selected
+                      </span>
+                    </div>
+
+                    {/* Chips + Search Input Container */}
+                    <div className="min-h-[52px] p-2 rounded-xl bg-zinc-900/90 border border-zinc-750 focus-within:border-emerald-500/80 focus-within:ring-1 focus-within:ring-emerald-500/50 transition-all flex flex-wrap items-center gap-1.5 relative">
+                      {artistChips.map((chip, idx) => (
+                        <span
+                          key={`${chip}-${idx}`}
+                          className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-zinc-800 text-zinc-200 text-xs font-mono border border-zinc-700/80 shadow-xs group"
+                        >
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0" />
+                          <span className="font-semibold text-zinc-100">{chip}</span>
+                          <button
+                            type="button"
+                            onClick={() => removeArtistChip(idx)}
+                            className="text-zinc-400 hover:text-red-400 transition-colors cursor-pointer ml-0.5"
+                            title={`Remove ${chip}`}
+                          >
+                            <X className="w-3 h-3" />
+                          </button>
+                        </span>
+                      ))}
+
+                      {/* Interactive Search Input */}
+                      <div className="flex-1 min-w-[160px] flex items-center gap-2">
+                        <input
+                          id="qloo-artist-search-input"
+                          type="text"
+                          value={artistInput}
+                          onChange={(e) => setArtistInput(e.target.value)}
+                          onKeyDown={handleArtistInputKeyDown}
+                          onFocus={() => {
+                            if (autocompleteResults.length > 0) setShowDropdown(true);
+                          }}
+                          className="w-full bg-transparent border-none text-xs sm:text-sm text-white placeholder-zinc-500 focus:outline-none font-mono py-1 px-1"
+                          placeholder={
+                            artistChips.length === 0
+                              ? "Type artist name (e.g. Four Tet, Peggy Gou)..."
+                              : "Add another artist (press Enter)..."
+                          }
+                        />
+                        {isSearching ? (
+                          <Loader2 className="w-4 h-4 animate-spin text-emerald-400 shrink-0 mr-1" />
+                        ) : artistInput ? (
+                          <button
+                            type="button"
+                            onClick={() => addArtistChip(artistInput)}
+                            className="p-1 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-300 transition-colors text-xs font-mono shrink-0 mr-1"
+                            title="Add Artist"
+                          >
+                            <Plus className="w-3 h-3 text-emerald-400" />
+                          </button>
+                        ) : null}
+                      </div>
+                    </div>
+
+                    {/* Floating Autocomplete Dropdown */}
+                    {showDropdown && autocompleteResults.length > 0 && (
+                      <div className="absolute left-0 right-0 top-full mt-1.5 z-50 bg-zinc-950/95 border border-zinc-750 rounded-xl shadow-2xl backdrop-blur-xl overflow-hidden divide-y divide-zinc-850 animate-in fade-in slide-in-from-top-1 duration-150">
+                        <div className="px-3 py-1.5 bg-zinc-900/80 text-[10px] font-mono uppercase tracking-wider text-zinc-400 flex items-center justify-between">
+                          <span className="flex items-center gap-1">
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                            Qloo Verified Artists (/search)
+                          </span>
+                          <span className="text-zinc-500">Click or press Enter to add</span>
+                        </div>
+
+                        <div className="max-h-56 overflow-y-auto">
+                          {autocompleteResults.map((item, idx) => (
+                            <button
+                              key={item.entityId}
+                              type="button"
+                              onClick={() => addArtistChip(item.name)}
+                              className={`w-full px-3 py-2 text-left flex items-center justify-between transition-colors cursor-pointer ${
+                                focusedIndex === idx
+                                  ? 'bg-zinc-850 text-white'
+                                  : 'hover:bg-zinc-900 text-zinc-200'
+                              }`}
+                            >
+                              <div className="min-w-0 pr-2">
+                                <div className="text-xs font-bold text-zinc-100 flex items-center gap-1.5 truncate">
+                                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0" />
+                                  <span>{item.name}</span>
+                                  {item.verified && (
+                                    <span className="text-[9px] font-mono px-1.5 py-0.2 rounded bg-emerald-950 text-emerald-400 border border-emerald-800/40">
+                                      Verified
+                                    </span>
+                                  )}
+                                </div>
+                                <div className="text-[10px] font-mono text-zinc-400 truncate mt-0.5">
+                                  {item.disambiguation ||
+                                    (item.genres && item.genres.length > 0 ? item.genres.join(' • ') : 'Musical Artist')}
+                                </div>
+                              </div>
+
+                              <div className="text-right shrink-0">
+                                {item.popularity !== undefined && (
+                                  <span className="text-[10px] font-mono text-emerald-400 font-semibold block">
+                                    {item.popularity}% pop
+                                  </span>
+                                )}
+                                <span className="text-[9px] font-mono text-zinc-600 block">
+                                  {item.entityId.slice(0, 8)}...
+                                </span>
+                              </div>
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    <p className="text-[11px] font-mono text-zinc-400 mt-1.5 flex items-center gap-1">
+                      <span className="text-emerald-400 font-bold">•</span>
+                      <span>Type artist name to search live Qloo Taste Graph. Press Enter or comma to create chip.</span>
                     </p>
                   </div>
 

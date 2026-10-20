@@ -138,6 +138,7 @@ export async function runCrowdprintPipeline(
     resolvedArtists,
     approvedSponsors: allApprovedSponsors,
     rejectedSponsors,
+    allEvaluatedBrands: rawCandidates,
     plainLlmBaseline: finalBaseline,
     tasteTags,
     telemetryTraces: allTraces,

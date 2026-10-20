@@ -8,6 +8,7 @@ import {
   ChevronDown,
   RefreshCw,
   Terminal,
+  FileText,
 } from 'lucide-react';
 
 interface WorkspaceHeaderProps {
@@ -16,6 +17,7 @@ interface WorkspaceHeaderProps {
   isLoading: boolean;
   onRefresh: () => void;
   onOpenScenarioPicker: () => void;
+  onOpenExportDossier?: () => void;
   selectedTab: 'sponsors' | 'diff' | 'rejected';
   onSelectTab: (tab: 'sponsors' | 'diff' | 'rejected') => void;
   approvedCount: number;
@@ -31,6 +33,7 @@ export function WorkspaceHeader({
   isLoading,
   onRefresh,
   onOpenScenarioPicker,
+  onOpenExportDossier,
   selectedTab,
   onSelectTab,
   approvedCount,
@@ -174,6 +177,21 @@ export function WorkspaceHeader({
                 : 'Mock'}
             </span>
           </div>
+
+          {/* Export Dossier Button */}
+          {onOpenExportDossier && (
+            <button
+              id="export-dossier-btn"
+              type="button"
+              onClick={onOpenExportDossier}
+              className="flex items-center gap-1.5 px-2 sm:px-2.5 py-1 rounded-lg bg-zinc-900/90 hover:bg-zinc-850 text-xs font-mono text-zinc-200 hover:text-white border border-zinc-750 hover:border-emerald-500/50 transition-all cursor-pointer shadow-xs shrink-0"
+              title="Export Executive Sponsorship Dossier (Print / PDF / Markdown)"
+            >
+              <FileText className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+              <span className="whitespace-nowrap hidden sm:inline">Export Dossier</span>
+              <span className="whitespace-nowrap sm:hidden">Dossier</span>
+            </button>
+          )}
 
           {/* Re-run Pipeline Button */}
           <button
